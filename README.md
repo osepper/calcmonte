@@ -8,13 +8,21 @@
 
 Most financial calculators give you one number. CalcMonte shows you the full range of what could happen.
 
-**Loan Calculator** — Compare up to 3 loan scenarios side by side. See how extra payments, different terms, and rates affect your total cost. Supports 6 payment frequencies with asset appreciation/depreciation overlay.
+**Loan Calculator** — Compare up to 3 loan scenarios side by side. See how extra payments, different terms, and rates affect your total cost. Supports 6 payment frequencies with asset appreciation/depreciation overlay and optional Monte Carlo simulation on home prices.
 
 **Investment Simulator** — Monte Carlo simulation using Geometric Brownian Motion. See percentile bands from 5th to 95th instead of a single projected line. Understand the realistic spread of outcomes before making decisions.
 
+## Features
+
+- **Stochastic home price modeling** — See the probability of going underwater on your mortgage, not just a single appreciation curve
+- **Side-by-side loan comparison** — Save up to 3 scenarios and compare them
+- **Monte Carlo investment simulation** — GBM with Itô correction, percentile bands, probability analysis
+- **6 payment frequencies** — Monthly, bi-weekly, weekly, semi-monthly, quarterly, annual
+- **Privacy-first** — Everything runs client-side, no data sent anywhere, no cookies
+
 ## Architecture
 
-Single self-contained HTML file (~130KB). No framework, no build step, no backend.
+Single self-contained HTML file (~137KB). No framework, no build step, no backend.
 
 - **Charts**: Chart.js (CDN)
 - **Math rendering**: KaTeX (lazy-loaded CDN)
@@ -60,6 +68,13 @@ S(t+Δt) = S(t) · exp[(μ - σ²/2)Δt + σ√Δt · Z]
 ```
 
 Where Z ~ N(0,1) via Box-Muller transform. The Methodology tab on the site documents all formulas.
+
+## Feedback
+
+Questions, suggestions, or bug reports are welcome:
+
+- **Email**: osepper@gmail.com
+- **Issues**: [github.com/osepper/calcmonte/issues](https://github.com/osepper/calcmonte/issues)
 
 ## License
 

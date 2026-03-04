@@ -159,7 +159,7 @@ body{font-family:var(--font-mono);background:var(--bg);color:var(--text);min-hei
 
 /* ─── NAV ─── */
 .top-nav{display:flex;align-items:center;padding:0 36px;border-bottom:1px solid var(--border);background:var(--card);height:48px;gap:0}
-.nav-btn{padding:12px 24px;border:none;cursor:pointer;background:transparent;color:var(--text-dim);font-size:12px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1.2px;transition:all 0.2s;border-bottom:2px solid transparent;height:48px;display:flex;align-items:center;gap:8px}
+.nav-btn{padding:12px 24px;border:none;cursor:pointer;background:transparent;color:var(--text-muted);font-size:12px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1.2px;transition:all 0.2s;border-bottom:2px solid var(--border);height:48px;display:flex;align-items:center;gap:8px}
 .nav-btn.active{color:var(--cyan);border-bottom-color:var(--cyan);background:rgba(6,214,160,0.04)}
 .nav-btn:hover{color:var(--text)}
 .nav-btn svg{width:16px;height:16px}
@@ -200,7 +200,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
 .stat-value{font-size:20px;font-weight:600;margin-bottom:3px}
 .stat-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px}
 .tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:20px;gap:0;flex-wrap:wrap}
-.tab-btn{padding:10px 18px;border:none;cursor:pointer;border-bottom:2px solid transparent;background:transparent;color:var(--text-muted);font-size:11px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;transition:all 0.2s;white-space:nowrap}
+.tab-btn{padding:10px 18px;border:none;cursor:pointer;border-bottom:2px solid var(--border);background:transparent;color:var(--text-muted);font-size:11px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;transition:all 0.2s;white-space:nowrap}
 .tab-btn.active{color:var(--cyan);border-bottom-color:var(--cyan)}.tab-btn:hover{color:var(--text)}
 .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:20px}
 .card h3{font-family:var(--font-display);font-size:18px;font-weight:400;margin-bottom:14px}
@@ -308,8 +308,8 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
 .meth-toc li a{padding:6px 14px;border-radius:6px;font-size:11px;border:1px solid var(--border);color:var(--text-muted);text-decoration:none;display:block;transition:all 0.15s}
 .meth-toc li a:hover{border-color:var(--cyan);color:var(--cyan)}
 
-.nav-btn.secondary{opacity:0.5;font-size:10px;letter-spacing:0.5px;padding:12px 12px}
-.nav-btn.secondary:hover{opacity:0.8}
+.nav-btn.secondary{opacity:0.8;font-size:10px;letter-spacing:0.5px;padding:12px 12px}
+.nav-btn.secondary:hover{opacity:0.95}
 .nav-btn.secondary.active{opacity:1}
 
 /* ─── RESPONSIVE: TABLET ─── */
@@ -514,7 +514,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     <label class="field-label">Payment Frequency</label><select id="L_payFreq"><option value="12">Monthly (12/yr)</option><option value="26">Bi-Weekly (26/yr)</option><option value="52">Weekly (52/yr)</option><option value="24">Semi-Monthly (24/yr)</option><option value="4">Quarterly (4/yr)</option><option value="1">Annually (1/yr)</option></select>
     <label class="field-label">Extra Payment per Period</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="L_extraPayment" value="0" min="0" step="50" class="has-prefix"></div>
     <label class="field-label">Down Payment</label><div class="input-wrap"><input type="number" id="L_downPct" value="20" min="0" max="100" step="1" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_downSlider" min="0" max="50" step="1" value="20"><div class="hint" id="L_downHint"></div>
-    <div class="section-divider"><div class="toggle-row"><h2 style="margin-bottom:0">Asset Simulation</h2><button class="toggle-btn" id="L_assetToggle" onclick="L.toggleAsset()">OFF</button></div><div id="L_assetControls" style="display:none"><label class="field-label">Asset Type</label><div class="type-btns"><button class="type-btn active" id="L_btnAppr" onclick="L.setAssetType('appreciating')">🏠 Appreciating</button><button class="type-btn" id="L_btnDepr" onclick="L.setAssetType('depreciating')">🚗 Depreciating</button></div><label class="field-label" id="L_assetRateLabel">Annual Appreciation</label><div class="input-wrap"><input type="number" id="L_assetRate" value="3.5" min="0" max="50" step="0.5" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_assetRateSlider" min="0" max="15" step="0.5" value="3.5"></div></div>
+    <div class="section-divider"><div class="toggle-row"><h2 style="margin-bottom:0">Asset Simulation</h2><button class="toggle-btn" id="L_assetToggle" onclick="L.toggleAsset()">OFF</button></div><div id="L_assetControls" style="display:none"><label class="field-label">Asset Type</label><div class="type-btns"><button class="type-btn active" id="L_btnAppr" onclick="L.setAssetType('appreciating')">🏠 Appreciating</button><button class="type-btn" id="L_btnDepr" onclick="L.setAssetType('depreciating')">🚗 Depreciating</button></div><label class="field-label" id="L_assetRateLabel">Annual Appreciation</label><div class="input-wrap"><input type="number" id="L_assetRate" value="3.5" min="0" max="50" step="0.5" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_assetRateSlider" min="0" max="15" step="0.5" value="3.5"><div id="L_assetVolWrap" style="display:none"><label class="field-label">Price Volatility (σ)</label><div class="input-wrap"><input type="number" id="L_assetVol" value="0" min="0" max="30" step="0.5" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_assetVolSlider" min="0" max="30" step="0.5" value="0"><p class="hint">0% = deterministic · Home: ~8% · Car: ~5%</p></div></div></div>
     <div class="section-divider"><div class="toggle-row"><h2 style="margin-bottom:0">Scenarios</h2><button class="scenario-save-btn" onclick="L.saveScenario()">+ Save Current</button></div><div id="L_scenarioChips" style="display:flex;flex-direction:column;gap:6px"></div><div class="hint" style="margin-top:8px">Save up to 3 scenarios to compare.</div></div>
   </div>
   <div class="content">
@@ -745,6 +745,12 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
           <p style="color:var(--text-dim);margin-bottom:4px">Scenario Comparison</p>
           <p style="color:var(--text-dim);margin-bottom:4px">GBM Volatility Modeling</p>
         </div>
+        <div>
+          <h4 style="color:var(--text-muted);font-size:9px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">Feedback</h4>
+          <p style="margin-bottom:4px"><a href="mailto:osepper@gmail.com" style="color:var(--text-dim);text-decoration:none">✉ Get in Touch</a></p>
+          <p style="margin-bottom:4px"><a href="https://github.com/osepper/calcmonte/issues" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:none">🐛 Report a Bug</a></p>
+          <p style="margin-bottom:4px"><a href="https://github.com/osepper/calcmonte/issues" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:none">💡 Request a Feature</a></p>
+        </div>
       </div>
     </div>
 
@@ -786,14 +792,16 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 // LOAN MODULE (L namespace)
 // ═══════════════════════════════════════════════════
 const L=(()=>{
-  const ch={};let st={schedule:[],payment:0,totalInterest:0,totalPaid:0,assetEnabled:false,assetType:'appreciating',assetValues:null,breakevenMonth:null,crossoverPeriod:null,tablePage:0,activeTab:'overview',scenarios:[]};
+  const ch={};let st={schedule:[],payment:0,totalInterest:0,totalPaid:0,assetEnabled:false,assetType:'appreciating',assetValues:null,assetPercentiles:null,breakevenMonth:null,crossoverPeriod:null,tablePage:0,activeTab:'overview',scenarios:[]};
   const SC=['#58a6ff','#fb923c','#c4b5fd'],SN=['A','B','C'],RPP=24;
 
   Chart.register({id:'loanClick',beforeEvent(c,args){if(args.event.type==='click'&&c.data._rawData){const pts=c.getElementsAtEventForMode(args.event.native,'nearest',{intersect:false},true);if(pts.length){const d=c.data._rawData[pts[0].index];if(d)openModal(d);}}}});
 
   function calcAmort(p,r,tm,ex,freq){const ppy=freq,tp=Math.round((tm/12)*ppy),pr=r/100/ppy;let pmt=pr===0?p/tp:(p*pr*Math.pow(1+pr,tp))/(Math.pow(1+pr,tp)-1);const s=[];let bal=p,ti=0,tpd=0;for(let i=1;i<=tp&&bal>0;i++){const ip=bal*pr;let pp=pmt-ip+ex;if(pp>bal)pp=bal;const ap=ip+pp;bal-=pp;if(bal<0.01)bal=0;ti+=ip;tpd+=ap;const yr=i/ppy,mo=Math.round(yr*12);s.push({period:i,month:mo,year:yr,payment:ap,principal:pp,interest:ip,balance:bal,totalInterest:ti,totalPaid:tpd,equityPercent:((p-bal)/p)*100,equity:p-bal})}return{schedule:s,payment:pmt,totalInterest:ti,totalPaid:tpd}}
   function calcAsset(init,pct,mo,appr){const r=appr?pct/100:-pct/100;const v=[];for(let m=0;m<=mo;m++)v.push({month:m,value:init*Math.pow(1+r,m/12)});return v}
-  function getInp(){const p=parseFloat($('L_principal').value)||0,r=parseFloat($('L_annualRate').value)||0,tv=parseFloat($('L_termValue').value)||1,tu=$('L_termUnit').value,pf=parseInt($('L_payFreq').value),ep=parseFloat($('L_extraPayment').value)||0,dp=parseFloat($('L_downPct').value)||0,tm=tu==='years'?tv*12:tv,tpv=dp<100?p/(1-dp/100):p,dpa=tpv*(dp/100),ar=parseFloat($('L_assetRate').value)||0;return{principal:p,annualRate:r,termMonths:tm,termValue:tv,termUnit:tu,payFreq:pf,extraPayment:ep,downPct:dp,totalPropertyValue:tpv,downPayment:dpa,assetRate:ar}}
+  function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+  function simAssetPaths(init,ratePct,volPct,months,nPaths){const mu=ratePct/100,sigma=volPct/100,dt=1/12;const paths=[];for(let i=0;i<nPaths;i++){const p=[init];let v=init;for(let m=1;m<=months;m++){const drift=(mu-sigma*sigma/2)*dt;const diff=sigma*Math.sqrt(dt)*randn();v=v*Math.exp(drift+diff);p.push(v)}paths.push(p)}const pctls={p5:[],p25:[],p50:[],p75:[],p95:[]};for(let m=0;m<=months;m++){const vals=paths.map(p=>p[m]).sort((a,b)=>a-b);const n=vals.length;const pct=q=>vals[Math.min(Math.floor(n*q),n-1)];pctls.p5.push(pct(0.05));pctls.p25.push(pct(0.25));pctls.p50.push(pct(0.50));pctls.p75.push(pct(0.75));pctls.p95.push(pct(0.95))}pctls.paths=paths;return pctls}
+  function getInp(){const p=parseFloat($('L_principal').value)||0,r=parseFloat($('L_annualRate').value)||0,tv=parseFloat($('L_termValue').value)||1,tu=$('L_termUnit').value,pf=parseInt($('L_payFreq').value),ep=parseFloat($('L_extraPayment').value)||0,dp=parseFloat($('L_downPct').value)||0,tm=tu==='years'?tv*12:tv,tpv=dp<100?p/(1-dp/100):p,dpa=tpv*(dp/100),ar=parseFloat($('L_assetRate').value)||0,av=parseFloat($('L_assetVol').value)||0;return{principal:p,annualRate:r,termMonths:tm,termValue:tv,termUnit:tu,payFreq:pf,extraPayment:ep,downPct:dp,totalPropertyValue:tpv,downPayment:dpa,assetRate:ar,assetVol:av}}
 
   function buildSummary(inp){const{principal:p,annualRate:r,termMonths:tm,payFreq:pf,extraPayment:ep,termValue:tv,termUnit:tu}=inp;const ty=tu==='years'?tv:(tv/12);const tl=ty===1?'1 year':((ty%1===0?ty:ty.toFixed(1))+' years');const freq=FL[pf].toLowerCase(),ir=(st.totalInterest/p)*100;const last=st.schedule[st.schedule.length-1];const atm=last?last.month:tm;const ts=tm-atm;const cross=st.crossoverPeriod;const cy=cross?(cross.month/12).toFixed(1):null;const y5=st.schedule.find(s=>s.month>=60);let t=`You're borrowing <strong>${fmtC(p)}</strong> at <strong>${r}%</strong> over <strong>${tl}</strong>. Your ${freq} payment will be <span class="hl-c">${fmtC(st.payment)}</span>`;if(ep>0)t+=` (plus <strong>${fmtC(ep)}</strong> extra)`;t+=`. Total interest: <span class="hl-r">${fmtC(st.totalInterest)}</span> (<span class="hl-r">${ir.toFixed(0)}%</span> of principal). Total cost: <strong>${fmtC(st.totalPaid)}</strong>. `;if(y5){const y5p=(y5.totalInterest/y5.totalPaid)*100;t+=`First 5 years: <span class="hl-a">${fmtC(y5.totalInterest)}</span> to interest (${y5p.toFixed(0)}%). `}if(cross)t+=`P > I crossover at year <span class="hl-p">${cy}</span>. `;if(ts>0&&ep>0)t+=`Extra payments save <span class="hl-c">${Math.round(ts)} months</span>. `;$('L_summary').innerHTML=`<div class="summary-title">Your Loan at a Glance</div><div class="summary-text">${t}</div>`}
 
@@ -801,7 +809,7 @@ const L=(()=>{
     const inp=getInp();const{principal:p,annualRate:r,termMonths:tm,payFreq:pf,extraPayment:ep,totalPropertyValue:tpv,downPayment:dpa,assetRate:ar}=inp;
     const res=calcAmort(p,r,tm,ep,pf);st.schedule=res.schedule;st.payment=res.payment;st.totalInterest=res.totalInterest;st.totalPaid=res.totalPaid;
     st.assetValues=null;st.breakevenMonth=null;
-    if(st.assetEnabled){const iv=tpv;st.assetValues=calcAsset(iv,ar,tm,st.assetType==='appreciating');for(const s of st.schedule){const av=st.assetValues.find(a=>a.month===s.month);if(av&&av.value-s.balance>=0&&s.period>1){st.breakevenMonth=s.month;break}}}
+    if(st.assetEnabled){const iv=tpv;st.assetPercentiles=null;if(st.assetType==='appreciating'&&inp.assetVol>0){st.assetPercentiles=simAssetPaths(iv,ar,inp.assetVol,tm,200);st.assetValues=st.assetPercentiles.p50.map((v,m)=>({month:m,value:v}));for(const s of st.schedule){const m=s.month;if(m<=tm&&st.assetPercentiles.p50[m]-s.balance>=0&&s.period>1){st.breakevenMonth=s.month;break}}}else{st.assetValues=calcAsset(iv,ar,tm,st.assetType==='appreciating');for(const s of st.schedule){const av=st.assetValues.find(a=>a.month===s.month);if(av&&av.value-s.balance>=0&&s.period>1){st.breakevenMonth=s.month;break}}}}
     st.crossoverPeriod=null;for(const s of st.schedule)if(s.principal>s.interest){st.crossoverPeriod=s;break}
     $('L_downHint').textContent=`Down payment: ${fmtC(dpa)} on ${fmtC(tpv)} total`;$('L_freqLabel').textContent=`${FL[pf]} payments`;
     buildSummary(inp);
@@ -835,10 +843,44 @@ const L=(()=>{
     }
     if(tab==='schedule'){$('L_schedCount').textContent=`${st.schedule.length} periods`;renderTable()}
     if(tab==='compare')renderCompare();
-    if(tab==='asset'&&st.assetEnabled){const iv=st.assetValues?.[0]?.value||0,fv=st.assetValues?.[st.assetValues.length-1]?.value||0;const tlab=tu==='years'?tv+'yr':(tv/12).toFixed(1)+'yr';const fc=st.assetType==='appreciating'?'cyan':'red';let ah=`<div class="stat-card" style="background:var(--amber-dim);border:1px solid rgba(251,191,36,0.2)"><div class="stat-value" style="color:var(--amber)">${st.assetType==='appreciating'?'🏠 Appreciating':'🚗 Depreciating'}</div><div class="stat-label">Type</div></div><div class="stat-card" style="background:var(--cyan-dim);border:1px solid rgba(6,214,160,0.2)"><div class="stat-value" style="color:var(--cyan)">${fmtS(iv)}</div><div class="stat-label">Initial</div></div><div class="stat-card" style="background:var(--${fc}-dim);border:1px solid var(--${fc})33"><div class="stat-value" style="color:var(--${fc})">${fmtS(fv)}</div><div class="stat-label">Final (${tlab})</div></div>`;if(st.breakevenMonth)ah+=`<div class="stat-card" style="background:var(--purple-dim);border:1px solid rgba(196,181,253,0.2)"><div class="stat-value" style="color:var(--purple)">Mo ${st.breakevenMonth}</div><div class="stat-label">Breakeven</div></div>`;$('L_assetStats').innerHTML=ah;
-      const c5=$('L_chartAsset').getContext('2d');if(ch.asset)ch.asset.destroy();ch.asset=new Chart(c5,{type:'line',data:{labels:lb,datasets:[{label:'Asset',data:sm.map(s=>{const a=st.assetValues.find(x=>x.month===s.month);return a?a.value:null}),borderColor:'#fbbf24',backgroundColor:mkG(c5,'#fbbf24'),fill:true,borderWidth:2.5,pointRadius:0,tension:0.3},{label:'Loan',data:sm.map(s=>s.balance),borderColor:'#58a6ff',backgroundColor:mkG(c5,'#58a6ff'),fill:true,borderWidth:2,pointRadius:0,tension:0.3}],_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`}}}}});
-      const c6=$('L_chartNet').getContext('2d');if(ch.net)ch.net.destroy();ch.net=new Chart(c6,{type:'line',data:{labels:lb,datasets:[{label:'Net',data:sm.map(s=>{const a=st.assetValues.find(x=>x.month===s.month);return a?a.value-s.balance:null}),borderColor:'#06d6a0',backgroundColor:mkG(c6,'#06d6a0'),fill:true,borderWidth:2,pointRadius:0,tension:0.3}],_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`Net: ${fmtC(i.raw)}`}}}}});
-      if(st.assetType==='depreciating'){const uw=st.schedule.find(d=>{const a=st.assetValues.find(x=>x.month===d.month);return a&&a.value<d.balance&&d.month>0});if(uw){const av=st.assetValues.find(x=>x.month===uw.month);const deficit=uw.balance-(av?av.value:0);$('L_underwaterWarn').style.display='block';$('L_underwaterText').textContent=`With ${inp.assetRate}% annual depreciation, the asset value drops below your loan balance at month ${uw.month} (year ${(uw.month/12).toFixed(1)}). At that point the asset is worth ${fmtC(av?av.value:0)} but you still owe ${fmtC(uw.balance)} — a negative equity of ${fmtC(deficit)}. A larger down payment or shorter loan term can help avoid this.`}else{$('L_underwaterWarn').style.display='none'}}else $('L_underwaterWarn').style.display='none';
+    if(tab==='asset'&&st.assetEnabled){const iv=st.assetValues?.[0]?.value||0;const isStoch=st.assetPercentiles!==null;const fv=isStoch?st.assetPercentiles.p50[st.assetPercentiles.p50.length-1]:st.assetValues?.[st.assetValues.length-1]?.value||0;const tlab=tu==='years'?tv+'yr':(tv/12).toFixed(1)+'yr';const fc=st.assetType==='appreciating'?'cyan':'red';
+      let ah=`<div class="stat-card" style="background:var(--amber-dim);border:1px solid rgba(251,191,36,0.2)"><div class="stat-value" style="color:var(--amber)">${st.assetType==='appreciating'?'🏠 Appreciating':'🚗 Depreciating'}${isStoch?' (σ)':''}</div><div class="stat-label">Type</div></div><div class="stat-card" style="background:var(--cyan-dim);border:1px solid rgba(6,214,160,0.2)"><div class="stat-value" style="color:var(--cyan)">${fmtS(iv)}</div><div class="stat-label">Initial</div></div><div class="stat-card" style="background:var(--${fc}-dim);border:1px solid var(--${fc})33"><div class="stat-value" style="color:var(--${fc})">${fmtS(fv)}</div><div class="stat-label">${isStoch?'Median':'Final'} (${tlab})</div></div>`;
+      if(isStoch){const p5f=st.assetPercentiles.p5[st.assetPercentiles.p5.length-1],p95f=st.assetPercentiles.p95[st.assetPercentiles.p95.length-1];ah+=`<div class="stat-card" style="background:var(--purple-dim);border:1px solid rgba(196,181,253,0.2)"><div class="stat-value" style="color:var(--purple)">${fmtS(p5f)} – ${fmtS(p95f)}</div><div class="stat-label">5th–95th Range</div></div>`;const paths=st.assetPercentiles.paths,uwCount=paths.filter(p=>{for(let m=0;m<st.schedule.length;m++){const s=st.schedule[m];if(s.month<=inp.termMonths&&p[s.month]<s.balance&&s.month>0)return true}return false}).length;const uwPct=(uwCount/paths.length*100).toFixed(1);ah+=`<div class="stat-card" style="background:var(--red-dim);border:1px solid rgba(255,107,107,0.2)"><div class="stat-value" style="color:var(--red)">${uwPct}%</div><div class="stat-label">P(Underwater)</div></div>`}
+      else if(st.breakevenMonth)ah+=`<div class="stat-card" style="background:var(--purple-dim);border:1px solid rgba(196,181,253,0.2)"><div class="stat-value" style="color:var(--purple)">Mo ${st.breakevenMonth}</div><div class="stat-label">Breakeven</div></div>`;
+      $('L_assetStats').innerHTML=ah;
+
+      // Asset vs Loan chart
+      const c5=$('L_chartAsset').getContext('2d');if(ch.asset)ch.asset.destroy();
+      const assetDS=[];
+      if(isStoch){
+        assetDS.push({label:'95th',data:sm.map(s=>st.assetPercentiles.p95[s.month]),borderColor:'rgba(251,191,36,0.15)',backgroundColor:'rgba(251,191,36,0.04)',fill:'+1',borderWidth:0,pointRadius:0,tension:0.3});
+        assetDS.push({label:'75th',data:sm.map(s=>st.assetPercentiles.p75[s.month]),borderColor:'rgba(251,191,36,0.2)',backgroundColor:'rgba(251,191,36,0.06)',fill:'+1',borderWidth:0,pointRadius:0,tension:0.3});
+        assetDS.push({label:'Median',data:sm.map(s=>st.assetPercentiles.p50[s.month]),borderColor:'#fbbf24',borderWidth:2.5,pointRadius:0,tension:0.3,fill:false});
+        assetDS.push({label:'25th',data:sm.map(s=>st.assetPercentiles.p25[s.month]),borderColor:'rgba(251,191,36,0.2)',backgroundColor:'rgba(251,191,36,0.06)',fill:'-1',borderWidth:0,pointRadius:0,tension:0.3});
+        assetDS.push({label:'5th',data:sm.map(s=>st.assetPercentiles.p5[s.month]),borderColor:'rgba(251,191,36,0.15)',backgroundColor:'rgba(251,191,36,0.04)',fill:'-1',borderWidth:0,pointRadius:0,tension:0.3});
+      } else {
+        assetDS.push({label:'Asset',data:sm.map(s=>{const a=st.assetValues.find(x=>x.month===s.month);return a?a.value:null}),borderColor:'#fbbf24',backgroundColor:mkG(c5,'#fbbf24'),fill:true,borderWidth:2.5,pointRadius:0,tension:0.3});
+      }
+      assetDS.push({label:'Loan',data:sm.map(s=>s.balance),borderColor:'#58a6ff',backgroundColor:isStoch?'transparent':mkG(c5,'#58a6ff'),fill:!isStoch,borderWidth:2,pointRadius:0,tension:0.3});
+      ch.asset=new Chart(c5,{type:'line',data:{labels:lb,datasets:assetDS,_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`},filter:i=>i.dataset.label==='Median'||i.dataset.label==='Asset'||i.dataset.label==='Loan'}}}}); 
+
+      // Net position chart
+      const c6=$('L_chartNet').getContext('2d');if(ch.net)ch.net.destroy();
+      const netDS=[];
+      if(isStoch){
+        netDS.push({label:'95th Net',data:sm.map(s=>st.assetPercentiles.p95[s.month]-s.balance),borderColor:'rgba(6,214,160,0.15)',backgroundColor:'rgba(6,214,160,0.04)',fill:'+1',borderWidth:0,pointRadius:0,tension:0.3});
+        netDS.push({label:'75th Net',data:sm.map(s=>st.assetPercentiles.p75[s.month]-s.balance),borderColor:'rgba(6,214,160,0.15)',backgroundColor:'rgba(6,214,160,0.06)',fill:'+1',borderWidth:0,pointRadius:0,tension:0.3});
+        netDS.push({label:'Net (Median)',data:sm.map(s=>st.assetPercentiles.p50[s.month]-s.balance),borderColor:'#06d6a0',borderWidth:2,pointRadius:0,tension:0.3,fill:false});
+        netDS.push({label:'25th Net',data:sm.map(s=>st.assetPercentiles.p25[s.month]-s.balance),borderColor:'rgba(6,214,160,0.15)',backgroundColor:'rgba(6,214,160,0.06)',fill:'-1',borderWidth:0,pointRadius:0,tension:0.3});
+        netDS.push({label:'5th Net',data:sm.map(s=>st.assetPercentiles.p5[s.month]-s.balance),borderColor:'rgba(6,214,160,0.15)',backgroundColor:'rgba(6,214,160,0.04)',fill:'-1',borderWidth:0,pointRadius:0,tension:0.3});
+      } else {
+        netDS.push({label:'Net',data:sm.map(s=>{const a=st.assetValues.find(x=>x.month===s.month);return a?a.value-s.balance:null}),borderColor:'#06d6a0',backgroundColor:mkG(c6,'#06d6a0'),fill:true,borderWidth:2,pointRadius:0,tension:0.3});
+      }
+      ch.net=new Chart(c6,{type:'line',data:{labels:lb,datasets:netDS,_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`},filter:i=>i.dataset.label==='Net (Median)'||i.dataset.label==='Net'}}}});
+
+      // Underwater warning
+      if(isStoch){const paths=st.assetPercentiles.paths,uwCount=paths.filter(p=>{for(let m=0;m<st.schedule.length;m++){const s=st.schedule[m];if(s.month<=inp.termMonths&&p[s.month]<s.balance&&s.month>0)return true}return false}).length;const uwPct=(uwCount/paths.length*100).toFixed(1);if(parseFloat(uwPct)>0){$('L_underwaterWarn').style.display='block';$('L_underwaterText').textContent=`With ${inp.assetRate}% annual appreciation and ${inp.assetVol}% volatility, ${uwPct}% of simulated paths (${uwCount} of ${paths.length}) show the home value dropping below the loan balance at some point during the loan term. A larger down payment or shorter term reduces this risk.`}else{$('L_underwaterWarn').style.display='none'}}
+      else if(st.assetType==='depreciating'){const uw=st.schedule.find(d=>{const a=st.assetValues.find(x=>x.month===d.month);return a&&a.value<d.balance&&d.month>0});if(uw){const av=st.assetValues.find(x=>x.month===uw.month);const deficit=uw.balance-(av?av.value:0);$('L_underwaterWarn').style.display='block';$('L_underwaterText').textContent=`With ${inp.assetRate}% annual depreciation, the asset value drops below your loan balance at month ${uw.month} (year ${(uw.month/12).toFixed(1)}). At that point the asset is worth ${fmtC(av?av.value:0)} but you still owe ${fmtC(uw.balance)} — a negative equity of ${fmtC(deficit)}. A larger down payment or shorter loan term can help avoid this.`}else{$('L_underwaterWarn').style.display='none'}}else $('L_underwaterWarn').style.display='none';
     }
   }
 
@@ -865,24 +907,24 @@ const L=(()=>{
 
   function exportCSV(){const inp=getInp();let csv='Period,Month,Payment,Principal,Interest,Balance,Equity%\n';for(const r of st.schedule)csv+=`${r.period},${r.month},${r.payment.toFixed(2)},${r.principal.toFixed(2)},${r.interest.toFixed(2)},${r.balance.toFixed(2)},${r.equityPercent.toFixed(2)}\n`;csv+=`\nSUMMARY\nPrincipal,${inp.principal}\nRate,${inp.annualRate}%\nPayment,${st.payment.toFixed(2)}\nTotal Interest,${st.totalInterest.toFixed(2)}\n`;const b=new Blob([csv],{type:'text/csv'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='loan-schedule.csv';a.click();URL.revokeObjectURL(u)}
 
-  function toggleAsset(){st.assetEnabled=!st.assetEnabled;$('L_assetToggle').textContent=st.assetEnabled?'ON':'OFF';$('L_assetToggle').classList.toggle('active',st.assetEnabled);$('L_assetControls').style.display=st.assetEnabled?'block':'none';rebuildTabs();update()}
-  function setAssetType(t){st.assetType=t;$('L_btnAppr').classList.toggle('active',t==='appreciating');$('L_btnDepr').classList.toggle('active',t==='depreciating');$('L_assetRateLabel').textContent=t==='appreciating'?'Annual Appreciation':'Annual Depreciation';$('L_assetRate').value=t==='appreciating'?3.5:15;$('L_assetRateSlider').value=$('L_assetRate').value;$('L_assetRateSlider').max=t==='appreciating'?15:40;update()}
+  function toggleAsset(){st.assetEnabled=!st.assetEnabled;$('L_assetToggle').textContent=st.assetEnabled?'ON':'OFF';$('L_assetToggle').classList.toggle('active',st.assetEnabled);$('L_assetControls').style.display=st.assetEnabled?'block':'none';if(st.assetEnabled)$('L_assetVolWrap').style.display=st.assetType==='appreciating'?'block':'none';rebuildTabs();update()}
+  function setAssetType(t){st.assetType=t;$('L_btnAppr').classList.toggle('active',t==='appreciating');$('L_btnDepr').classList.toggle('active',t==='depreciating');$('L_assetRateLabel').textContent=t==='appreciating'?'Annual Appreciation':'Annual Depreciation';$('L_assetRate').value=t==='appreciating'?3.5:15;$('L_assetRateSlider').value=$('L_assetRate').value;$('L_assetRateSlider').max=t==='appreciating'?15:40;$('L_assetVolWrap').style.display=t==='appreciating'?'block':'none';if(t==='depreciating'){$('L_assetVol').value=0;$('L_assetVolSlider').value=0}update()}
 
   function rebuildTabs(){const tabs=['overview','breakdown','schedule','compare'];if(st.assetEnabled)tabs.splice(3,0,'asset');$('L_tabsRow').innerHTML=tabs.map(t=>{let l=t;if(t==='compare'&&st.scenarios.length>0)l=`Compare (${st.scenarios.length})`;return`<button class="tab-btn${st.activeTab===t?' active':''}" data-tab="${t}" onclick="L.switchTab('${t}')">${l}</button>`}).join('');if(!tabs.includes(st.activeTab))switchTab('overview')}
   function switchTab(t){st.activeTab=t;st.tablePage=0;document.querySelectorAll('#page-loan .tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('#page-loan .tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));const panel=$(`L_tab-${t}`);if(panel)panel.classList.add('active');update()}
 
-  function init(){const du=debounce(update,150);['L_principal','L_annualRate','L_termValue','L_payFreq','L_extraPayment','L_downPct','L_assetRate'].forEach(id=>{$(id).addEventListener('input',du)});$('L_termUnit').addEventListener('change',update);$('L_rateSlider').addEventListener('input',e=>{$('L_annualRate').value=e.target.value;update()});$('L_annualRate').addEventListener('input',()=>{$('L_rateSlider').value=$('L_annualRate').value});$('L_downSlider').addEventListener('input',e=>{$('L_downPct').value=e.target.value;update()});$('L_downPct').addEventListener('input',()=>{$('L_downSlider').value=$('L_downPct').value});$('L_assetRateSlider').addEventListener('input',e=>{$('L_assetRate').value=e.target.value;update()});$('L_assetRate').addEventListener('input',()=>{$('L_assetRateSlider').value=$('L_assetRate').value});rebuildTabs();update()}
+  function init(){const du=debounce(update,150);['L_principal','L_annualRate','L_termValue','L_payFreq','L_extraPayment','L_downPct','L_assetRate','L_assetVol'].forEach(id=>{$(id).addEventListener('input',du)});$('L_termUnit').addEventListener('change',update);$('L_rateSlider').addEventListener('input',e=>{$('L_annualRate').value=e.target.value;update()});$('L_annualRate').addEventListener('input',()=>{$('L_rateSlider').value=$('L_annualRate').value});$('L_downSlider').addEventListener('input',e=>{$('L_downPct').value=e.target.value;update()});$('L_downPct').addEventListener('input',()=>{$('L_downSlider').value=$('L_downPct').value});$('L_assetRateSlider').addEventListener('input',e=>{$('L_assetRate').value=e.target.value;update()});$('L_assetRate').addEventListener('input',()=>{$('L_assetRateSlider').value=$('L_assetRate').value});$('L_assetVolSlider').addEventListener('input',e=>{$('L_assetVol').value=e.target.value;update()});$('L_assetVol').addEventListener('input',()=>{$('L_assetVolSlider').value=$('L_assetVol').value});rebuildTabs();update()}
 
-  function saveState(){try{const d={p:$('L_principal').value,r:$('L_annualRate').value,tv:$('L_termValue').value,tu:$('L_termUnit').value,pf:$('L_payFreq').value,ep:$('L_extraPayment').value,dp:$('L_downPct').value,ae:st.assetEnabled,at:st.assetType,ar:$('L_assetRate').value};localStorage.setItem('L_state',JSON.stringify(d))}catch(e){}}
-  function loadSaved(){try{const d=JSON.parse(localStorage.getItem('L_state'));if(!d)return false;$('L_principal').value=d.p;$('L_annualRate').value=d.r;$('L_rateSlider').value=d.r;$('L_termValue').value=d.tv;$('L_termUnit').value=d.tu;$('L_payFreq').value=d.pf;$('L_extraPayment').value=d.ep;$('L_downPct').value=d.dp;$('L_downSlider').value=d.dp;$('L_assetRate').value=d.ar;$('L_assetRateSlider').value=d.ar;if(d.ae&&!st.assetEnabled)toggleAsset();if(d.ae&&d.at!==st.assetType)setAssetType(d.at);return true}catch(e){return false}}
+  function saveState(){try{const d={p:$('L_principal').value,r:$('L_annualRate').value,tv:$('L_termValue').value,tu:$('L_termUnit').value,pf:$('L_payFreq').value,ep:$('L_extraPayment').value,dp:$('L_downPct').value,ae:st.assetEnabled,at:st.assetType,ar:$('L_assetRate').value,av:$('L_assetVol').value};localStorage.setItem('L_state',JSON.stringify(d))}catch(e){}}
+  function loadSaved(){try{const d=JSON.parse(localStorage.getItem('L_state'));if(!d)return false;$('L_principal').value=d.p;$('L_annualRate').value=d.r;$('L_rateSlider').value=d.r;$('L_termValue').value=d.tv;$('L_termUnit').value=d.tu;$('L_payFreq').value=d.pf;$('L_extraPayment').value=d.ep;$('L_downPct').value=d.dp;$('L_downSlider').value=d.dp;$('L_assetRate').value=d.ar;$('L_assetRateSlider').value=d.ar;if(d.av){$('L_assetVol').value=d.av;$('L_assetVolSlider').value=d.av}if(d.ae&&!st.assetEnabled)toggleAsset();if(d.ae&&d.at!==st.assetType)setAssetType(d.at);return true}catch(e){return false}}
 
   const LOAN_PRESETS={
-    mortgage30:{principal:350000,annualRate:6.5,termValue:30,termUnit:'years',payFreq:'12',extraPayment:0,downPct:20,assetEnabled:true,assetType:'appreciating',assetRate:3.5},
-    mortgage15:{principal:350000,annualRate:5.75,termValue:15,termUnit:'years',payFreq:'12',extraPayment:0,downPct:20,assetEnabled:true,assetType:'appreciating',assetRate:3.5},
-    auto5:{principal:35000,annualRate:5.9,termValue:5,termUnit:'years',payFreq:'12',extraPayment:0,downPct:10,assetEnabled:true,assetType:'depreciating',assetRate:15},
-    auto3:{principal:25000,annualRate:4.5,termValue:3,termUnit:'years',payFreq:'12',extraPayment:0,downPct:15,assetEnabled:true,assetType:'depreciating',assetRate:20},
-    student:{principal:45000,annualRate:5.5,termValue:10,termUnit:'years',payFreq:'12',extraPayment:0,downPct:0,assetEnabled:false,assetType:'appreciating',assetRate:0},
-    personal:{principal:15000,annualRate:10.5,termValue:5,termUnit:'years',payFreq:'12',extraPayment:0,downPct:0,assetEnabled:false,assetType:'appreciating',assetRate:0}
+    mortgage30:{principal:350000,annualRate:6.5,termValue:30,termUnit:'years',payFreq:'12',extraPayment:0,downPct:20,assetEnabled:true,assetType:'appreciating',assetRate:3.5,assetVol:8},
+    mortgage15:{principal:350000,annualRate:5.75,termValue:15,termUnit:'years',payFreq:'12',extraPayment:0,downPct:20,assetEnabled:true,assetType:'appreciating',assetRate:3.5,assetVol:8},
+    auto5:{principal:35000,annualRate:5.9,termValue:5,termUnit:'years',payFreq:'12',extraPayment:0,downPct:10,assetEnabled:true,assetType:'depreciating',assetRate:15,assetVol:0},
+    auto3:{principal:25000,annualRate:4.5,termValue:3,termUnit:'years',payFreq:'12',extraPayment:0,downPct:15,assetEnabled:true,assetType:'depreciating',assetRate:20,assetVol:0},
+    student:{principal:45000,annualRate:5.5,termValue:10,termUnit:'years',payFreq:'12',extraPayment:0,downPct:0,assetEnabled:false,assetType:'appreciating',assetRate:0,assetVol:0},
+    personal:{principal:15000,annualRate:10.5,termValue:5,termUnit:'years',payFreq:'12',extraPayment:0,downPct:0,assetEnabled:false,assetType:'appreciating',assetRate:0,assetVol:0}
   };
   function loadPreset(key){
     const p=LOAN_PRESETS[key];if(!p)return;
@@ -890,6 +932,7 @@ const L=(()=>{
     $('L_termValue').value=p.termValue;$('L_termUnit').value=p.termUnit;$('L_payFreq').value=p.payFreq;
     $('L_extraPayment').value=p.extraPayment;$('L_downPct').value=p.downPct;$('L_downSlider').value=p.downPct;
     $('L_assetRate').value=p.assetRate;$('L_assetRateSlider').value=p.assetRate;
+    $('L_assetVol').value=p.assetVol||0;$('L_assetVolSlider').value=p.assetVol||0;
     if(p.assetEnabled!==st.assetEnabled)toggleAsset();
     if(p.assetEnabled&&p.assetType!==st.assetType)setAssetType(p.assetType);
     update();saveState();
@@ -1339,7 +1382,7 @@ function encodeURLState(){
     params.set('lt',$('L_termValue').value);params.set('lu',$('L_termUnit').value);
     params.set('lf',$('L_payFreq').value);params.set('le',$('L_extraPayment').value);
     params.set('ld',$('L_downPct').value);
-    if(L.st.assetEnabled){params.set('la','1');params.set('lat',L.st.assetType);params.set('lar',$('L_assetRate').value)}
+    if(L.st.assetEnabled){params.set('la','1');params.set('lat',L.st.assetType);params.set('lar',$('L_assetRate').value);params.set('lav',$('L_assetVol').value)}
   }else if(page==='asset'){
     params.set('ai',$('A_initial').value);params.set('aa',$('A_apy').value);
     params.set('ac',$('A_compounding').value);params.set('ah',$('A_horizon').value);
@@ -1361,7 +1404,7 @@ function decodeURLState(){
       $('L_termValue').value=p.get('lt');$('L_termUnit').value=p.get('lu');
       $('L_payFreq').value=p.get('lf');$('L_extraPayment').value=p.get('le');
       $('L_downPct').value=p.get('ld');$('L_downSlider').value=p.get('ld');
-      if(p.get('la')==='1'){if(!L.st.assetEnabled)L.toggleAsset();if(p.get('lat'))L.setAssetType(p.get('lat'));$('L_assetRate').value=p.get('lar');$('L_assetRateSlider').value=p.get('lar')}
+      if(p.get('la')==='1'){if(!L.st.assetEnabled)L.toggleAsset();if(p.get('lat'))L.setAssetType(p.get('lat'));$('L_assetRate').value=p.get('lar');$('L_assetRateSlider').value=p.get('lar');if(p.get('lav')){$('L_assetVol').value=p.get('lav');$('L_assetVolSlider').value=p.get('lav')}}
       switchPage('loan');return true;
     }else if(page==='asset'&&p.has('ai')){
       $('A_initial').value=p.get('ai');$('A_apy').value=p.get('aa');$('A_apySlider').value=p.get('aa');

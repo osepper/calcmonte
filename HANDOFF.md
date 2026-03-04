@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-**CalcMonte** (https://calcmonte.com) is a live, publicly deployed single-file financial calculator web application (~130KB, ~1,420 lines) that combines loan amortization analytics with a Monte Carlo investment simulator. It targets financially literate users who want deeper analysis than typical online calculators provide. The design philosophy is **"sophisticated simplicity"** — quantitative rigor behind an intuitive, clean interface.
+**CalcMonte** (https://calcmonte.com) is a live, publicly deployed single-file financial calculator web application (~137KB, ~1,500 lines) that combines loan amortization analytics with a Monte Carlo investment simulator. It targets financially literate users who want deeper analysis than typical online calculators provide. The design philosophy is **"sophisticated simplicity"** — quantitative rigor behind an intuitive, clean interface.
 
 The entire application is one self-contained HTML file (`index.html`) with inline CSS and JavaScript. No build system, no npm, no framework. External dependencies are loaded from CDN at runtime: Chart.js for charts, Google Fonts for typography, and KaTeX for math rendering (lazy-loaded).
 
@@ -26,7 +26,7 @@ The entire application is one self-contained HTML file (`index.html`) with inlin
 ### Deployed Files
 ```
 deploy/
-├── index.html        ← The entire application (129 KB)
+├── index.html        ← The entire application (~137 KB)
 ├── og-image.png      ← Social sharing preview image (1200×630, 41 KB)
 ├── robots.txt        ← Search engine crawl directives (66 B)
 └── sitemap.xml       ← URL listing for Google (231 B)
@@ -125,8 +125,10 @@ Where P = principal, r = periodic rate, n = total periods.
 - **Extra payments**: Added to principal each period, reduces term
 - **Down payment**: Percentage input; derives total property value as `tpv = principal / (1 - downPct/100)`
 - **Asset simulation toggle**: Appreciating (home) or Depreciating (car) overlay
-  - Asset value: `V(t) = V₀ · (1 ± rate)^(t/12)` — exponential growth/decay
-  - Underwater detection: warns when asset value < loan balance with specific month and dollar figures
+  - Asset value: `V(t) = V₀ · (1 ± rate)^(t/12)` — exponential growth/decay (deterministic mode, σ=0)
+  - **Stochastic mode (σ>0, appreciating only)**: GBM Monte Carlo with 200 paths, showing 5th/25th/50th/75th/95th percentile bands. Uses same `S(t+Δt) = S(t)·exp[(μ-σ²/2)Δt + σ√Δt·Z]` model as Asset Simulator.
+  - Underwater detection: deterministic warns at specific month; stochastic shows **P(Underwater)** — percentage of paths where home value drops below loan balance
+  - Volatility slider: 0-30%, hidden for depreciating assets. Hint: Home ~8%, Car ~5%
 - **Scenario comparison**: Save up to 3 configurations, compare side-by-side (balance curves, interest curves, table)
 - **Tabs**: Overview, Breakdown, Schedule, Compare (if scenarios saved), Asset (if enabled)
 - **Export**: CSV of full amortization schedule, browser print-to-PDF
@@ -141,14 +143,14 @@ Where P = principal, r = periodic rate, n = total periods.
 - All inputs auto-save to localStorage on every update
 
 ### Presets
-| Preset | Principal | Rate | Term | Down% | Asset |
-|--------|-----------|------|------|-------|-------|
-| 30yr Mortgage | $350K | 6.5% | 30yr | 20% | Appreciating 3.5% |
-| 15yr Mortgage | $350K | 5.75% | 15yr | 20% | Appreciating 3.5% |
-| 5yr Auto | $35K | 5.9% | 5yr | 10% | Depreciating 15% |
-| 3yr Auto | $25K | 4.5% | 3yr | 15% | Depreciating 20% |
-| Student Loan | $45K | 5.5% | 10yr | 0% | Off |
-| Personal | $15K | 10.5% | 5yr | 0% | Off |
+| Preset | Principal | Rate | Term | Down% | Asset | Vol |
+|--------|-----------|------|------|-------|-------|-----|
+| 30yr Mortgage | $350K | 6.5% | 30yr | 20% | Appreciating 3.5% | 8% |
+| 15yr Mortgage | $350K | 5.75% | 15yr | 20% | Appreciating 3.5% | 8% |
+| 5yr Auto | $35K | 5.9% | 5yr | 10% | Depreciating 15% | — |
+| 3yr Auto | $25K | 4.5% | 3yr | 15% | Depreciating 20% | — |
+| Student Loan | $45K | 5.5% | 10yr | 0% | Off | — |
+| Personal | $15K | 10.5% | 5yr | 0% | Off | — |
 
 ---
 
@@ -387,6 +389,9 @@ Social platforms aggressively cache OG previews. If you update the image:
 | Reference card for volatility | Implemented | Solves actual user friction ("what number do I put for volatility?") with zero infrastructure cost |
 | Collapsible mobile sidebar | Removed | Caused iOS touch failures; replaced with simple stacked layout |
 | KaTeX eager loading | Replaced with lazy | Saved ~300KB on initial page load for users who never visit methodology page |
+| Stochastic home prices | Implemented (v4) | Opt-in σ slider for appreciating assets; 200 GBM paths; P(Underwater) is a killer differentiator vs every other mortgage calculator |
+| Nav readability fix | Implemented (v4) | Users couldn't see inactive tabs; bumped color from text-dim to text-muted, added subtle border, raised secondary opacity |
+| Built-in contact form | Rejected | Requires backend, breaks single-file architecture; mailto + GitHub Issues achieves same goal with zero infrastructure |
 
 ---
 
@@ -396,7 +401,8 @@ Social platforms aggressively cache OG previews. If you update the image:
 |---------|------|---------|
 | v1 (backup) | Feb 28, 2026 | Full working app: amortization, Monte Carlo, presets, methodology with KaTeX, URL sharing, localStorage, mobile responsive |
 | v2 | Mar 1, 2026 | Mobile fixes: removed broken collapsible sidebar, fixed range slider touch targets (36px element/4px track/20px thumb), explicit chart container heights, cleared nested scroll containers, iOS-specific input fixes |
-| v3 (current, live) | Mar 1, 2026 | Launch polish: landing copy rewritten (outcomes over methods), SVG chart preview added, KaTeX lazy-loaded, debounce on inputs, footer restructured (affiliate-ready, non-duplicative), nav hierarchy (methodology/share demoted), orientation hints, historical reference card in asset simulator, brand renamed to CalcMonte, domain references updated, GoatCounter analytics added, SEO meta optimized, OG image created and deployed |
+| v3 | Mar 1, 2026 | Launch polish: landing copy rewritten (outcomes over methods), SVG chart preview added, KaTeX lazy-loaded, debounce on inputs, footer restructured (affiliate-ready, non-duplicative), nav hierarchy (methodology/share demoted), orientation hints, historical reference card in asset simulator, brand renamed to CalcMonte, domain references updated, GoatCounter analytics added, SEO meta optimized, OG image created and deployed |
+| v4 (current, live) | Mar 4, 2026 | Nav readability: inactive buttons brightened (#3f5170→#7e92b0), subtle border on all tabs, secondary nav opacity 0.5→0.8. Stochastic home price simulation: GBM Monte Carlo (200 paths) on loan asset overlay with σ slider, fan chart percentile bands, P(Underwater) probability stat. Footer: added Feedback column with mailto + GitHub Issues links. |
 
 ### Reverting
 `loan-analytics-backup-v1.html` in `~/Desktop/LoanAnalytics/` is the v1 backup with all core features but without mobile fixes, polish, or deployment configuration. Rename to `index.html` to use.
