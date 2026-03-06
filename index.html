@@ -1117,9 +1117,11 @@ const A=(()=>{
     const yrs=months/12;
 
     let t=isStoch
-      ? `Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>, simulated with <strong>monthly-step GBM</strong>`
+      ? `Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>, simulated using <strong>monthly-step GBM</strong>`
       : `Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> compounded ${compLabel} over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>`;
-    if(inp.vol>0) t+=` with <strong>${inp.vol}% annual volatility</strong>`;
+    if(inp.vol>0) t+= isStoch
+      ? ` and <strong>${inp.vol}% annual volatility</strong>`
+      : ` with <strong>${inp.vol}% annual volatility</strong>`;
     t+=`. `;
 
     if(inp.contribAmt>0) t+=`Regular contributions configured at <span class="hl-c">${fmtC(inp.contribAmt)}</span> ${FL[inp.contribFreq]?.toLowerCase()||'periodic'}. `;
