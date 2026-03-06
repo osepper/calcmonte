@@ -397,6 +397,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
 .landing-trust{margin-top:24px;font-size:10px;color:var(--text-dim);letter-spacing:0.8px;text-transform:uppercase}
 .skip-link{position:absolute;top:-100px;left:50%;transform:translateX(-50%);padding:8px 20px;background:var(--cyan);color:var(--bg);font-weight:600;border-radius:0 0 6px 6px;z-index:9999;transition:top 0.2s}
 .skip-link:focus{top:0}
+select:disabled,input:disabled{opacity:0.6;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -511,7 +512,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     <label class="field-label">Loan Principal</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="L_principal" value="350000" min="1000" step="1000" class="has-prefix"></div>
     <label class="field-label">Annual Interest Rate</label><div class="input-wrap"><input type="number" id="L_annualRate" value="6.5" min="0" max="30" step="0.125" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_rateSlider" min="0" max="15" step="0.125" value="6.5">
     <div class="field-row"><div><label class="field-label">Loan Term</label><input type="number" id="L_termValue" value="30" min="1" step="1"></div><div><label class="field-label">Unit</label><select id="L_termUnit"><option value="years">Years</option><option value="months">Months</option></select></div></div>
-    <label class="field-label">Payment Frequency</label><select id="L_payFreq"><option value="12">Monthly (12/yr)</option><option value="26">Bi-Weekly (26/yr)</option><option value="52">Weekly (52/yr)</option><option value="24">Semi-Monthly (24/yr)</option><option value="4">Quarterly (4/yr)</option><option value="1">Annually (1/yr)</option></select>
+    <label class="field-label">Payment Frequency</label><select id="L_payFreq"><option value="12">Monthly (12/yr)</option><option value="26">Bi-Weekly (26/yr)</option><option value="52">Weekly (52/yr)</option><option value="24">Semi-Monthly (24/yr)</option><option value="4">Quarterly (4/yr)</option><option value="1">Annually (1/yr)</option></select><div class="hint" id="L_freqHint" style="margin-top:8px;padding:8px 10px;border-left:3px solid var(--purple);background:rgba(196,181,253,0.08);color:#ddd6fe;font-size:11px;line-height:1.5"><strong>How timing is shown.</strong> For weekly, bi-weekly, and semi-monthly schedules, charts and milestone labels use a rounded month timeline, while the amortization math uses exact payment periods.</div>
     <label class="field-label">Extra Payment per Period</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="L_extraPayment" value="0" min="0" step="50" class="has-prefix"></div>
     <label class="field-label">Down Payment</label><div class="input-wrap"><input type="number" id="L_downPct" value="20" min="0" max="100" step="1" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_downSlider" min="0" max="50" step="1" value="20"><div class="hint" id="L_downHint"></div>
     <div class="section-divider"><div class="toggle-row"><h2 style="margin-bottom:0">Asset Simulation</h2><button class="toggle-btn" id="L_assetToggle" onclick="L.toggleAsset()">OFF</button></div><div id="L_assetControls" style="display:none"><label class="field-label">Asset Type</label><div class="type-btns"><button class="type-btn active" id="L_btnAppr" onclick="L.setAssetType('appreciating')">🏠 Appreciating</button><button class="type-btn" id="L_btnDepr" onclick="L.setAssetType('depreciating')">🚗 Depreciating</button></div><label class="field-label" id="L_assetRateLabel">Annual Appreciation</label><div class="input-wrap"><input type="number" id="L_assetRate" value="3.5" min="0" max="50" step="0.5" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_assetRateSlider" min="0" max="15" step="0.5" value="3.5"><div id="L_assetVolWrap" style="display:none"><label class="field-label">Price Volatility (σ)</label><div class="input-wrap"><input type="number" id="L_assetVol" value="0" min="0" max="30" step="0.5" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_assetVolSlider" min="0" max="30" step="0.5" value="0"><p class="hint">0% = deterministic · Home: ~8% · Car: ~5%</p></div></div></div>
@@ -547,9 +548,10 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     </div>
     <div class="hint" style="margin-bottom:14px">Choose a preset or adjust below, then Run Simulation.</div>
     <label class="field-label">Initial Investment</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="A_initial" value="10000" min="0" step="1000" class="has-prefix"></div>
-    <label class="field-label">Annual Percentage Yield (APY)</label><div class="input-wrap"><input type="number" id="A_apy" value="5.0" min="0" max="100" step="0.1" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="A_apySlider" min="0" max="30" step="0.1" value="5.0">
+    <label class="field-label">Expected Annual Return</label><div class="input-wrap"><input type="number" id="A_apy" value="5.0" min="0" max="100" step="0.1" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="A_apySlider" min="0" max="30" step="0.1" value="5.0">
     <label class="field-label">Compounding</label>
     <select id="A_compounding"><option value="continuous">Continuous</option><option value="365">Daily</option><option value="12">Monthly</option><option value="4">Quarterly</option><option value="2">Semi-Annual</option><option value="1">Annual</option></select>
+    <div class="hint" id="A_compHint" style="margin-top:6px;padding:8px 10px;border-left:3px solid var(--amber);background:rgba(251,191,36,0.10);color:#f4d35e;font-size:11px;line-height:1.5"><strong>Deterministic only.</strong> When annual volatility is above 0%, the simulator switches to monthly-step GBM.</div>
     <label class="field-label">Investment Horizon</label>
     <div class="field-row"><div><input type="number" id="A_horizon" value="10" min="1" max="50" step="1"></div><div><select id="A_horizonUnit"><option value="years">Years</option><option value="months">Months</option></select></div></div>
 
@@ -562,11 +564,11 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
       <div style="margin:12px 0 4px;padding:10px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-size:10px;line-height:1.9;color:var(--text-dim)">
         <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:6px">Historical Reference</div>
         <div style="display:grid;grid-template-columns:1fr auto auto;gap:2px 12px">
-          <span>S&amp;P 500</span><span style="color:var(--cyan)">~10% APY</span><span>~18% σ</span>
-          <span>Total Bond Mkt</span><span style="color:var(--cyan)">~5% APY</span><span>~6% σ</span>
-          <span>NASDAQ</span><span style="color:var(--cyan)">~12% APY</span><span>~22% σ</span>
-          <span>Bitcoin (2015–)</span><span style="color:var(--cyan)">~60% APY</span><span>~65% σ</span>
-          <span>CDs / HYSA</span><span style="color:var(--cyan)">~4% APY</span><span>0% σ</span>
+          <span>S&amp;P 500</span><span style="color:var(--cyan)">~10% annual return</span><span>~18% σ</span>
+          <span>Total Bond Mkt</span><span style="color:var(--cyan)">~5% annual return</span><span>~6% σ</span>
+          <span>NASDAQ</span><span style="color:var(--cyan)">~12% annual return</span><span>~22% σ</span>
+          <span>Bitcoin (2015–)</span><span style="color:var(--cyan)">~60% annual return</span><span>~65% σ</span>
+          <span>CDs / HYSA</span><span style="color:var(--cyan)">~4% annual return</span><span>0% σ</span>
         </div>
         <div style="margin-top:6px;font-size:9px;color:var(--text-dim);font-style:italic">Long-run averages. Past returns ≠ future results.</div>
       </div>
@@ -580,6 +582,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
       <div class="field-row"><div><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="A_contribAmt" value="0" min="0" step="100" class="has-prefix"></div></div><div><select id="A_contribFreq"><option value="12">Monthly</option><option value="26">Bi-Weekly</option><option value="4">Quarterly</option><option value="1">Annual</option></select></div></div>
       <label class="field-label">Regular Withdrawals</label>
       <div class="field-row"><div><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="A_withdrawAmt" value="0" min="0" step="100" class="has-prefix"></div></div><div><select id="A_withdrawFreq"><option value="12">Monthly</option><option value="26">Bi-Weekly</option><option value="4">Quarterly</option><option value="1">Annual</option></select></div></div>
+      <div class="hint" id="A_cashflowHint" style="margin-top:8px;padding:8px 10px;border-left:3px solid var(--blue);background:rgba(88,166,255,0.08);color:#cfe3ff;font-size:11px;line-height:1.5"><strong>Monthly simulation timeline.</strong> Bi-weekly and other non-monthly regular cash flows are mapped into the monthly simulation steps as an approximation.</div>
       <label class="field-label">One-Time Events</label>
       <div class="field-row" style="align-items:flex-end">
         <div><label class="field-label" style="margin-top:0">Month</label><input type="number" id="A_evMonth" value="12" min="1" step="1"></div>
@@ -660,7 +663,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     <span id="f_discrete"></span>
     <ul class="where-list">
       <li><span id="fw_n2"></span> = compounding frequency (1 = annual, 4 = quarterly, 12 = monthly, 365 = daily)</li>
-      <li><span id="fw_r2"></span> = annual percentage yield (APY)</li>
+      <li><span id="fw_r2"></span> = expected annual return</li>
       <li><span id="fw_t"></span> = time in years</li>
     </ul>
   </div>
@@ -668,7 +671,8 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     <div class="formula-label">Continuous Compounding</div>
     <span id="f_continuous"></span>
   </div>
-  <p>Continuous compounding represents the mathematical limit as <em>n</em> approaches infinity. In practice, the difference between daily and continuous compounding is negligible for typical APYs, but the continuous formula is analytically cleaner and is the default because it connects naturally to the GBM stochastic model.</p>
+  <p>Continuous compounding represents the mathematical limit as <em>n</em> approaches infinity. In practice, the difference between daily and continuous compounding is usually small for typical annual return assumptions, but the continuous formula is analytically cleaner and connects naturally to the GBM stochastic model.</p>
+  <p><strong>Deterministic vs. stochastic modes:</strong> When annual volatility is greater than 0%, the simulator switches to a monthly-step GBM model; the compounding selector applies only to deterministic projections.</p>
 
   <h3 id="meth-gbm">Geometric Brownian Motion (GBM)</h3>
   <p>When volatility is non-zero, the Asset Simulator models price dynamics using Geometric Brownian Motion — the same framework underlying the Black-Scholes option pricing model. The stochastic differential equation is:</p>
@@ -715,9 +719,10 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
   <p><strong>Log-normal returns:</strong> GBM produces log-normally distributed returns. Real financial returns have fatter tails than the log-normal distribution predicts. This means crashes of the magnitude seen in 2008 or 2020 are more likely than the model suggests.</p>
   <p><strong>No mean reversion:</strong> The model does not incorporate mean reversion — the tendency of valuations to return to historical averages over long periods. This is most relevant for very long simulation horizons (20+ years).</p>
   <p><strong>Fixed rates:</strong> Loan calculations assume a fixed interest rate for the entire term. In practice, adjustable-rate mortgages (ARMs) and refinancing opportunities can significantly alter outcomes.</p>
+  <p><strong>Loan timeline display:</strong> For non-monthly payment schedules such as weekly, bi-weekly, and semi-monthly, the amortization calculation uses the exact payment frequency, but charts, milestones, and some summaries are displayed on rounded month labels for readability and alignment with the monthly asset overlays.</p>
   <p><strong>No taxes or fees:</strong> The simulator does not account for capital gains taxes, dividend taxes, management fees, inflation, or transaction costs, all of which reduce real returns. A 10% nominal return might be 6-7% after taxes and fees.</p>
-  <p><strong>Monthly granularity:</strong> All simulations use monthly time steps (Δt = 1/12). For very high volatility assets, finer granularity could yield different percentile estimates, though the expected values remain unbiased due to the Itô correction.</p>
-  <p><strong>Cash flow timing:</strong> Contributions and withdrawals are applied at the end of each monthly step (post-growth). Withdrawals are capped at the available balance to prevent negative values.</p>
+  <p><strong>Monthly granularity:</strong> All simulations use monthly time steps (Δt = 1/12). For very high volatility assets, finer granularity could yield different percentile estimates, though the expected values remain unbiased due to the Itô correction. One-time events are scheduled by integer month on this monthly timeline.</p>
+  <p><strong>Cash flow timing:</strong> Contributions and withdrawals are applied at the end of each monthly step (post-growth). Monthly recurring cash flows are modeled directly; non-monthly recurring choices such as bi-weekly are mapped into the monthly simulation timeline as an approximation. Withdrawals are capped at the available balance to prevent negative values.</p>
 </div>
 </div>
 
@@ -730,7 +735,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;margin-bottom:24px">
       <div style="max-width:360px">
         <h4 style="font-family:var(--font-display);font-size:15px;font-weight:400;margin-bottom:8px;color:var(--text)">Loan Analytics</h4>
-        <p style="color:var(--text-dim);font-size:11px;line-height:1.7">Amortization, scenario comparison, and asset simulation — with the analytical depth that finance professionals expect. Model extra payments, compare terms, and see the real cost of borrowing over time.</p>
+        <p style="color:var(--text-dim);font-size:11px;line-height:1.7">Amortization, scenario comparison, and asset simulation — with the transparency and rigor serious users expect. Model extra payments, compare terms, and see the real cost of borrowing over time.</p>
       </div>
       <div style="font-size:11px;display:flex;gap:24px">
         <div>
@@ -803,7 +808,7 @@ const L=(()=>{
   function simAssetPaths(init,ratePct,volPct,months,nPaths){const mu=ratePct/100,sigma=volPct/100,dt=1/12;const paths=[];for(let i=0;i<nPaths;i++){const p=[init];let v=init;for(let m=1;m<=months;m++){const drift=(mu-sigma*sigma/2)*dt;const diff=sigma*Math.sqrt(dt)*randn();v=v*Math.exp(drift+diff);p.push(v)}paths.push(p)}const pctls={p5:[],p25:[],p50:[],p75:[],p95:[]};for(let m=0;m<=months;m++){const vals=paths.map(p=>p[m]).sort((a,b)=>a-b);const n=vals.length;const pct=q=>vals[Math.min(Math.floor(n*q),n-1)];pctls.p5.push(pct(0.05));pctls.p25.push(pct(0.25));pctls.p50.push(pct(0.50));pctls.p75.push(pct(0.75));pctls.p95.push(pct(0.95))}pctls.paths=paths;return pctls}
   function getInp(){const p=parseFloat($('L_principal').value)||0,r=parseFloat($('L_annualRate').value)||0,tv=parseFloat($('L_termValue').value)||1,tu=$('L_termUnit').value,pf=parseInt($('L_payFreq').value),ep=parseFloat($('L_extraPayment').value)||0,dp=parseFloat($('L_downPct').value)||0,tm=tu==='years'?tv*12:tv,tpv=dp<100?p/(1-dp/100):p,dpa=tpv*(dp/100),ar=parseFloat($('L_assetRate').value)||0,av=parseFloat($('L_assetVol').value)||0;return{principal:p,annualRate:r,termMonths:tm,termValue:tv,termUnit:tu,payFreq:pf,extraPayment:ep,downPct:dp,totalPropertyValue:tpv,downPayment:dpa,assetRate:ar,assetVol:av}}
 
-  function buildSummary(inp){const{principal:p,annualRate:r,termMonths:tm,payFreq:pf,extraPayment:ep,termValue:tv,termUnit:tu}=inp;const ty=tu==='years'?tv:(tv/12);const tl=ty===1?'1 year':((ty%1===0?ty:ty.toFixed(1))+' years');const freq=FL[pf].toLowerCase(),ir=(st.totalInterest/p)*100;const last=st.schedule[st.schedule.length-1];const atm=last?last.month:tm;const ts=tm-atm;const cross=st.crossoverPeriod;const cy=cross?(cross.month/12).toFixed(1):null;const y5=st.schedule.find(s=>s.month>=60);let t=`You're borrowing <strong>${fmtC(p)}</strong> at <strong>${r}%</strong> over <strong>${tl}</strong>. Your ${freq} payment will be <span class="hl-c">${fmtC(st.payment)}</span>`;if(ep>0)t+=` (plus <strong>${fmtC(ep)}</strong> extra)`;t+=`. Total interest: <span class="hl-r">${fmtC(st.totalInterest)}</span> (<span class="hl-r">${ir.toFixed(0)}%</span> of principal). Total cost: <strong>${fmtC(st.totalPaid)}</strong>. `;if(y5){const y5p=(y5.totalInterest/y5.totalPaid)*100;t+=`First 5 years: <span class="hl-a">${fmtC(y5.totalInterest)}</span> to interest (${y5p.toFixed(0)}%). `}if(cross)t+=`P > I crossover at year <span class="hl-p">${cy}</span>. `;if(ts>0&&ep>0)t+=`Extra payments save <span class="hl-c">${Math.round(ts)} months</span>. `;$('L_summary').innerHTML=`<div class="summary-title">Your Loan at a Glance</div><div class="summary-text">${t}</div>`}
+  function buildSummary(inp){const{principal:p,annualRate:r,termMonths:tm,payFreq:pf,extraPayment:ep,termValue:tv,termUnit:tu}=inp;const ty=tu==='years'?tv:(tv/12);const tl=ty===1?'1 year':((ty%1===0?ty:ty.toFixed(1))+' years');const freq=FL[pf].toLowerCase(),ir=(st.totalInterest/p)*100;const last=st.schedule[st.schedule.length-1];const atm=last?last.month:tm;const ts=tm-atm;const cross=st.crossoverPeriod;const cy=cross?(cross.month/12).toFixed(1):null;const y5=st.schedule.find(s=>s.month>=60);let t=`You're borrowing <strong>${fmtC(p)}</strong> at <strong>${r}%</strong> over <strong>${tl}</strong>. Your ${freq} payment will be <span class="hl-c">${fmtC(st.payment)}</span>`;if(ep>0)t+=` (plus <strong>${fmtC(ep)}</strong> extra)`;t+=`. Total interest: <span class="hl-r">${fmtC(st.totalInterest)}</span> (<span class="hl-r">${ir.toFixed(0)}%</span> of principal). Total cost: <strong>${fmtC(st.totalPaid)}</strong>. `;if(y5){const y5p=(y5.totalInterest/y5.totalPaid)*100;t+=`First 5 years: <span class="hl-a">${fmtC(y5.totalInterest)}</span> to interest (${y5p.toFixed(0)}%). `}if(cross)t+=`P > I crossover at approximately year <span class="hl-p">${cy}</span>. `;if(ts>0&&ep>0)t+=`Extra payments save approximately <span class="hl-c">${Math.round(ts)} months</span>. `;$('L_summary').innerHTML=`<div class="summary-title">Your Loan at a Glance</div><div class="summary-text">${t}</div>`}
 
   function update(){
     try{
@@ -1111,12 +1116,14 @@ const A=(()=>{
     const compLabel={continuous:'continuously',365:'daily',12:'monthly',4:'quarterly',2:'semi-annually',1:'annually'}[inp.comp]||inp.comp;
     const yrs=months/12;
 
-    let t=`Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% APY</strong> compounded ${compLabel} over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>`;
+    let t=isStoch
+      ? `Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>, simulated with <strong>monthly-step GBM</strong>`
+      : `Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> compounded ${compLabel} over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>`;
     if(inp.vol>0) t+=` with <strong>${inp.vol}% annual volatility</strong>`;
     t+=`. `;
 
-    if(inp.contribAmt>0) t+=`Regular contributions of <span class="hl-c">${fmtC(inp.contribAmt)}</span> ${FL[inp.contribFreq]?.toLowerCase()||'periodic'}. `;
-    if(inp.withdrawAmt>0) t+=`Regular withdrawals of <span class="hl-r">${fmtC(inp.withdrawAmt)}</span> ${FL[inp.withdrawFreq]?.toLowerCase()||'periodic'}. `;
+    if(inp.contribAmt>0) t+=`Regular contributions configured at <span class="hl-c">${fmtC(inp.contribAmt)}</span> ${FL[inp.contribFreq]?.toLowerCase()||'periodic'}. `;
+    if(inp.withdrawAmt>0) t+=`Regular withdrawals configured at <span class="hl-r">${fmtC(inp.withdrawAmt)}</span> ${FL[inp.withdrawFreq]?.toLowerCase()||'periodic'}. `;
 
     if(isStoch){
       t+=`Median outcome: <span class="hl-c">${fmtC(finalMed)}</span>. `;
@@ -1319,7 +1326,8 @@ const A=(()=>{
     $('A_volSlider').addEventListener('input',e=>{$('A_vol').value=e.target.value;updateVolHint()});
     $('A_vol').addEventListener('input',()=>{$('A_volSlider').value=$('A_vol').value;updateVolHint()});
   }
-  function updateVolHint(){const v=parseFloat($('A_vol').value)||0;let h='σ = 0%: deterministic (CD).';if(v>0&&v<=10)h=`σ = ${v}%: low volatility (bonds, stable assets)`;else if(v>10&&v<=25)h=`σ = ${v}%: moderate (stock market range ~15-20%)`;else if(v>25)h=`σ = ${v}%: high volatility (crypto, speculative)`;$('A_volHint').textContent=h}
+  function updateVolHint(){const v=parseFloat($('A_vol').value)||0;let h='σ = 0%: deterministic (CD).';if(v>0&&v<=10)h=`σ = ${v}%: low volatility (bonds, stable assets)`;else if(v>10&&v<=25)h=`σ = ${v}%: moderate (stock market range ~15-20%)`;else if(v>25)h=`σ = ${v}%: high volatility (crypto, speculative)`;$('A_volHint').textContent=h;updateCompoundingMode()}
+  function updateCompoundingMode(){const v=parseFloat($('A_vol').value)||0;const comp=$('A_compounding');const hint=$('A_compHint');if(!comp||!hint)return;if(v>0){comp.disabled=true;hint.innerHTML='<strong>Stochastic mode active.</strong> Compounding is disabled because paths are simulated with monthly-step GBM.'}else{comp.disabled=false;hint.innerHTML='<strong>Deterministic only.</strong> When annual volatility is above 0%, the simulator switches to monthly-step GBM.'}}
 
   const ASSET_PRESETS={
     cd:{initial:10000,apy:4.5,compounding:'365',horizon:5,horizonUnit:'years',vol:0,paths:500,contribAmt:500,contribFreq:'12',withdrawAmt:0,withdrawFreq:'12'},
