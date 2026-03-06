@@ -547,7 +547,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     </div>
     <div class="hint" style="margin-bottom:14px">Choose a preset or adjust below, then Run Simulation.</div>
     <label class="field-label">Initial Investment</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="A_initial" value="10000" min="0" step="1000" class="has-prefix"></div>
-    <label class="field-label">Annual Percentage Yield (APY)</label><div class="input-wrap"><input type="number" id="A_apy" value="5.0" min="0" max="100" step="0.1" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="A_apySlider" min="0" max="30" step="0.1" value="5.0">
+    <label class="field-label">Expected Annual Return</label><div class="input-wrap"><input type="number" id="A_apy" value="5.0" min="0" max="100" step="0.1" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="A_apySlider" min="0" max="30" step="0.1" value="5.0">
     <label class="field-label">Compounding</label>
     <select id="A_compounding"><option value="continuous">Continuous</option><option value="365">Daily</option><option value="12">Monthly</option><option value="4">Quarterly</option><option value="2">Semi-Annual</option><option value="1">Annual</option></select>
     <label class="field-label">Investment Horizon</label>
@@ -562,11 +562,11 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
       <div style="margin:12px 0 4px;padding:10px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-size:10px;line-height:1.9;color:var(--text-dim)">
         <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:6px">Historical Reference</div>
         <div style="display:grid;grid-template-columns:1fr auto auto;gap:2px 12px">
-          <span>S&amp;P 500</span><span style="color:var(--cyan)">~10% APY</span><span>~18% σ</span>
-          <span>Total Bond Mkt</span><span style="color:var(--cyan)">~5% APY</span><span>~6% σ</span>
-          <span>NASDAQ</span><span style="color:var(--cyan)">~12% APY</span><span>~22% σ</span>
-          <span>Bitcoin (2015–)</span><span style="color:var(--cyan)">~60% APY</span><span>~65% σ</span>
-          <span>CDs / HYSA</span><span style="color:var(--cyan)">~4% APY</span><span>0% σ</span>
+          <span>S&amp;P 500</span><span style="color:var(--cyan)">~10% annual return</span><span>~18% σ</span>
+          <span>Total Bond Mkt</span><span style="color:var(--cyan)">~5% annual return</span><span>~6% σ</span>
+          <span>NASDAQ</span><span style="color:var(--cyan)">~12% annual return</span><span>~22% σ</span>
+          <span>Bitcoin (2015–)</span><span style="color:var(--cyan)">~60% annual return</span><span>~65% σ</span>
+          <span>CDs / HYSA</span><span style="color:var(--cyan)">~4% annual return</span><span>0% σ</span>
         </div>
         <div style="margin-top:6px;font-size:9px;color:var(--text-dim);font-style:italic">Long-run averages. Past returns ≠ future results.</div>
       </div>
@@ -660,7 +660,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     <span id="f_discrete"></span>
     <ul class="where-list">
       <li><span id="fw_n2"></span> = compounding frequency (1 = annual, 4 = quarterly, 12 = monthly, 365 = daily)</li>
-      <li><span id="fw_r2"></span> = annual percentage yield (APY)</li>
+      <li><span id="fw_r2"></span> = expected annual return</li>
       <li><span id="fw_t"></span> = time in years</li>
     </ul>
   </div>
@@ -668,7 +668,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     <div class="formula-label">Continuous Compounding</div>
     <span id="f_continuous"></span>
   </div>
-  <p>Continuous compounding represents the mathematical limit as <em>n</em> approaches infinity. In practice, the difference between daily and continuous compounding is negligible for typical APYs, but the continuous formula is analytically cleaner and is the default because it connects naturally to the GBM stochastic model.</p>
+  <p>Continuous compounding represents the mathematical limit as <em>n</em> approaches infinity. In practice, the difference between daily and continuous compounding is usually small for typical annual return assumptions, but the continuous formula is analytically cleaner and connects naturally to the GBM stochastic model.</p>
 
   <h3 id="meth-gbm">Geometric Brownian Motion (GBM)</h3>
   <p>When volatility is non-zero, the Asset Simulator models price dynamics using Geometric Brownian Motion — the same framework underlying the Black-Scholes option pricing model. The stochastic differential equation is:</p>
@@ -1111,7 +1111,7 @@ const A=(()=>{
     const compLabel={continuous:'continuously',365:'daily',12:'monthly',4:'quarterly',2:'semi-annually',1:'annually'}[inp.comp]||inp.comp;
     const yrs=months/12;
 
-    let t=`Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% APY</strong> compounded ${compLabel} over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>`;
+    let t=`Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> compounded ${compLabel} over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>`;
     if(inp.vol>0) t+=` with <strong>${inp.vol}% annual volatility</strong>`;
     t+=`. `;
 
