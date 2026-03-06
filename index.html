@@ -397,6 +397,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
 .landing-trust{margin-top:24px;font-size:10px;color:var(--text-dim);letter-spacing:0.8px;text-transform:uppercase}
 .skip-link{position:absolute;top:-100px;left:50%;transform:translateX(-50%);padding:8px 20px;background:var(--cyan);color:var(--bg);font-weight:600;border-radius:0 0 6px 6px;z-index:9999;transition:top 0.2s}
 .skip-link:focus{top:0}
+select:disabled,input:disabled{opacity:0.6;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -550,6 +551,7 @@ input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;b
     <label class="field-label">Expected Annual Return</label><div class="input-wrap"><input type="number" id="A_apy" value="5.0" min="0" max="100" step="0.1" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="A_apySlider" min="0" max="30" step="0.1" value="5.0">
     <label class="field-label">Compounding</label>
     <select id="A_compounding"><option value="continuous">Continuous</option><option value="365">Daily</option><option value="12">Monthly</option><option value="4">Quarterly</option><option value="2">Semi-Annual</option><option value="1">Annual</option></select>
+    <div class="hint" id="A_compHint" style="margin-top:6px;padding:8px 10px;border-left:3px solid var(--amber);background:rgba(251,191,36,0.10);color:#f4d35e;font-size:11px;line-height:1.5"><strong>Deterministic only.</strong> When annual volatility is above 0%, the simulator switches to monthly-step GBM.</div>
     <label class="field-label">Investment Horizon</label>
     <div class="field-row"><div><input type="number" id="A_horizon" value="10" min="1" max="50" step="1"></div><div><select id="A_horizonUnit"><option value="years">Years</option><option value="months">Months</option></select></div></div>
 
@@ -1111,7 +1113,9 @@ const A=(()=>{
     const compLabel={continuous:'continuously',365:'daily',12:'monthly',4:'quarterly',2:'semi-annually',1:'annually'}[inp.comp]||inp.comp;
     const yrs=months/12;
 
-    let t=`Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> compounded ${compLabel} over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>`;
+    let t=isStoch
+      ? `Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>, simulated with <strong>monthly-step GBM</strong>`
+      : `Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> compounded ${compLabel} over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>`;
     if(inp.vol>0) t+=` with <strong>${inp.vol}% annual volatility</strong>`;
     t+=`. `;
 
@@ -1319,7 +1323,8 @@ const A=(()=>{
     $('A_volSlider').addEventListener('input',e=>{$('A_vol').value=e.target.value;updateVolHint()});
     $('A_vol').addEventListener('input',()=>{$('A_volSlider').value=$('A_vol').value;updateVolHint()});
   }
-  function updateVolHint(){const v=parseFloat($('A_vol').value)||0;let h='σ = 0%: deterministic (CD).';if(v>0&&v<=10)h=`σ = ${v}%: low volatility (bonds, stable assets)`;else if(v>10&&v<=25)h=`σ = ${v}%: moderate (stock market range ~15-20%)`;else if(v>25)h=`σ = ${v}%: high volatility (crypto, speculative)`;$('A_volHint').textContent=h}
+  function updateVolHint(){const v=parseFloat($('A_vol').value)||0;let h='σ = 0%: deterministic (CD).';if(v>0&&v<=10)h=`σ = ${v}%: low volatility (bonds, stable assets)`;else if(v>10&&v<=25)h=`σ = ${v}%: moderate (stock market range ~15-20%)`;else if(v>25)h=`σ = ${v}%: high volatility (crypto, speculative)`;$('A_volHint').textContent=h;updateCompoundingMode()}
+  function updateCompoundingMode(){const v=parseFloat($('A_vol').value)||0;const comp=$('A_compounding');const hint=$('A_compHint');if(!comp||!hint)return;if(v>0){comp.disabled=true;hint.innerHTML='<strong>Stochastic mode active.</strong> Compounding is disabled because paths are simulated with monthly-step GBM.'}else{comp.disabled=false;hint.innerHTML='<strong>Deterministic only.</strong> When annual volatility is above 0%, the simulator switches to monthly-step GBM.'}}
 
   const ASSET_PRESETS={
     cd:{initial:10000,apy:4.5,compounding:'365',horizon:5,horizonUnit:'years',vol:0,paths:500,contribAmt:500,contribFreq:'12',withdrawAmt:0,withdrawFreq:'12'},
