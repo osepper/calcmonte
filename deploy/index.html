@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══ PRIMARY META ═══ -->
+<title>Free Loan Calculator & Monte Carlo Investment Simulator | CalcMonte</title>
+<meta name="description" content="Compare loan scenarios side by side, model extra payments, and simulate investment growth with real market volatility. See best-case to worst-case outcomes — not just one number. Free, private, no signup.">
+<meta name="keywords" content="mortgage calculator, loan amortization, Monte Carlo simulation, investment simulator, financial calculator, compound interest calculator, loan comparison tool, amortization schedule, extra payment calculator, 15 vs 30 year mortgage, portfolio simulator, retirement calculator, CD calculator, investment volatility, GBM simulation, free financial tools">
+<meta name="author" content="CalcMonte">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="googlebot" content="index, follow">
+<link rel="canonical" href="https://calcmonte.com/">
+
+<!-- ═══ OPEN GRAPH (Facebook, LinkedIn, iMessage, Slack) ═══ -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Financial Calculator That Shows What Others Won't">
+<meta property="og:description" content="Compare loan scenarios side by side. Simulate investments with real market volatility. See the full range of outcomes. Free, no signup, 100% private.">
+<meta property="og:url" content="https://calcmonte.com/">
+<meta property="og:site_name" content="CalcMonte">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://calcmonte.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CalcMonte dashboard showing amortization charts and Monte Carlo projections">
+
+<!-- ═══ TWITTER CARD ═══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Loan Calculator & Monte Carlo Investment Simulator">
+<meta name="twitter:description" content="Compare loans side by side. Simulate investments with real volatility. See every possible outcome. Free, no signup, runs in your browser.">
+<meta name="twitter:image" content="https://calcmonte.com/og-image.png">
+<meta name="twitter:image:alt" content="Financial calculator with Monte Carlo simulation fan chart">
+
+<!-- ═══ ADDITIONAL META ═══ -->
+<meta name="application-name" content="CalcMonte">
+<meta name="theme-color" content="#080c14">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CalcMonte">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- ═══ FAVICON (inline SVG) ═══ -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23080c14'/%3E%3Cpath d='M6 22 L12 10 L18 16 L26 6' stroke='%2306d6a0' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='6' r='2.5' fill='%2306d6a0'/%3E%3Cpath d='M6 26 L26 26' stroke='%231a2436' stroke-width='1'/%3E%3Cpath d='M6 6 L6 26' stroke='%231a2436' stroke-width='1'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%23080c14'/%3E%3Cpath d='M30 130 L65 55 L100 90 L150 30' stroke='%2306d6a0' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='150' cy='30' r='8' fill='%2306d6a0'/%3E%3C/svg%3E">
+
+<!-- ═══ STRUCTURED DATA: WebApplication ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Loan Analytics & Asset Simulator",
+  "alternateName": "CalcMonte",
+  "description": "Advanced financial calculator with full loan amortization, Monte Carlo asset simulation with Geometric Brownian Motion volatility modeling, scenario comparison, and interactive charts.",
+  "url": "https://calcmonte.com/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Full loan amortization with multiple payment frequencies",
+    "Side-by-side scenario comparison (up to 3 loans)",
+    "Monte Carlo portfolio simulation with GBM",
+    "Adjustable volatility for stocks, bonds, crypto, CDs",
+    "Regular contributions and withdrawals",
+    "One-time cash flow events",
+    "Percentile outcome distribution with confidence bands",
+    "Asset appreciation and depreciation modeling",
+    "Plain-English narrative summaries",
+    "CSV export and print-to-PDF",
+    "Interactive charts with click-to-snapshot"
+  ],
+  "screenshot": "https://calcmonte.com/og-image.png"
+}
+</script>
+
+<!-- ═══ STRUCTURED DATA: FAQPage (boosts search snippets) ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the Monte Carlo mortgage simulation work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The simulator models your investment using Geometric Brownian Motion (GBM), the same mathematical framework used by quantitative finance professionals. It runs hundreds or thousands of random paths based on your specified annual return and volatility, then shows percentile outcomes (5th through 95th) so you can see best-case, worst-case, and most-likely scenarios for your portfolio."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between this and a regular mortgage calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most calculators show a single amortization schedule. This tool adds scenario comparison (save up to 3 loan configurations side-by-side), asset simulation (model whether your home appreciates or your car depreciates against the loan balance), Monte Carlo projections for investments with real volatility modeling, plain-English narrative summaries, and interactive chart snapshots."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this financial calculator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, completely free with no signup required. The calculator runs entirely in your browser — no data is sent to any server. You can export amortization schedules as CSV files and print reports to PDF."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What volatility should I use for stock market simulation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Historical annual volatility for the S&P 500 is approximately 15-20%. For bonds and stable assets, use 3-8%. For individual stocks, 25-40% is common. For cryptocurrency, 50-80% reflects historical behavior. For a CD or savings account, use 0% (deterministic, no volatility)."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══ STRUCTURED DATA: BreadcrumbList ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "CalcMonte",
+      "item": "https://calcmonte.com/#loan"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Asset Simulator",
+      "item": "https://calcmonte.com/#asset"
+    }
+  ]
+}
+</script>
+
+<!-- ═══ RESOURCES ═══ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#080c14;--card:#0f1520;--card-hover:#151d2e;--border:#1a2436;--border-light:#253348;--text:#e1e7f0;--text-muted:#7e92b0;--text-dim:#3f5170;--cyan:#06d6a0;--cyan-dim:rgba(6,214,160,0.12);--blue:#58a6ff;--blue-dim:rgba(88,166,255,0.12);--red:#ff6b6b;--red-dim:rgba(255,107,107,0.12);--amber:#fbbf24;--amber-dim:rgba(251,191,36,0.12);--purple:#c4b5fd;--purple-dim:rgba(196,181,253,0.12);--orange:#fb923c;--orange-dim:rgba(251,146,60,0.12);--font-display:'DM Serif Display',Georgia,serif;--font-mono:'IBM Plex Mono','Menlo',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:13px}
+body{font-family:var(--font-mono);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* ─── NAV ─── */
+.top-nav{display:flex;align-items:center;padding:0 36px;border-bottom:1px solid var(--border);background:var(--card);height:48px;gap:0}
+.nav-btn{padding:12px 24px;border:none;cursor:pointer;background:transparent;color:var(--text-muted);font-size:12px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1.2px;transition:all 0.2s;border-bottom:2px solid var(--border);height:48px;display:flex;align-items:center;gap:8px}
+.nav-btn.active{color:var(--cyan);border-bottom-color:var(--cyan);background:rgba(6,214,160,0.04)}
+.nav-btn:hover{color:var(--text)}
+.nav-btn svg{width:16px;height:16px}
+.nav-spacer{flex:1}
+.nav-badge{font-size:9px;padding:2px 8px;border-radius:4px;background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(6,214,160,0.25);font-weight:600;letter-spacing:0.5px}
+
+/* ─── SHARED LAYOUT ─── */
+.page{display:none}.page.active{display:block}
+.header{padding:24px 36px 18px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,var(--card) 0%,var(--bg) 100%);display:flex;justify-content:space-between;align-items:flex-end}
+.header h1{font-family:var(--font-display);font-size:30px;font-weight:400;letter-spacing:-0.3px}
+.header-sub{color:var(--text-muted);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+.main-grid{display:grid;grid-template-columns:330px 1fr;min-height:calc(100vh - 138px)}
+.sidebar{border-right:1px solid var(--border);padding:22px;overflow-y:auto;background:var(--card);max-height:calc(100vh - 138px)}
+.sidebar h2{font-family:var(--font-display);font-size:17px;font-weight:400;margin-bottom:14px}
+.content{padding:22px 30px;overflow-y:auto;max-height:calc(100vh - 138px)}
+.field-label{display:block;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:5px;margin-top:14px}
+.field-row{display:flex;gap:10px;align-items:flex-end}.field-row>div{flex:1}
+input[type="number"],input[type="text"],select{width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;font-family:var(--font-mono);outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 2px var(--cyan-dim)}
+select{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237e92b0'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+input[type="range"]{width:100%;height:36px;border-radius:2px;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;background:transparent;margin:2px 0;touch-action:manipulation;padding:0}
+input[type="range"]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:var(--border)}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--cyan);cursor:pointer;border:2px solid var(--bg);box-shadow:0 0 10px rgba(6,214,160,0.35);margin-top:-8px}
+input[type="range"]::-moz-range-track{height:4px;border-radius:2px;background:var(--border);border:none}
+input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--cyan);cursor:pointer;border:2px solid var(--bg);box-shadow:0 0 10px rgba(6,214,160,0.35)}
+.input-wrap{position:relative}.input-prefix,.input-suffix{position:absolute;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:12px;pointer-events:none}.input-prefix{left:12px}.input-suffix{right:12px}
+.input-wrap input.has-prefix{padding-left:26px}.input-wrap input.has-suffix{padding-right:38px}
+.hint{font-size:10px;color:var(--text-dim);margin-top:3px}
+.section-divider{margin-top:24px;border-top:1px solid var(--border);padding-top:18px}
+.toggle-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.toggle-btn{padding:6px 14px;border-radius:5px;cursor:pointer;font-size:10px;font-family:var(--font-mono);letter-spacing:0.4px;transition:all 0.2s;border:1px solid var(--border);background:transparent;color:var(--text-muted)}
+.toggle-btn.active{border-color:var(--cyan);background:var(--cyan-dim);color:var(--cyan)}
+.type-btns{display:flex;gap:8px}
+.type-btn{padding:7px 14px;border-radius:5px;cursor:pointer;font-size:11px;font-family:var(--font-mono);border:1px solid var(--border);background:transparent;color:var(--text-muted);transition:all 0.2s}
+.type-btn.active{border-color:var(--cyan);background:var(--cyan-dim);color:var(--cyan)}
+.stats-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.stat-card{flex:1;min-width:130px;padding:14px 16px;border-radius:9px}
+.stat-value{font-size:20px;font-weight:600;margin-bottom:3px}
+.stat-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px}
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:20px;gap:0;flex-wrap:wrap}
+.tab-btn{padding:10px 18px;border:none;cursor:pointer;border-bottom:2px solid var(--border);background:transparent;color:var(--text-muted);font-size:11px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;transition:all 0.2s;white-space:nowrap}
+.tab-btn.active{color:var(--cyan);border-bottom-color:var(--cyan)}.tab-btn:hover{color:var(--text)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:20px}
+.card h3{font-family:var(--font-display);font-size:18px;font-weight:400;margin-bottom:14px}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.chart-hint{font-size:9px;color:var(--cyan);letter-spacing:0.6px;text-transform:uppercase;background:var(--cyan-dim);padding:4px 10px;border-radius:4px;border:1px solid rgba(6,214,160,0.15)}
+.chart-container{position:relative;width:100%;height:300px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.milestones{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.milestone{padding:14px;background:var(--bg);border-radius:8px;border-left:3px solid var(--cyan)}
+.milestone .ml-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px}
+.milestone .ml-value{font-size:16px;font-weight:600}
+.milestone .ml-sub{font-size:10px;color:var(--text-dim)}
+.cost-bar-wrap{margin-bottom:14px}
+.cost-bar-header{display:flex;justify-content:space-between;margin-bottom:4px;font-size:11px}
+.cost-bar-track{height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.cost-bar-fill{height:100%;border-radius:3px;transition:width 0.5s ease}
+.cost-bar-pct{font-size:9px;color:var(--text-dim);margin-top:2px}
+.schedule-table{width:100%;border-collapse:collapse;font-size:11px}
+.schedule-table thead th{text-align:right;padding:9px 10px;border-bottom:2px solid var(--border);color:var(--text-muted);font-size:9px;text-transform:uppercase;letter-spacing:0.8px;font-weight:600}
+.schedule-table thead th:first-child,.schedule-table thead th:nth-child(2){text-align:center}
+.schedule-table tbody tr{cursor:pointer;transition:background 0.12s}
+.schedule-table tbody tr:nth-child(even){background:rgba(8,12,20,0.4)}
+.schedule-table tbody tr:hover{background:var(--cyan-dim)}
+.schedule-table td{padding:7px 10px;text-align:right}
+.schedule-table td:first-child,.schedule-table td:nth-child(2){text-align:center;color:var(--text-dim)}
+.equity-badge{display:inline-block;padding:2px 7px;border-radius:4px;background:var(--cyan-dim);color:var(--cyan);font-size:10px}
+.pager{display:flex;justify-content:center;gap:10px;margin-top:14px;align-items:center}
+.pager button{padding:5px 14px;border-radius:5px;cursor:pointer;font-size:11px;font-family:var(--font-mono);border:1px solid var(--border);background:transparent;color:var(--text-muted)}
+.pager button:disabled{opacity:0.3;cursor:default}.pager span{color:var(--text-muted);font-size:11px}
+.warning-card{border-left:3px solid var(--red)}.warning-card h3{color:var(--red)}
+.summary-card{background:linear-gradient(135deg,rgba(6,214,160,0.06) 0%,rgba(88,166,255,0.06) 100%);border:1px solid rgba(6,214,160,0.18);border-radius:10px;padding:22px 24px;margin-bottom:22px;position:relative;overflow:hidden}
+.summary-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--cyan),var(--blue))}
+.summary-card .summary-title{font-family:var(--font-display);font-size:16px;font-weight:400;margin-bottom:10px;color:var(--cyan)}
+.summary-card .summary-text{color:var(--text-muted);font-size:12.5px;line-height:1.85}
+.summary-card .summary-text strong{color:var(--text);font-weight:600}
+.summary-card .summary-text .hl-c{color:var(--cyan);font-weight:600}
+.summary-card .summary-text .hl-r{color:var(--red);font-weight:600}
+.summary-card .summary-text .hl-a{color:var(--amber);font-weight:600}
+.summary-card .summary-text .hl-p{color:var(--purple);font-weight:600}
+.export-btn{padding:7px 16px;border-radius:6px;cursor:pointer;font-size:10px;font-family:var(--font-mono);letter-spacing:0.5px;text-transform:uppercase;border:1px solid var(--border);background:var(--bg);color:var(--text-muted);transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.export-btn:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim)}
+.export-btn svg{width:13px;height:13px}
+.scenario-save-btn{padding:8px 18px;border-radius:6px;cursor:pointer;font-size:11px;font-family:var(--font-mono);letter-spacing:0.3px;border:1px solid var(--cyan);background:var(--cyan-dim);color:var(--cyan);transition:all 0.2s}
+.scenario-save-btn:hover{background:rgba(6,214,160,0.25)}
+.scenario-chip{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:6px;font-size:11px;font-family:var(--font-mono);border:1px solid var(--border);background:var(--bg)}
+.scenario-chip .sc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.scenario-chip .sc-remove{cursor:pointer;color:var(--text-dim);font-size:14px;line-height:1;padding:0 2px;border:none;background:none;transition:color 0.15s;margin-left:auto}
+.scenario-chip .sc-remove:hover{color:var(--red)}
+.compare-table{width:100%;border-collapse:collapse;font-size:11px}
+.compare-table th{text-align:left;padding:10px 14px;border-bottom:2px solid var(--border);color:var(--text-muted);font-size:9px;text-transform:uppercase;letter-spacing:0.8px;font-weight:600}
+.compare-table td{padding:9px 14px;border-bottom:1px solid var(--border)}
+.compare-table tbody tr:hover{background:rgba(6,214,160,0.04)}
+.compare-table .best-val{color:var(--cyan);font-weight:600}
+.compare-table .worst-val{color:var(--red);opacity:0.7}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--card);border:1px solid var(--border-light);border-radius:14px;padding:30px;max-width:520px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.6);transform:translateY(20px);transition:transform 0.25s}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.modal-head h3{font-family:var(--font-display);font-size:22px;font-weight:400}
+.modal-head .modal-sub{color:var(--text-muted);font-size:11px;margin-top:3px}
+.modal-close{background:none;border:1px solid var(--border);border-radius:7px;color:var(--text-muted);cursor:pointer;padding:5px 12px;font-size:18px;font-family:var(--font-mono)}
+.snap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.snap-item{padding:11px;background:var(--bg);border-radius:7px;border:1px solid var(--border)}
+.snap-item .si-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:3px}
+.snap-item .si-value{font-size:15px;font-weight:600}
+.snap-asset{margin-top:14px;padding:12px;background:var(--bg);border-radius:7px;border:1px solid var(--border)}
+.snap-asset .sa-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px}
+.snap-asset-row{display:flex;justify-content:space-between}
+
+/* ─── ASSET SIM SPECIFIC ─── */
+.event-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.event-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;font-size:11px;border:1px solid var(--border);background:var(--bg)}
+.event-item .ev-remove{cursor:pointer;color:var(--text-dim);font-size:13px;border:none;background:none;margin-left:auto}
+.event-item .ev-remove:hover{color:var(--red)}
+.run-btn{width:100%;padding:12px;border-radius:8px;cursor:pointer;font-size:13px;font-family:var(--font-mono);font-weight:600;letter-spacing:0.5px;border:none;background:linear-gradient(135deg,var(--cyan),#0891b2);color:var(--bg);transition:all 0.2s;margin-top:18px}
+.run-btn:hover{opacity:0.9;transform:translateY(-1px);box-shadow:0 4px 20px rgba(6,214,160,0.3)}
+.percentile-table{width:100%;border-collapse:collapse;font-size:11px}
+.percentile-table th{text-align:center;padding:8px 10px;border-bottom:2px solid var(--border);color:var(--text-muted);font-size:9px;text-transform:uppercase;letter-spacing:0.8px}
+.percentile-table td{text-align:center;padding:8px 10px;border-bottom:1px solid var(--border)}
+
+/* ─── PRESETS ─── */
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.preset-btn{padding:6px 12px;border-radius:6px;cursor:pointer;font-size:10px;font-family:var(--font-mono);border:1px solid var(--border);background:var(--bg);color:var(--text-muted);transition:all 0.2s;white-space:nowrap;letter-spacing:0.2px}
+.preset-btn:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim)}
+.preset-btn:active{transform:scale(0.97)}
+
+/* ─── METHODOLOGY PAGE ─── */
+.meth-page{max-width:820px;margin:0 auto;padding:36px}
+.meth-page h2{font-family:var(--font-display);font-size:28px;font-weight:400;margin-bottom:20px}
+.meth-page h3{font-family:var(--font-display);font-size:20px;font-weight:400;margin:32px 0 14px;color:var(--cyan);padding-top:20px;border-top:1px solid var(--border)}
+.meth-page h3:first-of-type{border-top:none;padding-top:0}
+.meth-page p,.meth-page li{color:var(--text-muted);font-size:12.5px;line-height:1.85}
+.meth-page p{margin-bottom:14px}
+.meth-page .formula-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:14px 0 18px;font-size:14px;overflow-x:auto}
+.meth-page .formula-card .katex{font-size:15px}
+.meth-page .formula-label{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px}
+.meth-page .where-list{margin:10px 0 0;padding:0;list-style:none}
+.meth-page .where-list li{font-size:11.5px;color:var(--text-dim);line-height:1.9;padding-left:14px;position:relative}
+.meth-page .where-list li::before{content:'·';position:absolute;left:0;color:var(--cyan)}
+.meth-page .where-list .katex{font-size:12px}
+.meth-page .note-card{background:linear-gradient(135deg,rgba(251,191,36,0.06),rgba(251,146,60,0.06));border:1px solid rgba(251,191,36,0.18);border-radius:8px;padding:16px 20px;margin:14px 0 18px;font-size:11.5px;color:var(--text-muted);line-height:1.8}
+.meth-page .note-card strong{color:var(--amber)}
+.meth-toc{margin:0 0 28px;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.meth-toc li a{padding:6px 14px;border-radius:6px;font-size:11px;border:1px solid var(--border);color:var(--text-muted);text-decoration:none;display:block;transition:all 0.15s}
+.meth-toc li a:hover{border-color:var(--cyan);color:var(--cyan)}
+
+.nav-btn.secondary{opacity:0.8;font-size:10px;letter-spacing:0.5px;padding:12px 12px}
+.nav-btn.secondary:hover{opacity:0.95}
+.nav-btn.secondary.active{opacity:1}
+
+/* ─── RESPONSIVE: TABLET ─── */
+@media(max-width:900px){
+  .main-grid{display:flex;flex-direction:column;min-height:auto;height:auto}
+  .sidebar{max-height:none;height:auto;overflow-y:visible;overflow:visible;border-right:none;border-bottom:1px solid var(--border)}
+  .content{max-height:none;height:auto;overflow-y:visible;overflow:visible;min-height:auto}
+  .milestones{grid-template-columns:1fr 1fr}
+  .grid-2{grid-template-columns:1fr}
+  .stats-row{gap:8px;flex-wrap:wrap}.stat-card{min-width:0;padding:10px 12px;flex:1 1 calc(50% - 4px)}.stat-value{font-size:16px}
+  .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;gap:0;scrollbar-width:none;-ms-overflow-style:none}.tabs::-webkit-scrollbar{display:none}
+  .tab-btn{flex-shrink:0;padding:10px 14px}
+  .chart-container{height:260px}.chart-container canvas{max-height:260px}
+  .meth-page{padding:24px 20px}
+  .meth-page h2{font-size:22px}
+  footer>div>div:first-child{grid-template-columns:1fr!important}
+}
+/* ─── RESPONSIVE: PHONE ─── */
+@media(max-width:600px){
+  .header{padding:16px 16px;flex-direction:column;align-items:flex-start;gap:8px}
+  .header h1{font-size:22px}
+  .header-sub{font-size:9px}
+  .stats-row{flex-direction:column;gap:6px}
+  .stat-card{flex:1 1 100%}
+  .milestones{grid-template-columns:1fr}
+  .snap-grid{grid-template-columns:1fr 1fr}
+  .top-nav{padding:0 8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+  .top-nav::-webkit-scrollbar{display:none}
+  .nav-btn{padding:12px 10px;font-size:9px;letter-spacing:0.6px;gap:4px}
+  .nav-btn svg{width:12px;height:12px}
+  .nav-badge{font-size:8px;display:none}
+  .content{padding:14px 16px}
+  .sidebar{padding:16px}
+  .card{padding:14px 16px}
+  .card h3{font-size:14px}
+  .field-label{font-size:10px}
+  input[type="number"],select{font-size:16px!important}
+  .field-row{gap:8px}
+  .presets{gap:5px}.preset-btn{padding:6px 10px;font-size:9px}
+  .compare-table{font-size:10px}
+  .compare-table th,.compare-table td{padding:6px 8px}
+  .schedule-table{font-size:10px}
+  .summary-card{padding:16px 18px}
+  .summary-card .summary-text{font-size:11.5px}
+  .chart-container{height:220px}.chart-container canvas{max-height:220px}
+  .export-btn{padding:5px 10px;font-size:9px}
+  .export-btn svg{width:11px;height:11px}
+  .section-divider{padding-top:14px;margin-top:14px}
+  .type-btns{flex-direction:column;gap:4px}
+  .type-btn{padding:8px 12px;font-size:11px}
+  .toggle-btn{font-size:11px}
+  .run-btn{padding:14px;font-size:14px}
+  .scenario-save-btn{font-size:10px;padding:6px 12px}
+  .hint{font-size:10px}
+  .event-list{font-size:11px}
+  .modal{padding:20px;width:95%}
+  .modal-head h3{font-size:16px}
+  .landing{padding:28px 16px 24px}.landing h2{font-size:24px}.landing .landing-sub{font-size:12px}.landing-features{flex-direction:column;align-items:center}
+  .landing-cta-btn{padding:10px 20px;font-size:12px}
+  .meth-page{padding:18px 16px}.meth-page .formula-card{padding:12px 14px;font-size:12px}.meth-page .formula-card .katex{font-size:13px}
+  .meth-toc{gap:5px}.meth-toc li a{padding:5px 10px;font-size:10px}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.card{animation:fadeUp 0.35s ease-out both}.stat-card{animation:fadeUp 0.3s ease-out both}
+.tab-panel{display:none}.tab-panel.active{display:block}
+@media print{body{background:white!important;color:#1a1a1a!important}.main-grid{display:block!important}.sidebar,.top-nav,.landing{display:none!important}.content{max-height:none!important;padding:20px!important}.header{background:white!important;border-bottom:2px solid #333!important}.header h1{color:#1a1a1a!important}.export-btn,.tabs,.tab-panel:not(.active),.modal-overlay{display:none!important}.card{border:1px solid #ddd!important;background:white!important;break-inside:avoid}.card h3{color:#1a1a1a!important}.summary-card{background:#f5f5f5!important;border:1px solid #ddd!important}.summary-card::before{background:#333!important}.summary-card .summary-title{color:#333!important}.summary-card .summary-text,.summary-card .summary-text strong,.summary-card .summary-text .hl-c,.summary-card .summary-text .hl-r,.summary-card .summary-text .hl-a,.summary-card .summary-text .hl-p{color:#1a1a1a!important}.stat-card{background:#f0f0f0!important;border:1px solid #ddd!important}.stat-value,.stat-label{color:#1a1a1a!important}canvas{max-height:250px!important}}
+
+/* ─── LANDING / HERO ─── */
+.landing{background:linear-gradient(180deg,var(--card) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);padding:48px 36px 40px;text-align:center}
+.landing-inner{max-width:820px;margin:0 auto}
+.landing h2{font-family:var(--font-display);font-size:38px;font-weight:400;letter-spacing:-0.5px;line-height:1.25;margin-bottom:16px}
+.landing h2 .hl{background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.landing .landing-sub{color:var(--text-muted);font-size:14px;line-height:1.8;max-width:640px;margin:0 auto 28px}
+.landing-features{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.landing-feat{display:flex;align-items:flex-start;gap:10px;text-align:left;max-width:240px}
+.landing-feat-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.landing-feat h4{font-size:12px;font-weight:600;margin-bottom:2px;letter-spacing:0.3px}
+.landing-feat p{font-size:11px;color:var(--text-dim);line-height:1.5}
+.landing-cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.landing-cta-btn{padding:12px 28px;border-radius:8px;cursor:pointer;font-size:13px;font-family:var(--font-mono);font-weight:600;letter-spacing:0.3px;border:none;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.landing-cta-btn.primary{background:linear-gradient(135deg,var(--cyan),#0891b2);color:var(--bg)}
+.landing-cta-btn.primary:hover{opacity:0.9;transform:translateY(-1px);box-shadow:0 4px 20px rgba(6,214,160,0.3)}
+.landing-cta-btn.secondary{background:transparent;color:var(--text-muted);border:1px solid var(--border)}
+.landing-cta-btn.secondary:hover{border-color:var(--cyan);color:var(--cyan)}
+.landing-trust{margin-top:24px;font-size:10px;color:var(--text-dim);letter-spacing:0.8px;text-transform:uppercase}
+.skip-link{position:absolute;top:-100px;left:50%;transform:translateX(-50%);padding:8px 20px;background:var(--cyan);color:var(--bg);font-weight:600;border-radius:0 0 6px 6px;z-index:9999;transition:top 0.2s}
+.skip-link:focus{top:0}
+select:disabled,input:disabled{opacity:0.6;cursor:not-allowed}
+</style>
+</head>
+<body>
+<!-- Accessibility: skip to app -->
+<a href="#app-start" class="skip-link">Skip to calculator</a>
+
+<!-- Noscript fallback -->
+<noscript><div style="background:#1a1a2e;color:#e1e7f0;padding:40px;text-align:center;font-family:monospace"><h1>Loan Analytics & Asset Simulator</h1><p style="margin:16px 0">This interactive financial calculator requires JavaScript to run. Please enable JavaScript in your browser settings.</p><p>Features include: full loan amortization schedules, side-by-side scenario comparison, Monte Carlo portfolio simulation with Geometric Brownian Motion volatility modeling, adjustable compounding, contributions and withdrawals, CSV export, and print-to-PDF.</p></div></noscript>
+
+<!-- ═══ LANDING / HERO SECTION ═══ -->
+<!-- This section provides crawlable text for search engines since the interactive tool itself is JS-rendered -->
+<section class="landing" id="landing">
+  <div class="landing-inner">
+    <h2>The Financial Calculator That<br>Shows What <span class="hl">Others Won't</span></h2>
+    <p class="landing-sub">
+      See the full range of outcomes — not just one number. Compare loan scenarios side by side. 
+      Model real market volatility on your investments. Free, private, runs entirely in your browser.
+    </p>
+
+    <div class="landing-features">
+      <div class="landing-feat">
+        <div class="landing-feat-icon" style="background:var(--cyan-dim)">📊</div>
+        <div>
+          <h4 style="color:var(--cyan)">Loan Analytics</h4>
+          <p>See how extra payments, different terms, and frequencies change your total cost. Save and compare up to 3 scenarios side by side.</p>
+        </div>
+      </div>
+      <div class="landing-feat">
+        <div class="landing-feat-icon" style="background:var(--purple-dim)">📈</div>
+        <div>
+          <h4 style="color:var(--purple)">Investment Projections</h4>
+          <p>See the best-case, worst-case, and most-likely outcomes for any investment — from CDs to crypto — using real volatility modeling.</p>
+        </div>
+      </div>
+      <div class="landing-feat">
+        <div class="landing-feat-icon" style="background:var(--amber-dim)">💰</div>
+        <div>
+          <h4 style="color:var(--amber)">Cash Flow Modeling</h4>
+          <p>Add contributions, withdrawals, and one-time events. See how they interact with growth and volatility over any time horizon.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CSS-only chart preview -->
+    <div style="max-width:480px;margin:0 auto 28px;height:80px;position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:var(--bg);padding:12px 16px">
+      <svg viewBox="0 0 440 50" style="width:100%;height:100%;opacity:0.7" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="pg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c4b5fd" stop-opacity="0.25"/><stop offset="100%" stop-color="#c4b5fd" stop-opacity="0"/></linearGradient>
+          <linearGradient id="pg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#06d6a0" stop-opacity="0.3"/><stop offset="100%" stop-color="#06d6a0" stop-opacity="0"/></linearGradient>
+        </defs>
+        <path d="M0,45 Q60,42 120,38 T240,28 T360,15 T440,5 L440,50 L0,50Z" fill="url(#pg1)"/>
+        <path d="M0,45 Q60,42 120,38 T240,28 T360,15 T440,5" fill="none" stroke="#c4b5fd" stroke-width="1.5" opacity="0.5"/>
+        <path d="M0,45 Q60,43 120,40 T240,33 T360,22 T440,12" fill="none" stroke="#06d6a0" stroke-width="2"/>
+        <path d="M0,45 Q60,43 120,40 T240,33 T360,22 T440,12 L440,50 L0,50Z" fill="url(#pg2)"/>
+        <path d="M0,45 Q60,44 120,42 T240,38 T360,30 T440,20" fill="none" stroke="#58a6ff" stroke-width="1" opacity="0.4" stroke-dasharray="4,3"/>
+      </svg>
+      <div style="position:absolute;bottom:8px;right:14px;font-size:9px;color:var(--text-dim);letter-spacing:0.5px">Monte Carlo projection preview</div>
+    </div>
+
+    <div class="landing-cta">
+      <button class="landing-cta-btn primary" onclick="switchPage('loan')">
+        ▶ Open Loan Calculator
+      </button>
+      <button class="landing-cta-btn secondary" onclick="switchPage('asset')">
+        Open Asset Simulator →
+      </button>
+    </div>
+
+    <p class="landing-trust">Free forever · No signup · No data collected · 100% client-side</p>
+  </div>
+</section>
+
+<!-- Anchor for skip-link -->
+<div id="app-start"></div>
+
+<!-- TOP NAV -->
+<div class="top-nav">
+  <button class="nav-btn" data-page="loan" onclick="switchPage('loan')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    Loan Analytics
+  </button>
+  <button class="nav-btn" data-page="asset" onclick="switchPage('asset')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    Asset Simulator
+  </button>
+  <button class="nav-btn secondary" data-page="methodology" onclick="switchPage('methodology')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+    Methodology
+  </button>
+  <div class="nav-spacer"></div>
+  <button class="export-btn" id="shareBtn" onclick="copyShareURL()" style="padding:5px 12px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>Share</button>
+  <span class="nav-badge">Financial Suite</span>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- LOAN PAGE (same as before, compact) -->
+<!-- ════════════════════════════════════════════ -->
+<div class="page" id="page-loan">
+<div class="header"><div><h1>Loan Analytics</h1><div class="header-sub">Borrowing · Amortization · Asset Simulation</div></div><div style="display:flex;gap:10px;align-items:center"><div style="display:flex;gap:8px"><button class="export-btn" onclick="L.exportCSV()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>CSV</button><button class="export-btn" onclick="window.print()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print</button></div><span id="L_freqLabel" style="color:var(--text-dim);font-size:10px"></span></div></div>
+<div class="main-grid">
+  <div class="sidebar" id="L_sidebar">
+    <h2>Loan Parameters</h2>
+    <div class="presets" id="L_presets">
+      <button class="preset-btn" onclick="L.loadPreset('mortgage30')">🏠 30yr Mortgage</button>
+      <button class="preset-btn" onclick="L.loadPreset('mortgage15')">🏠 15yr Mortgage</button>
+      <button class="preset-btn" onclick="L.loadPreset('auto5')">🚗 5yr Auto</button>
+      <button class="preset-btn" onclick="L.loadPreset('auto3')">🚗 3yr Auto</button>
+      <button class="preset-btn" onclick="L.loadPreset('student')">🎓 Student Loan</button>
+      <button class="preset-btn" onclick="L.loadPreset('personal')">💳 Personal Loan</button>
+    </div>
+    <div class="hint" style="margin-bottom:14px">Choose a preset or adjust the parameters below.</div>
+    <label class="field-label">Loan Principal</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="L_principal" value="350000" min="1000" step="1000" class="has-prefix"></div>
+    <label class="field-label">Annual Interest Rate</label><div class="input-wrap"><input type="number" id="L_annualRate" value="6.5" min="0" max="30" step="0.125" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_rateSlider" min="0" max="15" step="0.125" value="6.5">
+    <div class="field-row"><div><label class="field-label">Loan Term</label><input type="number" id="L_termValue" value="30" min="1" step="1"></div><div><label class="field-label">Unit</label><select id="L_termUnit"><option value="years">Years</option><option value="months">Months</option></select></div></div>
+    <label class="field-label">Payment Frequency</label><select id="L_payFreq"><option value="12">Monthly (12/yr)</option><option value="26">Bi-Weekly (26/yr)</option><option value="52">Weekly (52/yr)</option><option value="24">Semi-Monthly (24/yr)</option><option value="4">Quarterly (4/yr)</option><option value="1">Annually (1/yr)</option></select><div class="hint" id="L_freqHint" style="margin-top:8px;padding:8px 10px;border-left:3px solid var(--purple);background:rgba(196,181,253,0.08);color:#ddd6fe;font-size:11px;line-height:1.5"><strong>How timing is shown.</strong> For weekly, bi-weekly, and semi-monthly schedules, charts and milestone labels use a rounded month timeline, while the amortization math uses exact payment periods.</div>
+    <label class="field-label">Extra Payment per Period</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="L_extraPayment" value="0" min="0" step="50" class="has-prefix"></div>
+    <label class="field-label">Down Payment</label><div class="input-wrap"><input type="number" id="L_downPct" value="20" min="0" max="100" step="1" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_downSlider" min="0" max="50" step="1" value="20"><div class="hint" id="L_downHint"></div>
+    <div class="section-divider"><div class="toggle-row"><h2 style="margin-bottom:0">Asset Simulation</h2><button class="toggle-btn" id="L_assetToggle" onclick="L.toggleAsset()">OFF</button></div><div id="L_assetControls" style="display:none"><label class="field-label">Asset Type</label><div class="type-btns"><button class="type-btn active" id="L_btnAppr" onclick="L.setAssetType('appreciating')">🏠 Appreciating</button><button class="type-btn" id="L_btnDepr" onclick="L.setAssetType('depreciating')">🚗 Depreciating</button></div><label class="field-label" id="L_assetRateLabel">Annual Appreciation</label><div class="input-wrap"><input type="number" id="L_assetRate" value="3.5" min="0" max="50" step="0.5" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_assetRateSlider" min="0" max="15" step="0.5" value="3.5"><div id="L_assetVolWrap" style="display:none"><label class="field-label">Price Volatility (σ)</label><div class="input-wrap"><input type="number" id="L_assetVol" value="0" min="0" max="30" step="0.5" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="L_assetVolSlider" min="0" max="30" step="0.5" value="0"><p class="hint">0% = deterministic · Home: ~8% · Car: ~5%</p></div></div></div>
+    <div class="section-divider"><div class="toggle-row"><h2 style="margin-bottom:0">Scenarios</h2><button class="scenario-save-btn" onclick="L.saveScenario()">+ Save Current</button></div><div id="L_scenarioChips" style="display:flex;flex-direction:column;gap:6px"></div><div class="hint" style="margin-top:8px">Save up to 3 scenarios to compare.</div></div>
+  </div>
+  <div class="content">
+    <div class="summary-card" id="L_summary"></div>
+    <div class="stats-row" id="L_statsRow"></div>
+    <div class="tabs" id="L_tabsRow"></div>
+    <div class="tab-panel active" id="L_tab-overview"><div class="card"><div class="card-header"><h3>Balance & Equity Over Time</h3><div class="chart-hint">ⓘ Tap any point for details</div></div><div class="chart-container"><canvas id="L_chartBalance" height="300"></canvas></div></div><div class="card"><h3>Payment Composition</h3><div class="chart-container"><canvas id="L_chartPayComp" height="230"></canvas></div></div><div class="card"><h3>Key Milestones</h3><div class="milestones" id="L_milestones"></div></div></div>
+    <div class="tab-panel" id="L_tab-breakdown"><div class="grid-2"><div class="card"><h3>Cost Breakdown</h3><div id="L_costBars"></div></div><div class="card"><h3>Cumulative Interest</h3><div class="chart-container"><canvas id="L_chartCumInt" height="220"></canvas></div></div></div><div class="card"><h3>Equity Build-Up (%)</h3><div class="chart-container"><canvas id="L_chartEquity" height="230"></canvas></div></div></div>
+    <div class="tab-panel" id="L_tab-schedule"><div class="card"><div class="card-header"><h3>Amortization Schedule</h3><div style="display:flex;align-items:center;gap:12px"><button class="export-btn" onclick="L.exportCSV()" style="padding:5px 12px">Export CSV</button><span id="L_schedCount" style="color:var(--text-dim);font-size:10px"></span></div></div><div style="overflow-x:auto"><table class="schedule-table"><thead><tr><th>#</th><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th><th>Equity</th></tr></thead><tbody id="L_schedBody"></tbody></table></div><div class="pager" id="L_pager"></div></div></div>
+    <div class="tab-panel" id="L_tab-compare"><div id="L_compareContent"></div></div>
+    <div class="tab-panel" id="L_tab-asset"><div class="stats-row" id="L_assetStats"></div><div class="card"><h3>Asset Value vs. Outstanding Loan</h3><div class="chart-container"><canvas id="L_chartAsset" height="320"></canvas></div></div><div class="card"><h3>Net Position</h3><div class="chart-container"><canvas id="L_chartNet" height="250"></canvas></div></div><div class="card warning-card" id="L_underwaterWarn" style="display:none"><h3>⚠ Underwater Risk</h3><p id="L_underwaterText" style="color:var(--text-muted);font-size:12px;line-height:1.7"></p></div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ASSET SIMULATOR PAGE -->
+<!-- ════════════════════════════════════════════ -->
+<div class="page" id="page-asset">
+<div class="header"><div><h1>Asset Simulator</h1><div class="header-sub">Growth · Volatility · Monte Carlo Projections</div></div><div style="display:flex;gap:10px;align-items:center"><button class="export-btn" onclick="A.exportCSV()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>CSV</button><button class="export-btn" onclick="window.print()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print</button></div></div>
+<div class="main-grid">
+  <div class="sidebar" id="A_sidebar">
+    <h2>Investment Parameters</h2>
+    <div class="presets" id="A_presets">
+      <button class="preset-btn" onclick="A.loadPreset('cd')">🏦 CD / HYSA</button>
+      <button class="preset-btn" onclick="A.loadPreset('sp500')">📈 S&P 500</button>
+      <button class="preset-btn" onclick="A.loadPreset('bond')">📊 Bond Fund</button>
+      <button class="preset-btn" onclick="A.loadPreset('crypto')">₿ Crypto</button>
+      <button class="preset-btn" onclick="A.loadPreset('retirement')">🏖️ Retirement</button>
+    </div>
+    <div class="hint" style="margin-bottom:14px">Choose a preset or adjust below, then Run Simulation.</div>
+    <label class="field-label">Initial Investment</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="A_initial" value="10000" min="0" step="1000" class="has-prefix"></div>
+    <label class="field-label">Expected Annual Return</label><div class="input-wrap"><input type="number" id="A_apy" value="5.0" min="0" max="100" step="0.1" class="has-suffix"><span class="input-suffix">%</span></div><input type="range" id="A_apySlider" min="0" max="30" step="0.1" value="5.0">
+    <label class="field-label">Compounding</label>
+    <select id="A_compounding"><option value="continuous">Continuous</option><option value="365">Daily</option><option value="12">Monthly</option><option value="4">Quarterly</option><option value="2">Semi-Annual</option><option value="1">Annual</option></select>
+    <div class="hint" id="A_compHint" style="margin-top:6px;padding:8px 10px;border-left:3px solid var(--amber);background:rgba(251,191,36,0.10);color:#f4d35e;font-size:11px;line-height:1.5"><strong>Deterministic only.</strong> When annual volatility is above 0%, the simulator switches to monthly-step GBM.</div>
+    <label class="field-label">Investment Horizon</label>
+    <div class="field-row"><div><input type="number" id="A_horizon" value="10" min="1" max="50" step="1"></div><div><select id="A_horizonUnit"><option value="years">Years</option><option value="months">Months</option></select></div></div>
+
+    <div class="section-divider">
+      <h2>Volatility (Risk)</h2>
+      <label class="field-label">Annual Volatility (σ)</label>
+      <div class="input-wrap"><input type="number" id="A_vol" value="0" min="0" max="100" step="0.5" class="has-suffix"><span class="input-suffix">%</span></div>
+      <input type="range" id="A_volSlider" min="0" max="60" step="0.5" value="0">
+      <div class="hint" id="A_volHint">σ = 0%: deterministic (CD). ~15-20%: stock market. ~30%+: crypto.</div>
+      <div style="margin:12px 0 4px;padding:10px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-size:10px;line-height:1.9;color:var(--text-dim)">
+        <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:6px">Historical Reference</div>
+        <div style="display:grid;grid-template-columns:1fr auto auto;gap:2px 12px">
+          <span>S&amp;P 500</span><span style="color:var(--cyan)">~10% annual return</span><span>~18% σ</span>
+          <span>Total Bond Mkt</span><span style="color:var(--cyan)">~5% annual return</span><span>~6% σ</span>
+          <span>NASDAQ</span><span style="color:var(--cyan)">~12% annual return</span><span>~22% σ</span>
+          <span>Bitcoin (2015–)</span><span style="color:var(--cyan)">~60% annual return</span><span>~65% σ</span>
+          <span>CDs / HYSA</span><span style="color:var(--cyan)">~4% annual return</span><span>0% σ</span>
+        </div>
+        <div style="margin-top:6px;font-size:9px;color:var(--text-dim);font-style:italic">Long-run averages. Past returns ≠ future results.</div>
+      </div>
+      <label class="field-label">Monte Carlo Paths</label>
+      <div class="input-wrap"><input type="number" id="A_paths" value="500" min="50" max="5000" step="50"></div>
+    </div>
+
+    <div class="section-divider">
+      <h2>Cash Flows</h2>
+      <label class="field-label">Regular Contributions</label>
+      <div class="field-row"><div><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="A_contribAmt" value="0" min="0" step="100" class="has-prefix"></div></div><div><select id="A_contribFreq"><option value="12">Monthly</option><option value="26">Bi-Weekly</option><option value="4">Quarterly</option><option value="1">Annual</option></select></div></div>
+      <label class="field-label">Regular Withdrawals</label>
+      <div class="field-row"><div><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="A_withdrawAmt" value="0" min="0" step="100" class="has-prefix"></div></div><div><select id="A_withdrawFreq"><option value="12">Monthly</option><option value="26">Bi-Weekly</option><option value="4">Quarterly</option><option value="1">Annual</option></select></div></div>
+      <div class="hint" id="A_cashflowHint" style="margin-top:8px;padding:8px 10px;border-left:3px solid var(--blue);background:rgba(88,166,255,0.08);color:#cfe3ff;font-size:11px;line-height:1.5"><strong>Monthly simulation timeline.</strong> Bi-weekly and other non-monthly regular cash flows are mapped into the monthly simulation steps as an approximation.</div>
+      <label class="field-label">One-Time Events</label>
+      <div class="field-row" style="align-items:flex-end">
+        <div><label class="field-label" style="margin-top:0">Month</label><input type="number" id="A_evMonth" value="12" min="1" step="1"></div>
+        <div><label class="field-label" style="margin-top:0">Amount</label><div class="input-wrap"><span class="input-prefix">$</span><input type="number" id="A_evAmt" value="5000" step="500" class="has-prefix"></div></div>
+        <div style="flex:0"><button class="toggle-btn active" onclick="A.addEvent()" style="padding:9px 14px;margin-top:14px;white-space:nowrap">+ Add</button></div>
+      </div>
+      <div class="hint">Negative amounts = withdrawal. Positive = contribution.</div>
+      <div class="event-list" id="A_events"></div>
+    </div>
+
+    <button class="run-btn" onclick="A.run()">▶ Run Simulation</button>
+  </div>
+  <div class="content">
+    <div class="summary-card" id="A_summary"><div class="summary-title">Asset Projection</div><div class="summary-text" style="color:var(--text-dim)">Configure your parameters and click <strong>Run Simulation</strong> to see projections.</div></div>
+    <div class="stats-row" id="A_statsRow"></div>
+    <div class="tabs" id="A_tabsRow"><button class="tab-btn active" data-tab="A_projection" onclick="A.switchTab('A_projection')">Projection</button><button class="tab-btn" data-tab="A_breakdown" onclick="A.switchTab('A_breakdown')">Breakdown</button><button class="tab-btn" data-tab="A_distribution" onclick="A.switchTab('A_distribution')">Distribution</button></div>
+    <div class="tab-panel active" id="A_tab-A_projection">
+      <div class="card"><div class="card-header"><h3>Portfolio Value Projection</h3><div class="chart-hint" id="A_projHint"></div></div><div class="chart-container"><canvas id="A_chartProj" height="360"></canvas></div></div>
+      <div class="card" id="A_milestonesCard"><h3>Growth Milestones</h3><div class="milestones" id="A_milestones"></div></div>
+    </div>
+    <div class="tab-panel" id="A_tab-A_breakdown">
+      <div class="grid-2">
+        <div class="card"><h3>Value Decomposition</h3><div id="A_decomp"></div></div>
+        <div class="card"><h3>Cumulative Cash Flows</h3><div class="chart-container"><canvas id="A_chartFlows" height="240"></canvas></div></div>
+      </div>
+      <div class="card"><h3>Monthly Balance Detail</h3><div class="chart-container"><canvas id="A_chartDetail" height="260"></canvas></div></div>
+    </div>
+    <div class="tab-panel" id="A_tab-A_distribution">
+      <div class="card" id="A_distCard"><h3>Final Value Distribution</h3><div class="chart-container"><canvas id="A_chartHist" height="300"></canvas></div></div>
+      <div class="card" id="A_percCard"><h3>Percentile Outcomes</h3><div style="overflow-x:auto"><table class="percentile-table" id="A_percTable"></table></div></div>
+      <div class="card" id="A_probCard"><h3>Probability Analysis</h3><div id="A_probContent"></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- METHODOLOGY PAGE -->
+<!-- ════════════════════════════════════════════ -->
+<div class="page" id="page-methodology">
+<div class="header"><div><h1>Methodology</h1><div class="header-sub">Mathematical Foundations & Assumptions</div></div></div>
+<div class="meth-page">
+  <h2>Under the Hood</h2>
+  <p>This page documents the mathematical models, formulas, and assumptions that power both the Loan Analytics and Asset Simulator modules. Every calculation runs client-side in your browser — no data is sent anywhere.</p>
+
+  <ul class="meth-toc">
+    <li><a href="#meth-amort">Amortization</a></li>
+    <li><a href="#meth-compound">Compounding</a></li>
+    <li><a href="#meth-gbm">GBM Model</a></li>
+    <li><a href="#meth-mc">Monte Carlo</a></li>
+    <li><a href="#meth-perc">Percentiles</a></li>
+    <li><a href="#meth-limits">Limitations</a></li>
+  </ul>
+
+  <h3 id="meth-amort">Loan Amortization</h3>
+  <p>The periodic payment for a fixed-rate fully-amortizing loan is computed using the standard annuity formula:</p>
+  <div class="formula-card">
+    <div class="formula-label">Periodic Payment</div>
+    <span id="f_amort"></span>
+    <ul class="where-list">
+      <li><span id="fw_P"></span> = loan principal (amount borrowed)</li>
+      <li><span id="fw_r"></span> = periodic interest rate (annual rate ÷ payments per year)</li>
+      <li><span id="fw_n"></span> = total number of payment periods</li>
+    </ul>
+  </div>
+  <p>Each payment is split into an interest component and a principal component. The interest portion for period <em>k</em> is the outstanding balance multiplied by the periodic rate. The principal portion is the remainder:</p>
+  <div class="formula-card">
+    <div class="formula-label">Interest & Principal Decomposition</div>
+    <span id="f_decomp1"></span><br><br>
+    <span id="f_decomp2"></span>
+  </div>
+  <p>Extra payments are added directly to the principal portion each period, which reduces the outstanding balance faster and shortens the loan term. The principal-interest crossover occurs at the period where the principal portion first exceeds the interest portion — a milestone that depends on the rate, term, and extra payment amount.</p>
+
+  <h3 id="meth-compound">Compound Interest</h3>
+  <p>The Asset Simulator supports six compounding modes. The future value after time <em>t</em> depends on the compounding frequency:</p>
+  <div class="formula-card">
+    <div class="formula-label">Discrete Compounding (n times per year)</div>
+    <span id="f_discrete"></span>
+    <ul class="where-list">
+      <li><span id="fw_n2"></span> = compounding frequency (1 = annual, 4 = quarterly, 12 = monthly, 365 = daily)</li>
+      <li><span id="fw_r2"></span> = expected annual return</li>
+      <li><span id="fw_t"></span> = time in years</li>
+    </ul>
+  </div>
+  <div class="formula-card">
+    <div class="formula-label">Continuous Compounding</div>
+    <span id="f_continuous"></span>
+  </div>
+  <p>Continuous compounding represents the mathematical limit as <em>n</em> approaches infinity. In practice, the difference between daily and continuous compounding is usually small for typical annual return assumptions, but the continuous formula is analytically cleaner and connects naturally to the GBM stochastic model.</p>
+  <p><strong>Deterministic vs. stochastic modes:</strong> When annual volatility is greater than 0%, the simulator switches to a monthly-step GBM model; the compounding selector applies only to deterministic projections.</p>
+
+  <h3 id="meth-gbm">Geometric Brownian Motion (GBM)</h3>
+  <p>When volatility is non-zero, the Asset Simulator models price dynamics using Geometric Brownian Motion — the same framework underlying the Black-Scholes option pricing model. The stochastic differential equation is:</p>
+  <div class="formula-card">
+    <div class="formula-label">GBM Stochastic Differential Equation</div>
+    <span id="f_gbm_sde"></span>
+    <ul class="where-list">
+      <li><span id="fw_mu"></span> = drift (expected return rate)</li>
+      <li><span id="fw_sigma"></span> = annual volatility (standard deviation of log returns)</li>
+      <li><span id="fw_Wt"></span> = Wiener process (standard Brownian motion)</li>
+    </ul>
+  </div>
+  <p>For simulation, we discretize this into monthly time steps using the exact solution:</p>
+  <div class="formula-card">
+    <div class="formula-label">Discretized GBM (monthly step)</div>
+    <span id="f_gbm_disc"></span>
+    <ul class="where-list">
+      <li><span id="fw_dt"></span> = time step = 1/12 year</li>
+      <li><span id="fw_Z"></span> = standard normal random variable (Box-Muller transform)</li>
+    </ul>
+  </div>
+  <p>The drift-adjustment term <span id="f_ito_inline"></span> is the Itô correction. It ensures that the <em>expected value</em> of the GBM process equals the deterministic growth path. Without this correction, volatility would systematically inflate the expected outcome due to the asymmetry of log-normal distributions.</p>
+
+  <h3 id="meth-mc">Monte Carlo Simulation</h3>
+  <p>The simulator generates multiple independent GBM paths (configurable, default 500). Each path is a sequence of monthly values obtained by repeatedly applying the discretized GBM step. Cash flows (contributions, withdrawals, one-time events) are applied after the growth step each month.</p>
+  <p>Random numbers are generated using the Box-Muller transform, which converts pairs of uniform random variables into standard normal random variables:</p>
+  <div class="formula-card">
+    <div class="formula-label">Box-Muller Transform</div>
+    <span id="f_boxmuller"></span>
+    <ul class="where-list">
+      <li><span id="fw_U"></span> = independent uniform(0,1) random variables</li>
+    </ul>
+  </div>
+
+  <h3 id="meth-perc">Percentile Computation</h3>
+  <p>At each monthly time step, the values from all simulation paths are sorted and percentiles are extracted using order statistics. For <em>N</em> paths and percentile <em>q</em>, the value is taken at index <span id="f_perc_inline"></span>. The displayed bands are the 5th, 10th, 25th, 50th (median), 75th, 90th, and 95th percentiles.</p>
+  <p>The final-value distribution histogram bins all terminal values across paths. The probability analysis computes the empirical probability of exceeding specific return thresholds by counting the fraction of paths above each target.</p>
+
+  <h3 id="meth-limits">Limitations & Assumptions</h3>
+  <div class="note-card">
+    <strong>⚠ Important:</strong> These models are simplifications of reality. Results should inform your thinking, not dictate decisions.
+  </div>
+  <p><strong>Constant volatility:</strong> GBM assumes volatility (σ) is constant over time. Real markets exhibit volatility clustering — periods of high volatility tend to follow other high-volatility periods (GARCH effects). GBM underestimates the frequency of extreme events.</p>
+  <p><strong>Log-normal returns:</strong> GBM produces log-normally distributed returns. Real financial returns have fatter tails than the log-normal distribution predicts. This means crashes of the magnitude seen in 2008 or 2020 are more likely than the model suggests.</p>
+  <p><strong>No mean reversion:</strong> The model does not incorporate mean reversion — the tendency of valuations to return to historical averages over long periods. This is most relevant for very long simulation horizons (20+ years).</p>
+  <p><strong>Fixed rates:</strong> Loan calculations assume a fixed interest rate for the entire term. In practice, adjustable-rate mortgages (ARMs) and refinancing opportunities can significantly alter outcomes.</p>
+  <p><strong>Loan timeline display:</strong> For non-monthly payment schedules such as weekly, bi-weekly, and semi-monthly, the amortization calculation uses the exact payment frequency, but charts, milestones, and some summaries are displayed on rounded month labels for readability and alignment with the monthly asset overlays.</p>
+  <p><strong>No taxes or fees:</strong> The simulator does not account for capital gains taxes, dividend taxes, management fees, inflation, or transaction costs, all of which reduce real returns. A 10% nominal return might be 6-7% after taxes and fees.</p>
+  <p><strong>Monthly granularity:</strong> All simulations use monthly time steps (Δt = 1/12). For very high volatility assets, finer granularity could yield different percentile estimates, though the expected values remain unbiased due to the Itô correction. One-time events are scheduled by integer month on this monthly timeline.</p>
+  <p><strong>Cash flow timing:</strong> Contributions and withdrawals are applied at the end of each monthly step (post-growth). Monthly recurring cash flows are modeled directly; non-monthly recurring choices such as bi-weekly are mapped into the monthly simulation timeline as an approximation. Withdrawals are capped at the available balance to prevent negative values.</p>
+</div>
+</div>
+
+<!-- ═══ SEO FOOTER ═══ -->
+<footer style="border-top:1px solid var(--border);padding:32px 36px;background:var(--card)">
+  <div style="max-width:900px;margin:0 auto">
+    <!-- Affiliate-ready: contextual partner row (placeholder, invisible until populated) -->
+    <div id="affiliate-row" style="display:none;border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:20px"></div>
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;margin-bottom:24px">
+      <div style="max-width:360px">
+        <h4 style="font-family:var(--font-display);font-size:15px;font-weight:400;margin-bottom:8px;color:var(--text)">Loan Analytics</h4>
+        <p style="color:var(--text-dim);font-size:11px;line-height:1.7">Amortization, scenario comparison, and asset simulation — with the transparency and rigor serious users expect. Model extra payments, compare terms, and see the real cost of borrowing over time.</p>
+      </div>
+      <div style="font-size:11px;display:flex;gap:24px">
+        <div>
+          <h4 style="color:var(--text-muted);font-size:9px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">Tools</h4>
+          <p style="margin-bottom:4px"><a href="#" onclick="switchPage('loan');return false" style="color:var(--text-dim);text-decoration:none">Loan Calculator</a></p>
+          <p style="margin-bottom:4px"><a href="#" onclick="switchPage('asset');return false" style="color:var(--text-dim);text-decoration:none">Asset Simulator</a></p>
+          <p style="margin-bottom:4px"><a href="#" onclick="switchPage('methodology');return false" style="color:var(--text-dim);text-decoration:none">Methodology</a></p>
+        </div>
+        <div>
+          <h4 style="color:var(--text-muted);font-size:9px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">Features</h4>
+          <p style="color:var(--text-dim);margin-bottom:4px">Monte Carlo Simulation</p>
+          <p style="color:var(--text-dim);margin-bottom:4px">Scenario Comparison</p>
+          <p style="color:var(--text-dim);margin-bottom:4px">GBM Volatility Modeling</p>
+        </div>
+        <div>
+          <h4 style="color:var(--text-muted);font-size:9px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">Feedback</h4>
+          <p style="margin-bottom:4px"><a href="mailto:feedback@calcmonte.com" style="color:var(--text-dim);text-decoration:none">✉ Get in Touch</a></p>
+          <p style="margin-bottom:4px"><a href="mailto:feedback@calcmonte.com?subject=Bug Report" style="color:var(--text-dim);text-decoration:none">🐛 Report a Bug</a></p>
+          <p style="margin-bottom:4px"><a href="mailto:feedback@calcmonte.com?subject=Feature Request" style="color:var(--text-dim);text-decoration:none">💡 Request a Feature</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <p style="color:var(--text-dim);font-size:10px;line-height:1.6;max-width:480px">
+        <strong style="color:var(--text-muted)">Disclaimer:</strong> For educational and informational purposes only. Not financial advice. Consult a qualified advisor before making investment or borrowing decisions. Simulated returns do not guarantee future results.
+      </p>
+      <p style="color:var(--text-dim);font-size:10px">© <script>document.write(new Date().getFullYear())</script> CalcMonte</p>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL (shared) -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-head"><div><h3>Loan Snapshot</h3><div class="modal-sub" id="modalSub"></div></div><button class="modal-close" onclick="closeModal()">×</button></div>
+    <div class="snap-grid" id="snapGrid"></div>
+    <div class="snap-asset" id="snapAsset" style="display:none"></div>
+  </div>
+</div>
+<script>
+// ═══════════════════════════════════════════════════
+// SHARED UTILITIES
+// ═══════════════════════════════════════════════════
+const $=id=>document.getElementById(id);
+const fmtC=v=>{if(v==null||isNaN(v))return'$0';return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(v)};
+const fmtS=v=>{if(v==null||isNaN(v))return'$0';if(Math.abs(v)>=1e6)return'$'+(v/1e6).toFixed(2)+'M';if(Math.abs(v)>=1e3)return'$'+(v/1e3).toFixed(1)+'K';return'$'+v.toFixed(2)};
+const fmtP=v=>v.toFixed(2)+'%';
+const FL={12:'Monthly',26:'Bi-Weekly',52:'Weekly',24:'Semi-Monthly',4:'Quarterly',1:'Annually'};
+Chart.defaults.color='#7e92b0';Chart.defaults.borderColor='#1a2436';Chart.defaults.font.family="'IBM Plex Mono',monospace";Chart.defaults.font.size=10;Chart.defaults.plugins.legend.labels.usePointStyle=true;Chart.defaults.plugins.legend.labels.pointStyleWidth=8;Chart.defaults.plugins.legend.labels.boxHeight=6;Chart.defaults.animation.duration=600;
+function mkG(ctx,c,o1=0.35,o2=0){const g=ctx.createLinearGradient(0,0,0,ctx.canvas.height);const r=parseInt(c.slice(1,3),16),gr=parseInt(c.slice(3,5),16),b=parseInt(c.slice(5,7),16);g.addColorStop(0,`rgba(${r},${gr},${b},${o1})`);g.addColorStop(1,`rgba(${r},${gr},${b},${o2})`);return g}
+function debounce(fn,ms=150){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}
+function sample(a,mx=120){if(a.length<=mx)return a;const s=Math.max(1,Math.floor(a.length/mx));return a.filter((_,i)=>i%s===0||i===a.length-1)}
+function switchPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));$(`page-${p}`).classList.add('active');document.querySelector(`.nav-btn[data-page="${p}"]`).classList.add('active');}
+function closeModal(){$('modalOverlay').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// ═══════════════════════════════════════════════════
+// LOAN MODULE (L namespace)
+// ═══════════════════════════════════════════════════
+const L=(()=>{
+  const ch={};let st={schedule:[],payment:0,totalInterest:0,totalPaid:0,assetEnabled:false,assetType:'appreciating',assetValues:null,assetPercentiles:null,breakevenMonth:null,crossoverPeriod:null,tablePage:0,activeTab:'overview',scenarios:[]};
+  const SC=['#58a6ff','#fb923c','#c4b5fd'],SN=['A','B','C'],RPP=24;
+
+  Chart.register({id:'loanClick',beforeEvent(c,args){if(args.event.type==='click'&&c.data._rawData){const pts=c.getElementsAtEventForMode(args.event.native,'nearest',{intersect:false},true);if(pts.length){const d=c.data._rawData[pts[0].index];if(d)openModal(d);}}}});
+
+  function calcAmort(p,r,tm,ex,freq){const ppy=freq,tp=Math.round((tm/12)*ppy),pr=r/100/ppy;let pmt=pr===0?p/tp:(p*pr*Math.pow(1+pr,tp))/(Math.pow(1+pr,tp)-1);const s=[];let bal=p,ti=0,tpd=0;for(let i=1;i<=tp&&bal>0;i++){const ip=bal*pr;let pp=pmt-ip+ex;if(pp>bal)pp=bal;const ap=ip+pp;bal-=pp;if(bal<0.01)bal=0;ti+=ip;tpd+=ap;const yr=i/ppy,mo=Math.round(yr*12);s.push({period:i,month:mo,year:yr,payment:ap,principal:pp,interest:ip,balance:bal,totalInterest:ti,totalPaid:tpd,equityPercent:((p-bal)/p)*100,equity:p-bal})}return{schedule:s,payment:pmt,totalInterest:ti,totalPaid:tpd}}
+  function calcAsset(init,pct,mo,appr){const r=appr?pct/100:-pct/100;const v=[];for(let m=0;m<=mo;m++)v.push({month:m,value:init*Math.pow(1+r,m/12)});return v}
+  function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+  function simAssetPaths(init,ratePct,volPct,months,nPaths){const mu=ratePct/100,sigma=volPct/100,dt=1/12;const paths=[];for(let i=0;i<nPaths;i++){const p=[init];let v=init;for(let m=1;m<=months;m++){const drift=(mu-sigma*sigma/2)*dt;const diff=sigma*Math.sqrt(dt)*randn();v=v*Math.exp(drift+diff);p.push(v)}paths.push(p)}const pctls={p5:[],p25:[],p50:[],p75:[],p95:[]};for(let m=0;m<=months;m++){const vals=paths.map(p=>p[m]).sort((a,b)=>a-b);const n=vals.length;const pct=q=>vals[Math.min(Math.floor(n*q),n-1)];pctls.p5.push(pct(0.05));pctls.p25.push(pct(0.25));pctls.p50.push(pct(0.50));pctls.p75.push(pct(0.75));pctls.p95.push(pct(0.95))}pctls.paths=paths;return pctls}
+  function getInp(){const p=parseFloat($('L_principal').value)||0,r=parseFloat($('L_annualRate').value)||0,tv=parseFloat($('L_termValue').value)||1,tu=$('L_termUnit').value,pf=parseInt($('L_payFreq').value),ep=parseFloat($('L_extraPayment').value)||0,dp=parseFloat($('L_downPct').value)||0,tm=tu==='years'?tv*12:tv,tpv=dp<100?p/(1-dp/100):p,dpa=tpv*(dp/100),ar=parseFloat($('L_assetRate').value)||0,av=parseFloat($('L_assetVol').value)||0;return{principal:p,annualRate:r,termMonths:tm,termValue:tv,termUnit:tu,payFreq:pf,extraPayment:ep,downPct:dp,totalPropertyValue:tpv,downPayment:dpa,assetRate:ar,assetVol:av}}
+
+  function buildSummary(inp){const{principal:p,annualRate:r,termMonths:tm,payFreq:pf,extraPayment:ep,termValue:tv,termUnit:tu}=inp;const ty=tu==='years'?tv:(tv/12);const tl=ty===1?'1 year':((ty%1===0?ty:ty.toFixed(1))+' years');const freq=FL[pf].toLowerCase(),ir=(st.totalInterest/p)*100;const last=st.schedule[st.schedule.length-1];const atm=last?last.month:tm;const ts=tm-atm;const cross=st.crossoverPeriod;const cy=cross?(cross.month/12).toFixed(1):null;const y5=st.schedule.find(s=>s.month>=60);let t=`You're borrowing <strong>${fmtC(p)}</strong> at <strong>${r}%</strong> over <strong>${tl}</strong>. Your ${freq} payment will be <span class="hl-c">${fmtC(st.payment)}</span>`;if(ep>0)t+=` (plus <strong>${fmtC(ep)}</strong> extra)`;t+=`. Total interest: <span class="hl-r">${fmtC(st.totalInterest)}</span> (<span class="hl-r">${ir.toFixed(0)}%</span> of principal). Total cost: <strong>${fmtC(st.totalPaid)}</strong>. `;if(y5){const y5p=(y5.totalInterest/y5.totalPaid)*100;t+=`First 5 years: <span class="hl-a">${fmtC(y5.totalInterest)}</span> to interest (${y5p.toFixed(0)}%). `}if(cross)t+=`P > I crossover at approximately year <span class="hl-p">${cy}</span>. `;if(ts>0&&ep>0)t+=`Extra payments save approximately <span class="hl-c">${Math.round(ts)} months</span>. `;$('L_summary').innerHTML=`<div class="summary-title">Your Loan at a Glance</div><div class="summary-text">${t}</div>`}
+
+  function update(){
+    try{
+    const inp=getInp();const{principal:p,annualRate:r,termMonths:tm,payFreq:pf,extraPayment:ep,totalPropertyValue:tpv,downPayment:dpa,assetRate:ar}=inp;
+    const res=calcAmort(p,r,tm,ep,pf);st.schedule=res.schedule;st.payment=res.payment;st.totalInterest=res.totalInterest;st.totalPaid=res.totalPaid;
+    st.assetValues=null;st.breakevenMonth=null;
+    if(st.assetEnabled){const iv=tpv;st.assetPercentiles=null;if(st.assetType==='appreciating'&&inp.assetVol>0){st.assetPercentiles=simAssetPaths(iv,ar,inp.assetVol,tm,200);st.assetValues=st.assetPercentiles.p50.map((v,m)=>({month:m,value:v}));for(const s of st.schedule){const m=s.month;if(m<=tm&&st.assetPercentiles.p50[m]-s.balance>=0&&s.period>1){st.breakevenMonth=s.month;break}}}else{st.assetValues=calcAsset(iv,ar,tm,st.assetType==='appreciating');for(const s of st.schedule){const av=st.assetValues.find(a=>a.month===s.month);if(av&&av.value-s.balance>=0&&s.period>1){st.breakevenMonth=s.month;break}}}}
+    st.crossoverPeriod=null;for(const s of st.schedule)if(s.principal>s.interest){st.crossoverPeriod=s;break}
+    $('L_downHint').textContent=`Down payment: ${fmtC(dpa)} on ${fmtC(tpv)} total`;$('L_freqLabel').textContent=`${FL[pf]} payments`;
+    buildSummary(inp);
+    const ts2=tm-(st.schedule.length?st.schedule[st.schedule.length-1].month:tm);
+    let sh='';const sc=[{l:FL[pf]+' Payment',v:fmtS(st.payment),c:'cyan'},{l:'Total Interest',v:fmtS(st.totalInterest),c:'red'},{l:'Total Cost',v:fmtS(st.totalPaid),c:'blue'},{l:'Interest Ratio',v:fmtP((st.totalInterest/p)*100),c:'purple'}];if(ep>0&&ts2>0)sc.push({l:'Time Saved',v:Math.round(ts2)+' mo',c:'amber'});
+    $('L_statsRow').innerHTML=sc.map(s=>`<div class="stat-card" style="background:var(--${s.c}-dim);border:1px solid var(--${s.c})33"><div class="stat-value" style="color:var(--${s.c})">${s.v}</div><div class="stat-label">${s.l}</div></div>`).join('');
+    renderTab(st.activeTab,inp);
+    try{saveState()}catch(e){}
+    }catch(err){console.error('CalcMonte update error:',err);Object.keys(ch).forEach(k=>{try{if(ch[k]){ch[k].destroy();ch[k]=null}}catch(e){}});}
+  }
+
+  function renderTab(tab,inp){
+    if(!inp)inp=getInp();const{principal:p,totalPropertyValue:tpv,downPayment:dpa,termMonths:tm,termValue:tv,termUnit:tu}=inp;const sm=sample(st.schedule),lb=sm.map(s=>s.month),lc=(v)=>{if(v===0)return'0';if(v%12===0)return(v/12)+'y';return'Mo '+v};
+    if(tab==='overview'){
+      const c1=$('L_chartBalance').getContext('2d');if(ch.balance)ch.balance.destroy();
+      const ds=[{label:'Balance',data:sm.map(s=>s.balance),borderColor:'#58a6ff',backgroundColor:mkG(c1,'#58a6ff'),fill:true,borderWidth:2,pointRadius:0,pointHitRadius:8,tension:0.3},{label:'Equity',data:sm.map(s=>s.equity),borderColor:'#06d6a0',backgroundColor:mkG(c1,'#06d6a0'),fill:true,borderWidth:2,pointRadius:0,pointHitRadius:8,tension:0.3}];
+      if(st.assetEnabled&&st.assetValues)ds.push({label:'Asset Value',data:sm.map(s=>{const a=st.assetValues.find(x=>x.month===s.month);return a?a.value:null}),borderColor:'#fbbf24',borderDash:[6,3],backgroundColor:'transparent',fill:false,borderWidth:2,pointRadius:0,tension:0.3});
+      ch.balance=new Chart(c1,{type:'line',data:{labels:lb,datasets:ds,_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label} · Year ${(i[0].label/12).toFixed(1)}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`}}}}});
+      const c2=$('L_chartPayComp').getContext('2d');if(ch.payComp)ch.payComp.destroy();
+      ch.payComp=new Chart(c2,{type:'line',data:{labels:lb,datasets:[{label:'Principal',data:sm.map(s=>s.principal),borderColor:'#06d6a0',backgroundColor:mkG(c2,'#06d6a0'),fill:true,borderWidth:1.5,pointRadius:0,tension:0.3},{label:'Interest',data:sm.map(s=>s.interest),borderColor:'#ff6b6b',backgroundColor:mkG(c2,'#ff6b6b'),fill:true,borderWidth:1.5,pointRadius:0,tension:0.3}],_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`}}}}});
+      let mh='';const m25=st.schedule.find(s=>s.equityPercent>=25),m50=st.schedule.find(s=>s.equityPercent>=50);
+      if(m25)mh+=`<div class="milestone" style="border-left-color:var(--blue)"><div class="ml-label">25% Equity</div><div class="ml-value" style="color:var(--blue)">Month ${m25.month}</div><div class="ml-sub">Year ${(m25.month/12).toFixed(1)}</div></div>`;
+      if(m50)mh+=`<div class="milestone" style="border-left-color:var(--cyan)"><div class="ml-label">50% Equity</div><div class="ml-value" style="color:var(--cyan)">Month ${m50.month}</div><div class="ml-sub">Year ${(m50.month/12).toFixed(1)}</div></div>`;
+      if(st.crossoverPeriod)mh+=`<div class="milestone" style="border-left-color:var(--purple)"><div class="ml-label">P > I Crossover</div><div class="ml-value" style="color:var(--purple)">Month ${st.crossoverPeriod.month}</div><div class="ml-sub">Year ${(st.crossoverPeriod.month/12).toFixed(1)}</div></div>`;
+      $('L_milestones').innerHTML=mh||'<div style="color:var(--text-dim)">No milestones</div>';
+    }
+    if(tab==='breakdown'){
+      const bars=[{l:'Principal',v:p,c:'var(--blue)',pct:(p/st.totalPaid)*100},{l:'Total Interest',v:st.totalInterest,c:'var(--red)',pct:(st.totalInterest/st.totalPaid)*100}];if(dpa>0)bars.push({l:'Down Payment',v:dpa,c:'var(--cyan)',pct:(dpa/(st.totalPaid+dpa))*100});
+      $('L_costBars').innerHTML=bars.map(b=>`<div class="cost-bar-wrap"><div class="cost-bar-header"><span style="color:${b.c}">${b.l}</span><span style="font-weight:600">${fmtC(b.v)}</span></div><div class="cost-bar-track"><div class="cost-bar-fill" style="width:${Math.min(b.pct,100)}%;background:${b.c}"></div></div><div class="cost-bar-pct">${fmtP(b.pct)}</div></div>`).join('');
+      const c3=$('L_chartCumInt').getContext('2d');if(ch.cumInt)ch.cumInt.destroy();ch.cumInt=new Chart(c3,{type:'line',data:{labels:lb,datasets:[{label:'Cumulative Interest',data:sm.map(s=>s.totalInterest),borderColor:'#ff6b6b',backgroundColor:mkG(c3,'#ff6b6b'),fill:true,borderWidth:2,pointRadius:0,tension:0.3}],_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`}}}}});
+      const c4=$('L_chartEquity').getContext('2d');if(ch.equity)ch.equity.destroy();ch.equity=new Chart(c4,{type:'line',data:{labels:lb,datasets:[{label:'Equity %',data:sm.map(s=>s.equityPercent),borderColor:'#06d6a0',backgroundColor:mkG(c4,'#06d6a0'),fill:true,borderWidth:2,pointRadius:0,tension:0.3}],_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{min:0,max:100,ticks:{callback:v=>v+'%'},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtP(i.raw)}`}}}}});
+    }
+    if(tab==='schedule'){$('L_schedCount').textContent=`${st.schedule.length} periods`;renderTable()}
+    if(tab==='compare')renderCompare();
+    if(tab==='asset'&&st.assetEnabled){const iv=st.assetValues?.[0]?.value||0;const isStoch=st.assetPercentiles!==null;const fv=isStoch?st.assetPercentiles.p50[st.assetPercentiles.p50.length-1]:st.assetValues?.[st.assetValues.length-1]?.value||0;const tlab=tu==='years'?tv+'yr':(tv/12).toFixed(1)+'yr';const fc=st.assetType==='appreciating'?'cyan':'red';
+      let ah=`<div class="stat-card" style="background:var(--amber-dim);border:1px solid rgba(251,191,36,0.2)"><div class="stat-value" style="color:var(--amber)">${st.assetType==='appreciating'?'🏠 Appreciating':'🚗 Depreciating'}</div><div class="stat-label">Type</div></div><div class="stat-card" style="background:var(--cyan-dim);border:1px solid rgba(6,214,160,0.2)"><div class="stat-value" style="color:var(--cyan)">${fmtS(iv)}</div><div class="stat-label">Initial</div></div><div class="stat-card" style="background:var(--${fc}-dim);border:1px solid var(--${fc})33"><div class="stat-value" style="color:var(--${fc})">${fmtS(fv)}</div><div class="stat-label">${isStoch?'Median':'Final'} (${tlab})</div></div>`;
+      if(isStoch){const p5f=st.assetPercentiles.p5[st.assetPercentiles.p5.length-1],p95f=st.assetPercentiles.p95[st.assetPercentiles.p95.length-1];ah+=`<div class="stat-card" style="background:var(--purple-dim);border:1px solid rgba(196,181,253,0.2)"><div class="stat-value" style="color:var(--purple)">${fmtS(p5f)} – ${fmtS(p95f)}</div><div class="stat-label">5th–95th Range</div></div>`;const allPaths=st.assetPercentiles.paths,uwCount=allPaths.filter(path=>{for(let m2=0;m2<st.schedule.length;m2++){const s2=st.schedule[m2];const pv=path[s2.month];if(pv!==undefined&&s2.month>0&&s2.month<=inp.termMonths&&pv<s2.balance)return true}return false}).length;const uwPct=(uwCount/allPaths.length*100).toFixed(1);ah+=`<div class="stat-card" style="background:var(--red-dim);border:1px solid rgba(255,107,107,0.2)"><div class="stat-value" style="color:var(--red)">${uwPct}%</div><div class="stat-label">Underwater Risk</div></div>`}
+      else if(st.breakevenMonth)ah+=`<div class="stat-card" style="background:var(--purple-dim);border:1px solid rgba(196,181,253,0.2)"><div class="stat-value" style="color:var(--purple)">Mo ${st.breakevenMonth}</div><div class="stat-label">Breakeven</div></div>`;
+      $('L_assetStats').innerHTML=ah;
+
+      // Asset vs Loan chart
+      const c5=$('L_chartAsset').getContext('2d');if(ch.asset)ch.asset.destroy();
+      const assetDS=[];
+      if(isStoch){
+        assetDS.push({label:'95th',data:sm.map(s=>st.assetPercentiles.p95[s.month]||0),borderColor:'rgba(251,191,36,0.15)',backgroundColor:'rgba(251,191,36,0.04)',fill:{target:1},borderWidth:0,pointRadius:0,tension:0.3});
+        assetDS.push({label:'75th',data:sm.map(s=>st.assetPercentiles.p75[s.month]||0),borderColor:'rgba(251,191,36,0.2)',backgroundColor:'rgba(251,191,36,0.06)',fill:{target:2},borderWidth:0,pointRadius:0,tension:0.3});
+        assetDS.push({label:'Median',data:sm.map(s=>st.assetPercentiles.p50[s.month]||0),borderColor:'#fbbf24',borderWidth:2.5,pointRadius:0,tension:0.3,fill:false});
+        assetDS.push({label:'25th',data:sm.map(s=>st.assetPercentiles.p25[s.month]||0),borderColor:'rgba(251,191,36,0.2)',backgroundColor:'rgba(251,191,36,0.06)',fill:{target:2},borderWidth:0,pointRadius:0,tension:0.3});
+        assetDS.push({label:'5th',data:sm.map(s=>st.assetPercentiles.p5[s.month]||0),borderColor:'rgba(251,191,36,0.15)',backgroundColor:'rgba(251,191,36,0.04)',fill:{target:3},borderWidth:0,pointRadius:0,tension:0.3});
+      } else {
+        assetDS.push({label:'Asset',data:sm.map(s=>{const a=st.assetValues.find(x=>x.month===s.month);return a?a.value:null}),borderColor:'#fbbf24',backgroundColor:mkG(c5,'#fbbf24'),fill:true,borderWidth:2.5,pointRadius:0,tension:0.3});
+      }
+      assetDS.push({label:'Loan',data:sm.map(s=>s.balance),borderColor:'#58a6ff',backgroundColor:isStoch?'transparent':mkG(c5,'#58a6ff'),fill:!isStoch,borderWidth:2,pointRadius:0,tension:0.3});
+      ch.asset=new Chart(c5,{type:'line',data:{labels:lb,datasets:assetDS,_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`},filter:i=>i.dataset.label==='Median'||i.dataset.label==='Asset'||i.dataset.label==='Loan'}}}}); 
+
+      // Net position chart
+      const c6=$('L_chartNet').getContext('2d');if(ch.net)ch.net.destroy();
+      const netDS=[];
+      if(isStoch){
+        netDS.push({label:'95th Net',data:sm.map(s=>(st.assetPercentiles.p95[s.month]||0)-s.balance),borderColor:'rgba(6,214,160,0.15)',backgroundColor:'rgba(6,214,160,0.04)',fill:{target:1},borderWidth:0,pointRadius:0,tension:0.3});
+        netDS.push({label:'75th Net',data:sm.map(s=>(st.assetPercentiles.p75[s.month]||0)-s.balance),borderColor:'rgba(6,214,160,0.15)',backgroundColor:'rgba(6,214,160,0.06)',fill:{target:2},borderWidth:0,pointRadius:0,tension:0.3});
+        netDS.push({label:'Net (Median)',data:sm.map(s=>(st.assetPercentiles.p50[s.month]||0)-s.balance),borderColor:'#06d6a0',borderWidth:2,pointRadius:0,tension:0.3,fill:false});
+        netDS.push({label:'25th Net',data:sm.map(s=>(st.assetPercentiles.p25[s.month]||0)-s.balance),borderColor:'rgba(6,214,160,0.15)',backgroundColor:'rgba(6,214,160,0.06)',fill:{target:2},borderWidth:0,pointRadius:0,tension:0.3});
+        netDS.push({label:'5th Net',data:sm.map(s=>(st.assetPercentiles.p5[s.month]||0)-s.balance),borderColor:'rgba(6,214,160,0.15)',backgroundColor:'rgba(6,214,160,0.04)',fill:{target:3},borderWidth:0,pointRadius:0,tension:0.3});
+      } else {
+        netDS.push({label:'Net',data:sm.map(s=>{const a=st.assetValues.find(x=>x.month===s.month);return a?a.value-s.balance:null}),borderColor:'#06d6a0',backgroundColor:mkG(c6,'#06d6a0'),fill:true,borderWidth:2,pointRadius:0,tension:0.3});
+      }
+      ch.net=new Chart(c6,{type:'line',data:{labels:lb,datasets:netDS,_rawData:sm},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`},filter:i=>i.dataset.label==='Net (Median)'||i.dataset.label==='Net'}}}});
+
+      // Underwater warning
+      if(isStoch){const allPaths2=st.assetPercentiles.paths,uwCount2=allPaths2.filter(path=>{for(let m2=0;m2<st.schedule.length;m2++){const s2=st.schedule[m2];const pv=path[s2.month];if(pv!==undefined&&s2.month>0&&s2.month<=inp.termMonths&&pv<s2.balance)return true}return false}).length;const uwPct2=(uwCount2/allPaths2.length*100).toFixed(1);if(parseFloat(uwPct2)>0){$('L_underwaterWarn').style.display='block';$('L_underwaterText').textContent=`With ${inp.assetRate}% annual appreciation and ${inp.assetVol}% volatility, ${uwPct2}% of simulated paths (${uwCount2} of ${allPaths2.length}) show the home value dropping below the loan balance at some point during the loan term. A larger down payment or shorter term reduces this risk.`}else{$('L_underwaterWarn').style.display='none'}}
+      else if(st.assetType==='depreciating'){const uw=st.schedule.find(d=>{const a=st.assetValues.find(x=>x.month===d.month);return a&&a.value<d.balance&&d.month>0});if(uw){const av=st.assetValues.find(x=>x.month===uw.month);const deficit=uw.balance-(av?av.value:0);$('L_underwaterWarn').style.display='block';$('L_underwaterText').textContent=`With ${inp.assetRate}% annual depreciation, the asset value drops below your loan balance at month ${uw.month} (year ${(uw.month/12).toFixed(1)}). At that point the asset is worth ${fmtC(av?av.value:0)} but you still owe ${fmtC(uw.balance)} — a negative equity of ${fmtC(deficit)}. A larger down payment or shorter loan term can help avoid this.`}else{$('L_underwaterWarn').style.display='none'}}else $('L_underwaterWarn').style.display='none';
+    }
+  }
+
+  function renderTable(){const s=st.tablePage*RPP,pg=st.schedule.slice(s,s+RPP);$('L_schedBody').innerHTML=pg.map(r=>`<tr onclick="L.openModal(L.st.schedule[${r.period-1}])"><td>${r.period}</td><td>${r.month}</td><td>${fmtC(r.payment)}</td><td style="color:var(--cyan)">${fmtC(r.principal)}</td><td style="color:var(--red)">${fmtC(r.interest)}</td><td style="color:var(--blue);font-weight:500">${fmtC(r.balance)}</td><td><span class="equity-badge">${fmtP(r.equityPercent)}</span></td></tr>`).join('');const tp=Math.ceil(st.schedule.length/RPP);$('L_pager').innerHTML=tp>1?`<button onclick="L.st.tablePage=Math.max(0,L.st.tablePage-1);L.renderTable()" ${st.tablePage===0?'disabled':''}>← Prev</button><span>Page ${st.tablePage+1} of ${tp}</span><button onclick="L.st.tablePage=Math.min(${tp-1},L.st.tablePage+1);L.renderTable()" ${st.tablePage>=tp-1?'disabled':''}>Next →</button>`:''}
+
+  function openModal(data){if(!data)return;const inp=getInp();$('modalSub').textContent=`Month ${data.month} · Year ${(data.month/12).toFixed(1)}`;const items=[{l:'Balance',v:fmtC(data.balance),c:'var(--blue)'},{l:'Equity',v:fmtP(data.equityPercent),c:'var(--cyan)'},{l:'Payment',v:fmtC(data.payment),c:'var(--text)'},{l:'Principal',v:fmtC(data.principal),c:'var(--cyan)'},{l:'Interest',v:fmtC(data.interest),c:'var(--red)'},{l:'Total Int Paid',v:fmtC(data.totalInterest),c:'var(--amber)'},{l:'Total Paid',v:fmtC(data.totalPaid),c:'var(--purple)'},{l:'Remaining',v:Math.max(0,inp.termMonths-data.month)+' mo',c:'var(--text-muted)'}];$('snapGrid').innerHTML=items.map(i=>`<div class="snap-item"><div class="si-label">${i.l}</div><div class="si-value" style="color:${i.c}">${i.v}</div></div>`).join('');$('snapAsset').style.display='none';if(st.assetEnabled&&st.assetValues){const av=st.assetValues.find(a=>a.month===data.month);if(av){const n=av.value-data.balance;$('snapAsset').style.display='block';$('snapAsset').innerHTML=`<div class="sa-label">Asset</div><div class="snap-asset-row"><div>Value: <span style="color:var(--cyan);font-weight:600">${fmtC(av.value)}</span></div><div>Net: <span style="color:${n>=0?'var(--cyan)':'var(--red)'};font-weight:600">${fmtC(n)}</span></div></div>`}}$('modalOverlay').classList.add('open')}
+
+  function renderCompare(){const el=$('L_compareContent'),sc=st.scenarios;if(!sc.length){el.innerHTML=`<div class="card"><div style="text-align:center;padding:50px 20px;color:var(--text-dim)"><div style="font-size:32px;margin-bottom:12px">📊</div><h3 style="font-family:var(--font-display);font-weight:400;margin-bottom:8px">No Scenarios</h3><p style="font-size:12px">Save scenarios from the sidebar to compare.</p></div></div>`;return}
+    const metrics=[{l:'Principal',fmt:fmtC,g:s=>s.inputs.principal,b:'min'},{l:'Rate',fmt:v=>fmtP(v),g:s=>s.inputs.annualRate,b:'min'},{l:'Term',fmt:v=>v+' mo',g:s=>s.inputs.termMonths,b:'min'},{l:'Payment',fmt:fmtC,g:s=>s.result.payment,b:'min'},{l:'Total Interest',fmt:fmtC,g:s=>s.result.totalInterest,b:'min'},{l:'Total Cost',fmt:fmtC,g:s=>s.result.totalPaid,b:'min'},{l:'Interest Ratio',fmt:v=>fmtP(v),g:s=>(s.result.totalInterest/s.inputs.principal)*100,b:'min'},{l:'Actual Term',fmt:v=>v+' mo',g:s=>s.actualTermMonths,b:'min'}];
+    let th=`<div class="card"><h3>Comparison</h3><div style="overflow-x:auto"><table class="compare-table"><thead><tr><th>Metric</th>`;sc.forEach(s=>{th+=`<th style="color:${s.color}">${s.name}</th>`});th+=`</tr></thead><tbody>`;
+    for(const m of metrics){const vals=sc.map(s=>m.g(s)),nv=vals.filter(v=>v!=null&&!isNaN(v));const bi=m.b&&nv.length>1?vals.indexOf(Math.min(...nv)):-1,wi=m.b&&sc.length>1&&nv.length>1?vals.indexOf(Math.max(...nv)):-1;th+=`<tr><td style="color:var(--text-muted)">${m.l}</td>`;vals.forEach((v,i)=>{let c='';if(i===bi&&sc.length>1)c='best-val';else if(i===wi&&sc.length>1)c='worst-val';th+=`<td class="${c}">${m.fmt(v)}</td>`});th+=`</tr>`}th+=`</tbody></table></div></div>`;
+    let sav='';if(sc.length>=2){const sorted=[...sc].sort((a,b)=>a.result.totalInterest-b.result.totalInterest);const best=sorted[0],worst=sorted[sorted.length-1];sav=`<div class="summary-card" style="margin-bottom:20px"><div class="summary-title">Insight</div><div class="summary-text"><span style="color:${best.color};font-weight:600">${best.name}</span> saves <span class="hl-c">${fmtC(worst.result.totalInterest-best.result.totalInterest)}</span> in interest vs <span style="color:${worst.color};font-weight:600">${worst.name}</span>.</div></div>`}
+    let chH=`<div class="grid-2"><div class="card"><h3>Balance</h3><div class="chart-container"><canvas id="L_chartCompBal" height="250"></canvas></div></div><div class="card"><h3>Interest</h3><div class="chart-container"><canvas id="L_chartCompInt" height="250"></canvas></div></div></div>`;
+    el.innerHTML=sav+th+chH;
+    setTimeout(()=>{const lc2=(v)=>{if(v===0)return'0';if(v%12===0)return(v/12)+'y';return'Mo '+v},mx=Math.max(...sc.map(s=>s.actualTermMonths)),ul=[];for(let m=0;m<=mx;m+=Math.max(1,Math.round(mx/100)))ul.push(m);
+      const c7=$('L_chartCompBal')?.getContext('2d');if(c7){if(ch.compBal)ch.compBal.destroy();ch.compBal=new Chart(c7,{type:'line',data:{labels:ul,datasets:sc.map(s=>({label:s.name,borderColor:s.color,backgroundColor:'transparent',data:ul.map(m=>{const e=s.schedule.find(x=>x.month>=m);return e?e.balance:0}),borderWidth:2,pointRadius:0,tension:0.3,fill:false}))},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{callback:lc2,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}}}})}
+      const c8=$('L_chartCompInt')?.getContext('2d');if(c8){if(ch.compInt)ch.compInt.destroy();ch.compInt=new Chart(c8,{type:'line',data:{labels:ul,datasets:sc.map(s=>({label:s.name,borderColor:s.color,backgroundColor:'transparent',data:ul.map(m=>{const e=s.schedule.find(x=>x.month>=m);return e?e.totalInterest:(s.schedule.length?s.schedule[s.schedule.length-1].totalInterest:0)}),borderWidth:2,pointRadius:0,tension:0.3,fill:false}))},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{callback:lc2,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}}}})}
+    },50);
+  }
+
+  function saveScenario(){if(st.scenarios.length>=3){alert('Max 3');return}const inp=getInp(),res=calcAmort(inp.principal,inp.annualRate,inp.termMonths,inp.extraPayment,inp.payFreq);const cross=res.schedule.find(s=>s.principal>s.interest),last=res.schedule[res.schedule.length-1];st.scenarios.push({id:Date.now(),name:'Scenario '+SN[st.scenarios.length],color:SC[st.scenarios.length],inputs:{...inp},result:res,schedule:res.schedule,crossoverMonth:cross?cross.month:null,actualTermMonths:last?last.month:inp.termMonths});renderChips();rebuildTabs();if(st.activeTab==='compare')renderCompare()}
+  function removeScenario(id){st.scenarios=st.scenarios.filter(s=>s.id!==id);st.scenarios.forEach((s,i)=>{s.color=SC[i];s.name='Scenario '+SN[i]});renderChips();rebuildTabs();if(st.activeTab==='compare')renderCompare()}
+  function renderChips(){$('L_scenarioChips').innerHTML=st.scenarios.map(s=>`<div class="scenario-chip"><span class="sc-dot" style="background:${s.color}"></span><span style="color:${s.color};font-weight:500">${s.name}</span><span style="color:var(--text-dim);font-size:10px">${fmtC(s.inputs.principal)} · ${s.inputs.annualRate}%</span><button class="sc-remove" onclick="L.removeScenario(${s.id})">×</button></div>`).join('')}
+
+  function exportCSV(){const inp=getInp();let csv='Period,Month,Payment,Principal,Interest,Balance,Equity%\n';for(const r of st.schedule)csv+=`${r.period},${r.month},${r.payment.toFixed(2)},${r.principal.toFixed(2)},${r.interest.toFixed(2)},${r.balance.toFixed(2)},${r.equityPercent.toFixed(2)}\n`;csv+=`\nSUMMARY\nPrincipal,${inp.principal}\nRate,${inp.annualRate}%\nPayment,${st.payment.toFixed(2)}\nTotal Interest,${st.totalInterest.toFixed(2)}\n`;const b=new Blob([csv],{type:'text/csv'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='loan-schedule.csv';a.click();URL.revokeObjectURL(u)}
+
+  function toggleAsset(){st.assetEnabled=!st.assetEnabled;$('L_assetToggle').textContent=st.assetEnabled?'ON':'OFF';$('L_assetToggle').classList.toggle('active',st.assetEnabled);$('L_assetControls').style.display=st.assetEnabled?'block':'none';if(st.assetEnabled)$('L_assetVolWrap').style.display=st.assetType==='appreciating'?'block':'none';rebuildTabs();update()}
+  function setAssetType(t){st.assetType=t;$('L_btnAppr').classList.toggle('active',t==='appreciating');$('L_btnDepr').classList.toggle('active',t==='depreciating');$('L_assetRateLabel').textContent=t==='appreciating'?'Annual Appreciation':'Annual Depreciation';$('L_assetRate').value=t==='appreciating'?3.5:15;$('L_assetRateSlider').value=$('L_assetRate').value;$('L_assetRateSlider').max=t==='appreciating'?15:40;$('L_assetVolWrap').style.display=t==='appreciating'?'block':'none';if(t==='depreciating'){$('L_assetVol').value=0;$('L_assetVolSlider').value=0}update()}
+
+  function rebuildTabs(){const tabs=['overview','breakdown','schedule','compare'];if(st.assetEnabled)tabs.splice(3,0,'asset');$('L_tabsRow').innerHTML=tabs.map(t=>{let l=t;if(t==='compare'&&st.scenarios.length>0)l=`Compare (${st.scenarios.length})`;return`<button class="tab-btn${st.activeTab===t?' active':''}" data-tab="${t}" onclick="L.switchTab('${t}')">${l}</button>`}).join('');if(!tabs.includes(st.activeTab))switchTab('overview')}
+  function switchTab(t){st.activeTab=t;st.tablePage=0;document.querySelectorAll('#page-loan .tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('#page-loan .tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));const panel=$(`L_tab-${t}`);if(panel)panel.classList.add('active');update()}
+
+  function init(){const du=debounce(update,150);['L_principal','L_annualRate','L_termValue','L_payFreq','L_extraPayment','L_downPct','L_assetRate','L_assetVol'].forEach(id=>{$(id).addEventListener('input',du)});$('L_termUnit').addEventListener('change',update);$('L_rateSlider').addEventListener('input',e=>{$('L_annualRate').value=e.target.value;update()});$('L_annualRate').addEventListener('input',()=>{$('L_rateSlider').value=$('L_annualRate').value});$('L_downSlider').addEventListener('input',e=>{$('L_downPct').value=e.target.value;update()});$('L_downPct').addEventListener('input',()=>{$('L_downSlider').value=$('L_downPct').value});$('L_assetRateSlider').addEventListener('input',e=>{$('L_assetRate').value=e.target.value;update()});$('L_assetRate').addEventListener('input',()=>{$('L_assetRateSlider').value=$('L_assetRate').value});$('L_assetVolSlider').addEventListener('input',e=>{$('L_assetVol').value=e.target.value;update()});$('L_assetVol').addEventListener('input',()=>{$('L_assetVolSlider').value=$('L_assetVol').value});rebuildTabs();update()}
+
+  function saveState(){try{const d={p:$('L_principal').value,r:$('L_annualRate').value,tv:$('L_termValue').value,tu:$('L_termUnit').value,pf:$('L_payFreq').value,ep:$('L_extraPayment').value,dp:$('L_downPct').value,ae:st.assetEnabled,at:st.assetType,ar:$('L_assetRate').value,av:$('L_assetVol').value};localStorage.setItem('L_state',JSON.stringify(d))}catch(e){}}
+  function loadSaved(){try{const d=JSON.parse(localStorage.getItem('L_state'));if(!d)return false;$('L_principal').value=d.p;$('L_annualRate').value=d.r;$('L_rateSlider').value=d.r;$('L_termValue').value=d.tv;$('L_termUnit').value=d.tu;$('L_payFreq').value=d.pf;$('L_extraPayment').value=d.ep;$('L_downPct').value=d.dp;$('L_downSlider').value=d.dp;$('L_assetRate').value=d.ar;$('L_assetRateSlider').value=d.ar;if(d.av){$('L_assetVol').value=d.av;$('L_assetVolSlider').value=d.av}if(d.ae&&!st.assetEnabled)toggleAsset();if(d.ae&&d.at!==st.assetType)setAssetType(d.at);return true}catch(e){return false}}
+
+  const LOAN_PRESETS={
+    mortgage30:{principal:350000,annualRate:6.5,termValue:30,termUnit:'years',payFreq:'12',extraPayment:0,downPct:20,assetEnabled:true,assetType:'appreciating',assetRate:3.5,assetVol:8},
+    mortgage15:{principal:350000,annualRate:5.75,termValue:15,termUnit:'years',payFreq:'12',extraPayment:0,downPct:20,assetEnabled:true,assetType:'appreciating',assetRate:3.5,assetVol:8},
+    auto5:{principal:35000,annualRate:5.9,termValue:5,termUnit:'years',payFreq:'12',extraPayment:0,downPct:10,assetEnabled:true,assetType:'depreciating',assetRate:15,assetVol:0},
+    auto3:{principal:25000,annualRate:4.5,termValue:3,termUnit:'years',payFreq:'12',extraPayment:0,downPct:15,assetEnabled:true,assetType:'depreciating',assetRate:20,assetVol:0},
+    student:{principal:45000,annualRate:5.5,termValue:10,termUnit:'years',payFreq:'12',extraPayment:0,downPct:0,assetEnabled:false,assetType:'appreciating',assetRate:0,assetVol:0},
+    personal:{principal:15000,annualRate:10.5,termValue:5,termUnit:'years',payFreq:'12',extraPayment:0,downPct:0,assetEnabled:false,assetType:'appreciating',assetRate:0,assetVol:0}
+  };
+  function loadPreset(key){
+    const p=LOAN_PRESETS[key];if(!p)return;
+    $('L_principal').value=p.principal;$('L_annualRate').value=p.annualRate;$('L_rateSlider').value=p.annualRate;
+    $('L_termValue').value=p.termValue;$('L_termUnit').value=p.termUnit;$('L_payFreq').value=p.payFreq;
+    $('L_extraPayment').value=p.extraPayment;$('L_downPct').value=p.downPct;$('L_downSlider').value=p.downPct;
+    $('L_assetRate').value=p.assetRate;$('L_assetRateSlider').value=p.assetRate;
+    $('L_assetVol').value=p.assetVol||0;$('L_assetVolSlider').value=p.assetVol||0;
+    if(p.assetEnabled!==st.assetEnabled)toggleAsset();
+    if(p.assetEnabled&&p.assetType!==st.assetType)setAssetType(p.assetType);
+    update();saveState();
+  }
+
+  return{init,update,st,openModal,renderTable,toggleAsset,setAssetType,saveScenario,removeScenario,exportCSV,switchTab,rebuildTabs,loadPreset,saveState,loadSaved}
+})();
+// ═══════════════════════════════════════════════════
+// ASSET SIMULATOR MODULE (A namespace)
+// GBM-based Monte Carlo with cash flows
+// ═══════════════════════════════════════════════════
+const A=(()=>{
+  const ch={};
+  let st={events:[],results:null,activeTab:'A_projection'};
+
+  // Box-Muller for standard normal
+  function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+
+  function getInp(){
+    const init=parseFloat($('A_initial').value)||0;
+    const apy=parseFloat($('A_apy').value)||0;
+    const comp=$('A_compounding').value;
+    const hv=parseFloat($('A_horizon').value)||1;
+    const hu=$('A_horizonUnit').value;
+    const horizonMo=hu==='years'?hv*12:hv;
+    const vol=parseFloat($('A_vol').value)||0;
+    const nPaths=parseInt($('A_paths').value)||500;
+    const contribAmt=parseFloat($('A_contribAmt').value)||0;
+    const contribFreq=parseInt($('A_contribFreq').value);
+    const withdrawAmt=parseFloat($('A_withdrawAmt').value)||0;
+    const withdrawFreq=parseInt($('A_withdrawFreq').value);
+    return{init,apy,comp,horizonMo,vol,nPaths,contribAmt,contribFreq,withdrawAmt,withdrawFreq,hv,hu}
+  }
+
+  // Deterministic growth for one month step
+  // Returns multiplier for balance over dt=1/12 year
+  function growthMultiplier(apy,comp,dt){
+    const r=apy/100;
+    if(comp==='continuous') return Math.exp(r*dt);
+    const n=parseInt(comp);
+    // Effective rate per compounding period
+    const periodsInDt=n*dt;
+    return Math.pow(1+r/n, periodsInDt);
+  }
+
+  // Simulate one path (monthly steps)
+  function simPath(inp, stochastic){
+    const{init,apy,comp,horizonMo,vol,contribAmt,contribFreq,withdrawAmt,withdrawFreq}=inp;
+    const dt=1/12; // monthly step
+    const sigma=vol/100;
+    const r=apy/100;
+    // For GBM: drift adjusted for vol: mu_eff = r - sigma^2/2
+    // dS = S * (mu*dt + sigma*sqrt(dt)*Z)
+    const path=[{month:0,value:init,contributions:0,withdrawals:0,interest:0,cumContrib:0,cumWithdraw:0,cumInterest:0}];
+    let bal=init, cumC=0, cumW=0, cumI=0;
+
+    for(let m=1;m<=horizonMo;m++){
+      const prevBal=bal;
+      // Growth
+      if(stochastic && sigma>0){
+        const drift=(r-sigma*sigma/2)*dt;
+        const diffusion=sigma*Math.sqrt(dt)*randn();
+        bal=bal*Math.exp(drift+diffusion);
+      } else {
+        bal=bal*growthMultiplier(apy,comp,dt);
+      }
+      const intEarned=bal-prevBal;
+      cumI+=intEarned;
+
+      // Cash flows: contributions
+      let cFlow=0;
+      if(contribAmt>0){
+        const moPerContrib=12/contribFreq;
+        if(moPerContrib<1 || m%(Math.round(moPerContrib))===0 || moPerContrib<=1){
+          // For frequencies > monthly, add proportionally each month
+          const amtPerMo=contribAmt*contribFreq/12;
+          bal+=amtPerMo; cFlow+=amtPerMo; cumC+=amtPerMo;
+        }
+      }
+      // Withdrawals
+      let wFlow=0;
+      if(withdrawAmt>0){
+        const moPerWithdraw=12/withdrawFreq;
+        if(moPerWithdraw<1 || m%(Math.round(moPerWithdraw))===0 || moPerWithdraw<=1){
+          const amtPerMo=withdrawAmt*withdrawFreq/12;
+          const actual=Math.min(amtPerMo,bal);
+          bal-=actual; wFlow+=actual; cumW+=actual;
+        }
+      }
+      // One-time events
+      for(const ev of st.events){
+        if(ev.month===m){
+          if(ev.amount>0){bal+=ev.amount;cFlow+=ev.amount;cumC+=ev.amount}
+          else{const actual=Math.min(Math.abs(ev.amount),bal);bal-=actual;wFlow+=actual;cumW+=actual}
+        }
+      }
+
+      if(bal<0)bal=0;
+      path.push({month:m,value:bal,contributions:cFlow,withdrawals:wFlow,interest:intEarned,cumContrib:cumC,cumWithdraw:cumW,cumInterest:cumI});
+    }
+    return path;
+  }
+
+  function run(){
+    const inp=getInp();
+    if(inp.init<=0){alert('Set initial investment > 0');return}
+    const isStoch=inp.vol>0;
+    const nPaths=isStoch?Math.min(inp.nPaths,5000):1;
+
+    // Run simulations
+    const allPaths=[];
+    for(let i=0;i<nPaths;i++) allPaths.push(simPath(inp,isStoch));
+
+    // Compute percentiles at each month
+    const months=inp.horizonMo;
+    const percentiles={p5:[],p10:[],p25:[],p50:[],p75:[],p90:[],p95:[],mean:[]};
+    const monthLabels=[];
+
+    for(let m=0;m<=months;m++){
+      monthLabels.push(m);
+      const vals=allPaths.map(p=>p[m].value).sort((a,b)=>a-b);
+      const n=vals.length;
+      const pct=q=>vals[Math.min(Math.floor(q*n),n-1)];
+      percentiles.p5.push(pct(0.05));
+      percentiles.p10.push(pct(0.10));
+      percentiles.p25.push(pct(0.25));
+      percentiles.p50.push(pct(0.50));
+      percentiles.p75.push(pct(0.75));
+      percentiles.p90.push(pct(0.90));
+      percentiles.p95.push(pct(0.95));
+      percentiles.mean.push(vals.reduce((a,b)=>a+b,0)/n);
+    }
+
+    // Final values for distribution
+    const finalVals=allPaths.map(p=>p[months].value).sort((a,b)=>a-b);
+
+    // Median path for breakdown
+    const medianPath=allPaths[0]; // for deterministic, this is THE path
+    if(isStoch){
+      // Use the path closest to median final value
+      const medFinal=percentiles.p50[months];
+      let bestIdx=0,bestDiff=Infinity;
+      for(let i=0;i<allPaths.length;i++){const d=Math.abs(allPaths[i][months].value-medFinal);if(d<bestDiff){bestDiff=d;bestIdx=i}}
+      st.medianPath=allPaths[bestIdx];
+    } else {
+      st.medianPath=allPaths[0];
+    }
+
+    // Sample a few paths to show
+    const showPaths=[];
+    if(isStoch){
+      const indices=[0,Math.floor(nPaths*0.1),Math.floor(nPaths*0.25),Math.floor(nPaths*0.5),Math.floor(nPaths*0.75),Math.floor(nPaths*0.9),nPaths-1];
+      // Sort allPaths by final value and pick spread
+      const sorted=[...allPaths].sort((a,b)=>a[months].value-b[months].value);
+      for(const i of indices)if(sorted[i])showPaths.push(sorted[i]);
+    }
+
+    st.results={inp,allPaths,percentiles,finalVals,monthLabels,isStoch,showPaths,months};
+    buildSummary();
+    renderStats();
+    renderTab(st.activeTab);
+    try{saveState()}catch(e){}
+  }
+
+  function buildSummary(){
+    const{inp,percentiles,finalVals,isStoch,months}=st.results;
+    const mp=st.medianPath;
+    const finalMed=percentiles.p50[months];
+    const totalContrib=mp[months].cumContrib;
+    const totalWithdraw=mp[months].cumWithdraw;
+    const totalIn=inp.init+totalContrib-totalWithdraw;
+    const gain=finalMed-totalIn;
+    const gainPct=totalIn>0?(gain/totalIn)*100:0;
+    const compLabel={continuous:'continuously',365:'daily',12:'monthly',4:'quarterly',2:'semi-annually',1:'annually'}[inp.comp]||inp.comp;
+    const yrs=months/12;
+
+    let t=isStoch
+      ? `Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>, simulated using <strong>monthly-step GBM</strong>`
+      : `Starting with <strong>${fmtC(inp.init)}</strong> at <strong>${inp.apy}% expected annual return</strong> compounded ${compLabel} over <strong>${yrs%1===0?yrs:yrs.toFixed(1)} years</strong>`;
+    if(inp.vol>0) t+= isStoch
+      ? ` and <strong>${inp.vol}% annual volatility</strong>`
+      : ` with <strong>${inp.vol}% annual volatility</strong>`;
+    t+=`. `;
+
+    if(inp.contribAmt>0) t+=`Regular contributions configured at <span class="hl-c">${fmtC(inp.contribAmt)}</span> ${FL[inp.contribFreq]?.toLowerCase()||'periodic'}. `;
+    if(inp.withdrawAmt>0) t+=`Regular withdrawals configured at <span class="hl-r">${fmtC(inp.withdrawAmt)}</span> ${FL[inp.withdrawFreq]?.toLowerCase()||'periodic'}. `;
+
+    if(isStoch){
+      t+=`Median outcome: <span class="hl-c">${fmtC(finalMed)}</span>. `;
+      t+=`90% of outcomes fall between <span class="hl-a">${fmtC(percentiles.p5[months])}</span> and <span class="hl-a">${fmtC(percentiles.p95[months])}</span>. `;
+      const probLoss=finalVals.filter(v=>v<totalIn).length/finalVals.length*100;
+      if(probLoss>0) t+=`Probability of loss: <span class="hl-r">${probLoss.toFixed(1)}%</span>. `;
+      else t+=`No simulated paths resulted in a loss. `;
+    } else {
+      const finalVal=finalMed;
+      t+=`Final value: <span class="hl-c">${fmtC(finalVal)}</span>. `;
+      if(gain>0) t+=`Total growth: <span class="hl-c">${fmtC(gain)}</span> (<span class="hl-c">+${gainPct.toFixed(1)}%</span>). `;
+      t+=`Interest earned: <span class="hl-p">${fmtC(mp[months].cumInterest)}</span>. `;
+    }
+    $('A_summary').innerHTML=`<div class="summary-title">Asset Projection${isStoch?' (Monte Carlo)':''}</div><div class="summary-text">${t}</div>`;
+  }
+
+  function renderStats(){
+    const{inp,percentiles,months,isStoch}=st.results;
+    const mp=st.medianPath;
+    const finalMed=percentiles.p50[months];
+    const totalContrib=mp[months].cumContrib;
+    const totalIn=inp.init+totalContrib;
+    const cagr=inp.init>0?(Math.pow(finalMed/inp.init,12/months)-1)*100:0;
+
+    let sh='';
+    sh+=`<div class="stat-card" style="background:var(--cyan-dim);border:1px solid rgba(6,214,160,0.2)"><div class="stat-value" style="color:var(--cyan)">${fmtS(finalMed)}</div><div class="stat-label">${isStoch?'Median':'Final'} Value</div></div>`;
+    sh+=`<div class="stat-card" style="background:var(--purple-dim);border:1px solid rgba(196,181,253,0.2)"><div class="stat-value" style="color:var(--purple)">${fmtS(mp[months].cumInterest)}</div><div class="stat-label">${isStoch?'Median ':''}Interest</div></div>`;
+    sh+=`<div class="stat-card" style="background:var(--amber-dim);border:1px solid rgba(251,191,36,0.2)"><div class="stat-value" style="color:var(--amber)">${cagr.toFixed(2)}%</div><div class="stat-label">CAGR</div></div>`;
+    if(totalContrib>0) sh+=`<div class="stat-card" style="background:var(--blue-dim);border:1px solid rgba(88,166,255,0.2)"><div class="stat-value" style="color:var(--blue)">${fmtS(totalContrib)}</div><div class="stat-label">Total Added</div></div>`;
+    if(mp[months].cumWithdraw>0) sh+=`<div class="stat-card" style="background:var(--red-dim);border:1px solid rgba(255,107,107,0.2)"><div class="stat-value" style="color:var(--red)">${fmtS(mp[months].cumWithdraw)}</div><div class="stat-label">Total Withdrawn</div></div>`;
+    if(isStoch){
+      sh+=`<div class="stat-card" style="background:var(--orange-dim);border:1px solid rgba(251,146,60,0.2)"><div class="stat-value" style="color:var(--orange)">${fmtS(percentiles.p5[months])}</div><div class="stat-label">5th Percentile</div></div>`;
+    }
+    $('A_statsRow').innerHTML=sh;
+  }
+
+  function renderTab(tab){
+    if(!st.results) return;
+    const{inp,percentiles,finalVals,monthLabels,isStoch,showPaths,months}=st.results;
+    const mp=st.medianPath;
+    const sm=sample(monthLabels);
+    const lc=(v)=>{if(v===0)return'0';if(v%12===0)return(v/12)+'y';return'Mo '+v};
+
+    if(tab==='A_projection'){
+      $('A_projHint').textContent=isStoch?`${inp.nPaths} Monte Carlo paths · GBM model`:'Deterministic projection';
+      const ctx=$('A_chartProj').getContext('2d');if(ch.proj)ch.proj.destroy();
+
+      const datasets=[];
+      if(isStoch){
+        // Confidence bands — index percentiles directly by month number
+        datasets.push({label:'95th',data:sm.map(m=>percentiles.p95[m]),borderColor:'rgba(6,214,160,0.15)',backgroundColor:'transparent',fill:false,borderWidth:1,borderDash:[3,3],pointRadius:0,tension:0.3,order:5});
+        datasets.push({label:'90th',data:sm.map(m=>percentiles.p90[m]),borderColor:'rgba(6,214,160,0.25)',backgroundColor:'rgba(6,214,160,0.06)',fill:'+1',borderWidth:1,pointRadius:0,tension:0.3,order:4});
+        datasets.push({label:'75th',data:sm.map(m=>percentiles.p75[m]),borderColor:'rgba(6,214,160,0.3)',backgroundColor:'rgba(6,214,160,0.08)',fill:'+1',borderWidth:1,pointRadius:0,tension:0.3,order:3});
+        datasets.push({label:'Median',data:sm.map(m=>percentiles.p50[m]),borderColor:'#06d6a0',backgroundColor:'rgba(6,214,160,0.1)',fill:'+1',borderWidth:2.5,pointRadius:0,tension:0.3,order:1});
+        datasets.push({label:'25th',data:sm.map(m=>percentiles.p25[m]),borderColor:'rgba(88,166,255,0.3)',backgroundColor:'rgba(88,166,255,0.08)',fill:'+1',borderWidth:1,pointRadius:0,tension:0.3,order:3});
+        datasets.push({label:'10th',data:sm.map(m=>percentiles.p10[m]),borderColor:'rgba(255,107,107,0.25)',backgroundColor:'rgba(255,107,107,0.06)',fill:'+1',borderWidth:1,pointRadius:0,tension:0.3,order:4});
+        datasets.push({label:'5th',data:sm.map(m=>percentiles.p5[m]),borderColor:'rgba(255,107,107,0.15)',backgroundColor:'transparent',fill:false,borderWidth:1,borderDash:[3,3],pointRadius:0,tension:0.3,order:5});
+        // Mean line
+        datasets.push({label:'Mean',data:sm.map(m=>percentiles.mean[m]),borderColor:'#fbbf24',borderDash:[6,3],backgroundColor:'transparent',fill:false,borderWidth:1.5,pointRadius:0,tension:0.3,order:2});
+      } else {
+        // Single deterministic line — index path directly by month number
+        const path=st.medianPath;
+        datasets.push({label:'Portfolio Value',data:sm.map(m=>path[m].value),borderColor:'#06d6a0',backgroundColor:mkG(ctx,'#06d6a0'),fill:true,borderWidth:2.5,pointRadius:0,pointHitRadius:8,tension:0.3});
+        // Cost basis line
+        datasets.push({label:'Cost Basis',data:sm.map(m=>{const p=path[m];return inp.init+p.cumContrib-p.cumWithdraw}),borderColor:'#58a6ff',borderDash:[6,3],backgroundColor:'transparent',fill:false,borderWidth:1.5,pointRadius:0,tension:0.3});
+      }
+
+      ch.proj=new Chart(ctx,{type:'line',data:{labels:sm,datasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label} (${lc(i[0].label)})`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`}},legend:{labels:{filter:item=>!['90th','75th','25th','10th'].includes(item.text)}}}}}); 
+
+      // Milestones
+      const path=st.medianPath;
+      let mh='';
+      const doubles=path.find(p=>p.value>=inp.init*2&&inp.init>0);
+      if(doubles)mh+=`<div class="milestone" style="border-left-color:var(--cyan)"><div class="ml-label">2× Initial</div><div class="ml-value" style="color:var(--cyan)">Month ${doubles.month}</div><div class="ml-sub">${lc(doubles.month)}</div></div>`;
+      const triples=path.find(p=>p.value>=inp.init*3&&inp.init>0);
+      if(triples)mh+=`<div class="milestone" style="border-left-color:var(--blue)"><div class="ml-label">3× Initial</div><div class="ml-value" style="color:var(--blue)">Month ${triples.month}</div><div class="ml-sub">${lc(triples.month)}</div></div>`;
+      // Max drawdown for stochastic
+      if(isStoch){
+        let peak=path[0].value,maxDD=0;
+        for(const p of path){if(p.value>peak)peak=p.value;const dd=(peak-p.value)/peak;if(dd>maxDD)maxDD=dd}
+        mh+=`<div class="milestone" style="border-left-color:var(--red)"><div class="ml-label">Max Drawdown (med)</div><div class="ml-value" style="color:var(--red)">${(maxDD*100).toFixed(1)}%</div><div class="ml-sub">${fmtC(peak*maxDD)} from peak</div></div>`;
+      }
+      const intEq=path.find(p=>p.cumInterest>=inp.init&&inp.init>0);
+      if(intEq)mh+=`<div class="milestone" style="border-left-color:var(--purple)"><div class="ml-label">Interest = Principal</div><div class="ml-value" style="color:var(--purple)">Month ${intEq.month}</div><div class="ml-sub">${lc(intEq.month)}</div></div>`;
+      $('A_milestones').innerHTML=mh||'<div style="color:var(--text-dim)">No milestones reached</div>';
+    }
+
+    if(tab==='A_breakdown'){
+      const path=st.medianPath;
+      const finalP=path[months];
+      const totalIn=inp.init+finalP.cumContrib;
+      const totalOut=finalP.cumWithdraw;
+      const intEarned=finalP.cumInterest;
+      const bars=[
+        {l:'Initial Investment',v:inp.init,c:'var(--blue)',pct:(inp.init/Math.max(finalP.value,1))*100},
+        {l:'Contributions',v:finalP.cumContrib,c:'var(--cyan)',pct:(finalP.cumContrib/Math.max(finalP.value,1))*100},
+        {l:'Interest Earned',v:intEarned,c:'var(--purple)',pct:(intEarned/Math.max(finalP.value,1))*100},
+      ];
+      if(totalOut>0)bars.push({l:'Withdrawals',v:-totalOut,c:'var(--red)',pct:(totalOut/Math.max(totalIn,1))*100});
+      $('A_decomp').innerHTML=bars.map(b=>`<div class="cost-bar-wrap"><div class="cost-bar-header"><span style="color:${b.c}">${b.l}</span><span style="font-weight:600">${fmtC(b.v)}</span></div><div class="cost-bar-track"><div class="cost-bar-fill" style="width:${Math.min(Math.abs(b.pct),100)}%;background:${b.c}"></div></div></div>`).join('');
+
+      // Cumulative cash flows chart
+      const ctx2=$('A_chartFlows').getContext('2d');if(ch.flows)ch.flows.destroy();
+      ch.flows=new Chart(ctx2,{type:'line',data:{labels:sm,datasets:[
+        {label:'Cum. Contributions',data:sm.map(m=>path[m].cumContrib),borderColor:'#06d6a0',backgroundColor:mkG(ctx2,'#06d6a0'),fill:true,borderWidth:1.5,pointRadius:0,tension:0.3},
+        {label:'Cum. Withdrawals',data:sm.map(m=>path[m].cumWithdraw),borderColor:'#ff6b6b',backgroundColor:mkG(ctx2,'#ff6b6b'),fill:true,borderWidth:1.5,pointRadius:0,tension:0.3},
+        {label:'Cum. Interest',data:sm.map(m=>path[m].cumInterest),borderColor:'#c4b5fd',backgroundColor:mkG(ctx2,'#c4b5fd'),fill:true,borderWidth:1.5,pointRadius:0,tension:0.3}
+      ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`}}}}});
+
+      // Detail chart: balance decomposed
+      const ctx3=$('A_chartDetail').getContext('2d');if(ch.detail)ch.detail.destroy();
+      ch.detail=new Chart(ctx3,{type:'line',data:{labels:sm,datasets:[
+        {label:'Portfolio Value',data:sm.map(m=>path[m].value),borderColor:'#06d6a0',backgroundColor:mkG(ctx3,'#06d6a0'),fill:true,borderWidth:2,pointRadius:0,tension:0.3},
+        {label:'Cost Basis',data:sm.map(m=>{const p=path[m];return inp.init+p.cumContrib-p.cumWithdraw}),borderColor:'#58a6ff',borderDash:[6,3],backgroundColor:'transparent',fill:false,borderWidth:1.5,pointRadius:0,tension:0.3}
+      ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},scales:{x:{ticks:{callback:lc,autoSkip:true,maxTicksLimit:12},grid:{color:'#1a2436'}},y:{ticks:{callback:fmtS},grid:{color:'#1a2436'}}},plugins:{tooltip:{callbacks:{title:i=>`Month ${i[0].label}`,label:i=>`${i.dataset.label}: ${fmtC(i.raw)}`}}}}});
+    }
+
+    if(tab==='A_distribution'){
+      if(!isStoch){
+        $('A_distCard').innerHTML='<h3>Distribution</h3><p style="color:var(--text-dim);padding:30px">Distribution analysis requires volatility > 0. Set annual volatility to enable Monte Carlo simulation.</p>';
+        $('A_percCard').style.display='none';$('A_probCard').style.display='none';
+        return;
+      }
+      $('A_percCard').style.display='block';$('A_probCard').style.display='block';
+      $('A_distCard').innerHTML='<h3>Final Value Distribution</h3><div class="chart-container"><canvas id="A_chartHist" height="300"></canvas></div>';
+
+      // Histogram
+      setTimeout(()=>{
+        const ctx=$('A_chartHist')?.getContext('2d');if(!ctx)return;if(ch.hist)ch.hist.destroy();
+        const min=finalVals[0],max=finalVals[finalVals.length-1];
+        const nBins=Math.min(40,Math.max(15,Math.ceil(Math.sqrt(finalVals.length))));
+        const binW=(max-min)/nBins;
+        const bins=Array(nBins).fill(0);
+        const binLabels=[];
+        for(let i=0;i<nBins;i++) binLabels.push(min+binW*(i+0.5));
+        for(const v of finalVals){const i=Math.min(Math.floor((v-min)/binW),nBins-1);bins[i]++}
+        const maxCount=Math.max(...bins);
+
+        ch.hist=new Chart(ctx,{type:'bar',data:{labels:binLabels,datasets:[{
+          label:'Frequency',data:bins,
+          backgroundColor:binLabels.map(v=>{const totalIn=inp.init+st.medianPath[months].cumContrib-st.medianPath[months].cumWithdraw;return v>=totalIn?'rgba(6,214,160,0.5)':'rgba(255,107,107,0.5)'}),
+          borderColor:binLabels.map(v=>{const totalIn=inp.init+st.medianPath[months].cumContrib-st.medianPath[months].cumWithdraw;return v>=totalIn?'#06d6a0':'#ff6b6b'}),
+          borderWidth:1,borderRadius:2
+        }]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{callback:v=>fmtS(v),maxTicksLimit:8},grid:{display:false},title:{display:true,text:'Final Portfolio Value',color:'#7e92b0'}},y:{ticks:{callback:v=>v},grid:{color:'#1a2436'},title:{display:true,text:'Frequency',color:'#7e92b0'}}},plugins:{legend:{display:false},tooltip:{callbacks:{title:i=>`${fmtC(binLabels[i[0].dataIndex]-binW/2)} – ${fmtC(binLabels[i[0].dataIndex]+binW/2)}`,label:i=>`${i.raw} paths (${(i.raw/finalVals.length*100).toFixed(1)}%)`}}}}});
+      },50);
+
+      // Percentile table
+      const pcts=[{l:'5th (Worst Case)',k:'p5'},{l:'10th',k:'p10'},{l:'25th',k:'p25'},{l:'50th (Median)',k:'p50'},{l:'75th',k:'p75'},{l:'90th',k:'p90'},{l:'95th (Best Case)',k:'p95'}];
+      // Show at select time points
+      const timePoints=[12,24,60,months].filter((v,i,a)=>v<=months&&a.indexOf(v)===i);
+      let tbl='<thead><tr><th>Percentile</th>';
+      for(const t of timePoints) tbl+=`<th>${lc(t)}</th>`;
+      tbl+='</tr></thead><tbody>';
+      for(const p of pcts){
+        tbl+=`<tr><td style="color:var(--text-muted)">${p.l}</td>`;
+        for(const t of timePoints) tbl+=`<td style="font-weight:500">${fmtC(percentiles[p.k][t])}</td>`;
+        tbl+='</tr>';
+      }
+      tbl+='</tbody>';
+      $('A_percTable').innerHTML=tbl;
+
+      // Probability analysis
+      const totalIn=inp.init+st.medianPath[months].cumContrib-st.medianPath[months].cumWithdraw;
+      const targets=[totalIn, totalIn*1.5, totalIn*2, inp.init*2];
+      const uniqueTargets=[...new Set(targets.map(t=>Math.round(t)))].sort((a,b)=>a-b).slice(0,4);
+      let probH='';
+      for(const target of uniqueTargets){
+        const above=finalVals.filter(v=>v>=target).length;
+        const pct=(above/finalVals.length*100);
+        const barColor=pct>=75?'var(--cyan)':pct>=50?'var(--amber)':'var(--red)';
+        probH+=`<div class="cost-bar-wrap"><div class="cost-bar-header"><span>P(value ≥ ${fmtS(target)})</span><span style="color:${barColor};font-weight:600">${pct.toFixed(1)}%</span></div><div class="cost-bar-track"><div class="cost-bar-fill" style="width:${pct}%;background:${barColor}"></div></div></div>`;
+      }
+      $('A_probContent').innerHTML=probH;
+    }
+  }
+
+  function addEvent(){
+    const m=parseInt($('A_evMonth').value)||1;
+    const a=parseFloat($('A_evAmt').value)||0;
+    if(a===0)return;
+    st.events.push({id:Date.now(),month:m,amount:a});
+    renderEvents();
+  }
+  function removeEvent(id){st.events=st.events.filter(e=>e.id!==id);renderEvents()}
+  function renderEvents(){$('A_events').innerHTML=st.events.map(e=>`<div class="event-item"><span style="color:${e.amount>0?'var(--cyan)':'var(--red)'};font-weight:500">${e.amount>0?'+':''}${fmtC(e.amount)}</span><span style="color:var(--text-dim)">@ month ${e.month}</span><button class="ev-remove" onclick="A.removeEvent(${e.id})">×</button></div>`).join('')}
+
+  function switchTab(t){st.activeTab=t;document.querySelectorAll('#page-asset .tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('#page-asset .tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));const panel=$(`A_tab-${t}`);if(panel)panel.classList.add('active');if(st.results)renderTab(t)}
+
+  function exportCSV(){
+    if(!st.results||!st.medianPath)return;
+    const path=st.medianPath;
+    let csv='Month,Value,Contributions,Withdrawals,Interest,Cum Contributions,Cum Withdrawals,Cum Interest\n';
+    for(const r of path)csv+=`${r.month},${r.value.toFixed(2)},${r.contributions.toFixed(2)},${r.withdrawals.toFixed(2)},${r.interest.toFixed(2)},${r.cumContrib.toFixed(2)},${r.cumWithdraw.toFixed(2)},${r.cumInterest.toFixed(2)}\n`;
+    const b=new Blob([csv],{type:'text/csv'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='asset-simulation.csv';a.click();URL.revokeObjectURL(u);
+  }
+
+  function init(){
+    $('A_apySlider').addEventListener('input',e=>{$('A_apy').value=e.target.value});
+    $('A_apy').addEventListener('input',()=>{$('A_apySlider').value=$('A_apy').value});
+    $('A_volSlider').addEventListener('input',e=>{$('A_vol').value=e.target.value;updateVolHint()});
+    $('A_vol').addEventListener('input',()=>{$('A_volSlider').value=$('A_vol').value;updateVolHint()});
+  }
+  function updateVolHint(){const v=parseFloat($('A_vol').value)||0;let h='σ = 0%: deterministic (CD).';if(v>0&&v<=10)h=`σ = ${v}%: low volatility (bonds, stable assets)`;else if(v>10&&v<=25)h=`σ = ${v}%: moderate (stock market range ~15-20%)`;else if(v>25)h=`σ = ${v}%: high volatility (crypto, speculative)`;$('A_volHint').textContent=h;updateCompoundingMode()}
+  function updateCompoundingMode(){const v=parseFloat($('A_vol').value)||0;const comp=$('A_compounding');const hint=$('A_compHint');if(!comp||!hint)return;if(v>0){comp.disabled=true;hint.innerHTML='<strong>Stochastic mode active.</strong> Compounding is disabled because paths are simulated with monthly-step GBM.'}else{comp.disabled=false;hint.innerHTML='<strong>Deterministic only.</strong> When annual volatility is above 0%, the simulator switches to monthly-step GBM.'}}
+
+  const ASSET_PRESETS={
+    cd:{initial:10000,apy:4.5,compounding:'365',horizon:5,horizonUnit:'years',vol:0,paths:500,contribAmt:500,contribFreq:'12',withdrawAmt:0,withdrawFreq:'12'},
+    sp500:{initial:10000,apy:10,compounding:'continuous',horizon:20,horizonUnit:'years',vol:18,paths:1000,contribAmt:500,contribFreq:'12',withdrawAmt:0,withdrawFreq:'12'},
+    bond:{initial:50000,apy:5,compounding:'12',horizon:10,horizonUnit:'years',vol:6,paths:500,contribAmt:200,contribFreq:'12',withdrawAmt:0,withdrawFreq:'12'},
+    crypto:{initial:5000,apy:15,compounding:'continuous',horizon:5,horizonUnit:'years',vol:55,paths:1000,contribAmt:100,contribFreq:'12',withdrawAmt:0,withdrawFreq:'12'},
+    retirement:{initial:100000,apy:7,compounding:'continuous',horizon:30,horizonUnit:'years',vol:15,paths:1000,contribAmt:1000,contribFreq:'12',withdrawAmt:0,withdrawFreq:'12'}
+  };
+  function loadPreset(key){
+    const p=ASSET_PRESETS[key];if(!p)return;
+    $('A_initial').value=p.initial;$('A_apy').value=p.apy;$('A_apySlider').value=p.apy;
+    $('A_compounding').value=p.compounding;$('A_horizon').value=p.horizon;$('A_horizonUnit').value=p.horizonUnit;
+    $('A_vol').value=p.vol;$('A_volSlider').value=p.vol;$('A_paths').value=p.paths;
+    $('A_contribAmt').value=p.contribAmt;$('A_contribFreq').value=p.contribFreq;
+    $('A_withdrawAmt').value=p.withdrawAmt;$('A_withdrawFreq').value=p.withdrawFreq;
+    updateVolHint();run();saveState();
+  }
+  function saveState(){try{const d={initial:$('A_initial').value,apy:$('A_apy').value,comp:$('A_compounding').value,horizon:$('A_horizon').value,hu:$('A_horizonUnit').value,vol:$('A_vol').value,paths:$('A_paths').value,ca:$('A_contribAmt').value,cf:$('A_contribFreq').value,wa:$('A_withdrawAmt').value,wf:$('A_withdrawFreq').value,events:st.events};localStorage.setItem('A_state',JSON.stringify(d))}catch(e){}}
+  function loadSaved(){try{const d=JSON.parse(localStorage.getItem('A_state'));if(!d)return false;$('A_initial').value=d.initial;$('A_apy').value=d.apy;$('A_apySlider').value=d.apy;$('A_compounding').value=d.comp;$('A_horizon').value=d.horizon;$('A_horizonUnit').value=d.hu;$('A_vol').value=d.vol;$('A_volSlider').value=d.vol;$('A_paths').value=d.paths;$('A_contribAmt').value=d.ca;$('A_contribFreq').value=d.cf;$('A_withdrawAmt').value=d.wa;$('A_withdrawFreq').value=d.wf;if(d.events)st.events=d.events;renderEvents();updateVolHint();return true}catch(e){return false}}
+
+  return{init,run,addEvent,removeEvent,switchTab,exportCSV,loadPreset,saveState,loadSaved}
+})();
+
+// ═══════════════════════════════════════════════════
+// BOOT: Init, URL State, localStorage, KaTeX
+// ═══════════════════════════════════════════════════
+
+// --- KaTeX formula rendering for methodology page (lazy-loaded) ---
+function renderMathFormulas(){
+  if(typeof katex!=='undefined'){renderMathFormulasInner();return}
+  // Lazy-load KaTeX CSS + JS
+  const link=document.createElement('link');link.rel='stylesheet';link.href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css';document.head.appendChild(link);
+  const sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js';
+  sc.onload=()=>renderMathFormulasInner();document.head.appendChild(sc);
+}
+function renderMathFormulasInner(){
+  const k=(id,tex,display=true)=>{const el=$(id);if(el)katex.render(tex,el,{displayMode:display,throwOnError:false})};
+  k('f_amort','PMT = \\frac{P \\cdot r \\cdot (1+r)^n}{(1+r)^n - 1}');
+  k('fw_P','P',false);k('fw_r','r',false);k('fw_n','n',false);
+  k('f_decomp1','I_k = B_{k-1} \\cdot r, \\quad P_k = PMT - I_k + E');
+  k('f_decomp2','B_k = B_{k-1} - P_k');
+  k('f_discrete','FV = PV \\cdot \\left(1 + \\frac{r}{n}\\right)^{n \\cdot t}');
+  k('fw_n2','n',false);k('fw_r2','r',false);k('fw_t','t',false);
+  k('f_continuous','FV = PV \\cdot e^{r \\cdot t}');
+  k('f_gbm_sde','dS = \\mu S \\, dt + \\sigma S \\, dW_t');
+  k('fw_mu','\\mu',false);k('fw_sigma','\\sigma',false);k('fw_Wt','W_t',false);
+  k('f_gbm_disc','S_{t+\\Delta t} = S_t \\cdot \\exp\\!\\left[\\left(\\mu - \\tfrac{\\sigma^2}{2}\\right)\\Delta t + \\sigma\\sqrt{\\Delta t}\\;Z\\right]');
+  k('fw_dt','\\Delta t',false);k('fw_Z','Z \\sim \\mathcal{N}(0,1)',false);
+  k('f_ito_inline','\\;-\\sigma^2/2\\;',false);
+  k('f_boxmuller','Z = \\sqrt{-2 \\ln U_1} \\cdot \\cos(2\\pi U_2)');
+  k('fw_U','U_1, U_2',false);
+  k('f_perc_inline','\\lfloor q \\cdot N \\rfloor',false);
+}
+
+// --- URL State: encode/decode parameters in URL hash ---
+function encodeURLState(){
+  const page=document.querySelector('.page.active')?.id?.replace('page-','');
+  const params=new URLSearchParams();
+  params.set('p',page||'loan');
+  if(page==='loan'){
+    params.set('lp',$('L_principal').value);params.set('lr',$('L_annualRate').value);
+    params.set('lt',$('L_termValue').value);params.set('lu',$('L_termUnit').value);
+    params.set('lf',$('L_payFreq').value);params.set('le',$('L_extraPayment').value);
+    params.set('ld',$('L_downPct').value);
+    if(L.st.assetEnabled){params.set('la','1');params.set('lat',L.st.assetType);params.set('lar',$('L_assetRate').value);params.set('lav',$('L_assetVol').value)}
+  }else if(page==='asset'){
+    params.set('ai',$('A_initial').value);params.set('aa',$('A_apy').value);
+    params.set('ac',$('A_compounding').value);params.set('ah',$('A_horizon').value);
+    params.set('ahu',$('A_horizonUnit').value);params.set('av',$('A_vol').value);
+    params.set('ap',$('A_paths').value);params.set('aca',$('A_contribAmt').value);
+    params.set('acf',$('A_contribFreq').value);params.set('awa',$('A_withdrawAmt').value);
+    params.set('awf',$('A_withdrawFreq').value);
+  }
+  history.replaceState(null,'','#'+params.toString());
+}
+function decodeURLState(){
+  const hash=window.location.hash.slice(1);
+  if(!hash)return false;
+  try{
+    const p=new URLSearchParams(hash);
+    const page=p.get('p');
+    if(page==='loan'&&p.has('lp')){
+      $('L_principal').value=p.get('lp');$('L_annualRate').value=p.get('lr');$('L_rateSlider').value=p.get('lr');
+      $('L_termValue').value=p.get('lt');$('L_termUnit').value=p.get('lu');
+      $('L_payFreq').value=p.get('lf');$('L_extraPayment').value=p.get('le');
+      $('L_downPct').value=p.get('ld');$('L_downSlider').value=p.get('ld');
+      if(p.get('la')==='1'){if(!L.st.assetEnabled)L.toggleAsset();if(p.get('lat'))L.setAssetType(p.get('lat'));$('L_assetRate').value=p.get('lar');$('L_assetRateSlider').value=p.get('lar');if(p.get('lav')){$('L_assetVol').value=p.get('lav');$('L_assetVolSlider').value=p.get('lav')}}
+      switchPage('loan');return true;
+    }else if(page==='asset'&&p.has('ai')){
+      $('A_initial').value=p.get('ai');$('A_apy').value=p.get('aa');$('A_apySlider').value=p.get('aa');
+      $('A_compounding').value=p.get('ac');$('A_horizon').value=p.get('ah');$('A_horizonUnit').value=p.get('ahu');
+      $('A_vol').value=p.get('av');$('A_volSlider').value=p.get('av');$('A_paths').value=p.get('ap');
+      $('A_contribAmt').value=p.get('aca');$('A_contribFreq').value=p.get('acf');
+      $('A_withdrawAmt').value=p.get('awa');$('A_withdrawFreq').value=p.get('awf');
+      switchPage('asset');A.run();return true;
+    }else if(page==='methodology'){switchPage('methodology');return true}
+  }catch(e){}
+  return false;
+}
+
+// --- Page switching with hash update ---
+let assetFirstRun=true;
+let methRendered=false;
+window.switchPage=function(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));
+  const pageEl=$(`page-${p}`);if(pageEl)pageEl.classList.add('active');
+  const navBtn=document.querySelector(`.nav-btn[data-page="${p}"]`);if(navBtn)navBtn.classList.add('active');
+  const landing=$('landing');if(landing)landing.style.display='none';
+  if(p==='asset'&&assetFirstRun){A.run();assetFirstRun=false}
+  if(p==='methodology'&&!methRendered){renderMathFormulas();methRendered=true}
+  encodeURLState();
+};
+
+// --- Initialize ---
+L.init();
+A.init();
+
+// Priority: URL state > localStorage > defaults
+const urlLoaded=decodeURLState();
+if(!urlLoaded){
+  // Try loading from localStorage
+  const loanLoaded=L.loadSaved();
+  const assetLoaded=A.loadSaved();
+  if(loanLoaded)L.update();
+  // Don't auto-run asset from localStorage — wait for user to switch tabs
+}
+
+// Share button: copy URL to clipboard
+function copyShareURL(){
+  encodeURLState();
+  navigator.clipboard.writeText(window.location.href).then(()=>{
+    const btn=$('shareBtn');if(btn){btn.textContent='✓ Copied!';setTimeout(()=>{btn.innerHTML='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>Share'},1500)}
+  });
+}
+</script>
+
+<!-- ═══ ANALYTICS: GoatCounter (free, privacy-friendly, no cookies) ═══ -->
+<!-- Analytics: GoatCounter (privacy-friendly, no cookies) — dashboard at calcmonte.goatcounter.com -->
+<script data-goatcounter="https://calcmonte.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>

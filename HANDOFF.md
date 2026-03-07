@@ -6,7 +6,7 @@
 
 The entire application is one self-contained HTML file (`index.html`) with inline CSS and JavaScript. No build system, no npm, no framework. External dependencies are loaded from CDN at runtime: Chart.js for charts, Google Fonts for typography, and KaTeX for math rendering (lazy-loaded).
 
-**Current status: LIVE and fully operational.** Deployed March 1, 2026. Google-indexed with FAQ and Breadcrumb rich results active. Analytics running. Ready for distribution.
+**Current status: LIVE and fully operational.** V1 credibility patch deployed March 5, 2026. Google-indexed with FAQ and Breadcrumb rich results active. Analytics running. Feedback via feedback@calcmonte.com. Git tag: `v1-live-ready`.
 
 ---
 
@@ -20,6 +20,7 @@ The entire application is one self-contained HTML file (`index.html`) with inlin
 | CDN/Security | Cloudflare | HTTPS, DDoS protection, global CDN | Free |
 | Analytics | GoatCounter | `calcmonte.goatcounter.com` | Free |
 | Search | Google Search Console | Verified, indexed, sitemap submitted | Free |
+| Email | Cloudflare Email Routing | `feedback@calcmonte.com` → `osepper@gmail.com` | Free |
 
 **Total running cost: ~$10/year**
 
@@ -40,22 +41,29 @@ deploy/
 - Preview URL: `calcmonte.osepper.workers.dev`
 
 ### How to Redeploy
-1. Edit `index.html` locally (at `~/Desktop/LoanAnalytics/deploy/index.html`)
-2. Go to Cloudflare → Workers & Pages → `calcmonte`
-3. Create new deployment → upload the `deploy` folder
-4. Live within seconds, zero downtime
+1. Edit `index.html` locally (at `~/Projects/calcmonte/index.html`)
+2. `mkdir -p deploy && cp index.html og-image.png robots.txt sitemap.xml deploy/`
+3. Go to Cloudflare → Workers & Pages → `calcmonte` → upload the `deploy` folder
+4. `rm -rf deploy && git add . && git commit -m "description" && git push`
+5. Live within seconds, zero downtime
+
+### Git Workflow
+- **Main repo**: `~/Projects/calcmonte` on branch `main`
+- **Remote**: `github.com/osepper/calcmonte` (PRIVATE)
+- **V1 workflow used**: Git worktree with isolated `v1-fixes-lab` branch → PR → merge → delete branch. Good pattern for future multi-fix patches.
+- **Tags**: `v1-live-ready` marks the current production state
 
 ### Local Project Files
 ```
-~/Desktop/LoanAnalytics/
-├── deploy/                          ← Upload this folder to Cloudflare
-│   ├── index.html
-│   ├── og-image.png
-│   ├── robots.txt
-│   └── sitemap.xml
-├── loan-analytics-backup-v1.html    ← Pre-polish backup (all features, no v3 fixes)
-├── financial-calculator.jsx         ← Earlier React prototype (historical, not used)
-└── HANDOFF.md                       ← This document
+~/Projects/calcmonte/
+├── index.html          ← The entire application
+├── og-image.png        ← Social sharing preview (1200×630)
+├── robots.txt          ← Search engine directives
+├── sitemap.xml         ← URL listing for Google
+├── HANDOFF.md          ← This document
+├── README.md           ← GitHub repo readme
+├── LICENSE             ← MIT license
+└── .gitignore
 ```
 
 ---
@@ -172,12 +180,12 @@ Where Z ~ N(0,1) via Box-Muller transform: `Z = √(-2·ln(U₁)) · cos(2π·U�
 The `-σ²/2` drift adjustment (Itô correction) ensures the expected value of the stochastic process equals the deterministic growth path.
 
 ### Features
-- **Compounding modes**: Continuous, Daily (365), Monthly (12), Quarterly (4), Semi-Annual (2), Annual (1)
+- **Compounding modes**: Continuous, Daily (365), Monthly (12), Quarterly (4), Semi-Annual (2), Annual (1). **V1 clarification**: compounding selector is disabled when volatility > 0 (stochastic mode uses monthly-step GBM regardless). UI hint explains this.
 - **Volatility**: 0% = deterministic, ~15-20% = stock market, ~30%+ = crypto
 - **Monte Carlo**: 50–5,000 configurable paths
 - **Cash flows**: Regular contributions/withdrawals at 4 frequencies + one-time events at specific months
 - **Percentile bands**: 5th, 10th, 25th, 50th (median), 75th, 90th, 95th
-- **Historical reference card**: Static reference in sidebar showing typical APY and volatility for S&P 500 (~10% / ~18σ), Total Bond Mkt (~5% / ~6σ), NASDAQ (~12% / ~22σ), Bitcoin (~60% / ~65σ), CDs/HYSA (~4% / 0σ)
+- **Historical reference card**: Static reference in sidebar showing typical annual return and volatility for S&P 500 (~10% / ~18σ), Total Bond Mkt (~5% / ~6σ), NASDAQ (~12% / ~22σ), Bitcoin (~60% / ~65σ), CDs/HYSA (~4% / 0σ)
 - **Tabs**:
   - Projection: Fan chart (stochastic) or single line (deterministic) + milestones
   - Breakdown: Value decomposition, cumulative cash flows, cost basis
@@ -188,12 +196,13 @@ The `-σ²/2` drift adjustment (Itô correction) ensures the expected value of t
 ### Key Implementation Details
 - `simPath(inp, stochastic)` — runs one GBM path with monthly steps and cash flow events
 - `growthMultiplier(apy, comp, dt)` — returns exact multiplier for any compounding mode
+- **V1 note**: Internal variable names (`A_apy`, `inp.apy`, slider IDs, localStorage keys, URL state params) still use `apy`. User-facing labels changed to "Expected Annual Return". Full internal rename deferred to V2 to avoid regressions.
 - Percentiles computed by sorting all paths at each month and extracting quantiles
 - Balance floored at 0 (prevents negative portfolio values)
 - Median path for breakdown: finds path closest to median final value
 
 ### Presets
-| Preset | Initial | APY | Vol | Horizon | Compounding | Contrib |
+| Preset | Initial | Return | Vol | Horizon | Compounding | Contrib |
 |--------|---------|-----|-----|---------|-------------|---------|
 | CD/HYSA | $10K | 4.5% | 0% | 5yr | Daily | $500/mo |
 | S&P 500 | $10K | 10% | 18% | 20yr | Continuous | $500/mo |
@@ -369,7 +378,13 @@ Social platforms aggressively cache OG previews. If you update the image:
 ## Known Issues & Technical Debt
 
 ### Bugs
-- None known as of launch. All identified bugs have been fixed.
+- None known as of V1 deployment.
+- **Transient chart disappearance** was observed once during V1 deployment (charts went blank after slider interaction). Did not reproduce after cache clear. try-catch in `update()` added in v4 should catch and recover from such errors. Monitor.
+
+### Known Technical Debt
+- **Loan time axis uses rounded months**: For non-monthly payment frequencies (weekly, bi-weekly, semi-monthly), period numbers are converted to months via `Math.round()`. This rounded label propagates to charts, milestones, summaries, asset overlays, and modals. Disclosed in UI and methodology in V1. Full architectural fix deferred to V2.
+- **Internal variable names still use `apy`**: User-facing text changed to "Expected Annual Return" in V1, but `A_apy`, `inp.apy`, slider IDs, localStorage keys, and URL params still say `apy`. Full rename deferred to V2 with regression testing.
+- **Cash flow timing approximation**: Non-monthly recurring flows (bi-weekly, etc.) are mapped onto monthly simulation steps. Disclosed in UI and methodology in V1.
 
 ### Potential Improvements (Post-Launch)
 - **Sensitivity analysis panel**: Show delta impact of parameter changes (e.g., "each extra $100/mo saves X months")
@@ -378,8 +393,16 @@ Social platforms aggressively cache OG previews. If you update the image:
 - **PWA manifest**: Add `manifest.json` for "Add to Home Screen" with proper icons
 - **A/B test landing page**: Test different headlines, CTA copy, visual previews
 - **Historical benchmark comparison**: Rolling-window historical S&P 500 percentile bands overlaid on Monte Carlo fan chart (discussed and deferred — adds academic rigor but minimal practical value for target users)
-- **Live market data ticker**: Considered and rejected — doesn't fit the "planning tool" identity, adds maintenance burden, cheapens the aesthetic
-- **Mobile app (iOS/Android)**: PWA is the recommended first step (30 minutes). Capacitor wrapper for App Store distribution is ~1-2 days. Full React Native rewrite unnecessary for a financial calculator.
+- **Mobile app (iOS/Android)**: PWA is the recommended first step (30 minutes). Capacitor wrapper for App Store distribution is ~1-2 days.
+
+### Recommended V2 Sequence (from V1 handoff)
+1. **Modularize**: Split single file into `index.html`, `styles.css`, `loan.js`, `asset.js`, `shared.js` — no behavior change
+2. **Add validation fixtures/tests**: Amortization totals, deterministic growth, zero-vol consistency, saved-state roundtrip
+3. **Rename internal `apy` variables**: Full rename with regression testing now that tests exist
+4. **Refactor loan time axis**: Replace rounded-month labels with exact period tracking
+5. **Decision-summary cards**: High-value user-facing upgrade for both loan and asset flows
+6. **Assumption presets/guidance**: Conservative / base / aggressive + better help around return/volatility inputs
+7. **First monetizable feature**: Refinance break-even or rent vs buy calculator
 
 ### Feature Decisions & Rationale
 | Feature | Decision | Rationale |
@@ -391,7 +414,11 @@ Social platforms aggressively cache OG previews. If you update the image:
 | KaTeX eager loading | Replaced with lazy | Saved ~300KB on initial page load for users who never visit methodology page |
 | Stochastic home prices | Implemented (v4) | Opt-in σ slider for appreciating assets; 200 GBM paths; P(Underwater) is a killer differentiator vs every other mortgage calculator |
 | Nav readability fix | Implemented (v4) | Users couldn't see inactive tabs; bumped color from text-dim to text-muted, added subtle border, raised secondary opacity |
-| Built-in contact form | Rejected | Requires backend, breaks single-file architecture; mailto + GitHub Issues achieves same goal with zero infrastructure |
+| Built-in contact form | Rejected | Requires backend, breaks single-file architecture; feedback@calcmonte.com with Cloudflare email routing achieves same goal |
+| APY terminology | Replaced (V1) | "APY" was misleading when compounding selector and GBM coexist; changed to "Expected Annual Return" — user-facing only, internal vars deferred |
+| Stochastic mode clarity | Implemented (V1) | Compounding dropdown now disabled when vol > 0, with explanatory hint. Prevents users thinking compounding choice matters in GBM mode |
+| Disclosure-based fixes | Implemented (V1) | Cash flow timing, loan rounded-month display, and methodology gaps addressed via honest disclosure rather than risky architectural refactors |
+| Summary language softening | Implemented (V1) | "Crossover at year X" → "approximately year X", "saves X months" → "approximately X months". Reduces overclaim risk for rounded values |
 
 ---
 
@@ -402,10 +429,11 @@ Social platforms aggressively cache OG previews. If you update the image:
 | v1 (backup) | Feb 28, 2026 | Full working app: amortization, Monte Carlo, presets, methodology with KaTeX, URL sharing, localStorage, mobile responsive |
 | v2 | Mar 1, 2026 | Mobile fixes: removed broken collapsible sidebar, fixed range slider touch targets (36px element/4px track/20px thumb), explicit chart container heights, cleared nested scroll containers, iOS-specific input fixes |
 | v3 | Mar 1, 2026 | Launch polish: landing copy rewritten (outcomes over methods), SVG chart preview added, KaTeX lazy-loaded, debounce on inputs, footer restructured (affiliate-ready, non-duplicative), nav hierarchy (methodology/share demoted), orientation hints, historical reference card in asset simulator, brand renamed to CalcMonte, domain references updated, GoatCounter analytics added, SEO meta optimized, OG image created and deployed |
-| v4 (current, live) | Mar 4, 2026 | Nav readability: inactive buttons brightened (#3f5170→#7e92b0), subtle border on all tabs, secondary nav opacity 0.5→0.8. Stochastic home price simulation: GBM Monte Carlo (200 paths) on loan asset overlay with σ slider, fan chart percentile bands, P(Underwater) probability stat. Footer: added Feedback column with mailto + GitHub Issues links. |
+| v4 | Mar 4, 2026 | Nav readability: inactive buttons brightened (#3f5170→#7e92b0), subtle border on all tabs, secondary nav opacity 0.5→0.8. Stochastic home price simulation: GBM Monte Carlo (200 paths) on loan asset overlay with σ slider, fan chart percentile bands, Underwater Risk stat. Footer: added Feedback column. Chart.js fill syntax fix, try-catch in update(), null safety. Relabeled P(Underwater)→Underwater Risk, P(Profit)→Profit Chance. |
+| V1 (current, live) | Mar 5, 2026 | **Credibility/trust patch.** APY→"Expected Annual Return" in all user-facing text. Stochastic vs deterministic mode clarified: compounding dropdown disabled when vol>0 with explanatory hint. Cash flow timing approximation disclosed in UI and methodology. Loan rounded-month display caveat added. Summary language softened ("approximately"). Methodology strengthened for monthly granularity, cash flow timing, and deterministic/stochastic distinction. Marketing copy softened. Feedback links updated to feedback@calcmonte.com (Cloudflare email routing). GitHub links removed from site. Git tag: `v1-live-ready`. |
 
 ### Reverting
-`loan-analytics-backup-v1.html` in `~/Desktop/LoanAnalytics/` is the v1 backup with all core features but without mobile fixes, polish, or deployment configuration. Rename to `index.html` to use.
+Git tag `v1-live-ready` marks the current production state. To revert to any prior state: `git log --oneline` to find the commit, then `git checkout <hash> -- index.html` and redeploy.
 
 ---
 
