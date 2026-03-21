@@ -20,3 +20,5 @@ __pycache__/
 
 # Node (if build tools are added later)
 node_modules/
+HANDOFF.md
+CALCMONTE_V2_ROADMAP.md
