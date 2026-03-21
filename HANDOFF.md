@@ -2,466 +2,109 @@
 
 ## Executive Summary
 
-**CalcMonte** (https://calcmonte.com) is a live, publicly deployed single-file financial calculator web application (~137KB, ~1,500 lines) that combines loan amortization analytics with a Monte Carlo investment simulator. It targets financially literate users who want deeper analysis than typical online calculators provide. The design philosophy is **"sophisticated simplicity"** — quantitative rigor behind an intuitive, clean interface.
+**CalcMonte** (https://calcmonte.com) is a live, single-file financial calculator (~177KB, ~1,800 lines) combining loan amortization analytics with Monte Carlo investment simulation. Dark theme, responsive, no framework, no backend. Everything runs client-side.
 
-The entire application is one self-contained HTML file (`index.html`) with inline CSS and JavaScript. No build system, no npm, no framework. External dependencies are loaded from CDN at runtime: Chart.js for charts, Google Fonts for typography, and KaTeX for math rendering (lazy-loaded).
+**Current status: LIVE.** V2 features deployed March 21, 2026. Feedback via feedback@calcmonte.com (Cloudflare Email Routing → Gmail). GitHub repo is private.
 
-**Current status: LIVE and fully operational.** V1 credibility patch deployed March 5, 2026. Google-indexed with FAQ and Breadcrumb rich results active. Analytics running. Feedback via feedback@calcmonte.com. Git tag: `v1-live-ready`.
+## Infrastructure
 
----
+| Layer | Service | Cost |
+|-------|---------|------|
+| Hosting | Cloudflare Workers (Pages) | Free |
+| Domain | calcmonte.com via Cloudflare Registrar (expires Mar 2027) | ~$10/yr |
+| Analytics | GoatCounter (calcmonte.goatcounter.com) | Free |
+| Search | Google Search Console (indexed, FAQ + Breadcrumb rich results) | Free |
+| Email | Cloudflare Email Routing: feedback@calcmonte.com → osepper@gmail.com | Free |
 
-## Live Infrastructure
+## Deployment
 
-### Domain & Hosting
-| Component | Provider | Details | Cost |
-|-----------|----------|---------|------|
-| Domain | Cloudflare Registrar | `calcmonte.com` + `www.calcmonte.com` | ~$10.44/year |
-| Hosting | Cloudflare Workers (static assets) | Worker name: `calcmonte` | Free |
-| CDN/Security | Cloudflare | HTTPS, DDoS protection, global CDN | Free |
-| Analytics | GoatCounter | `calcmonte.goatcounter.com` | Free |
-| Search | Google Search Console | Verified, indexed, sitemap submitted | Free |
-| Email | Cloudflare Email Routing | `feedback@calcmonte.com` → `osepper@gmail.com` | Free |
-
-**Total running cost: ~$10/year**
-
-### Deployed Files
-```
-deploy/
-├── index.html        ← The entire application (~137 KB)
-├── og-image.png      ← Social sharing preview image (1200×630, 41 KB)
-├── robots.txt        ← Search engine crawl directives (66 B)
-└── sitemap.xml       ← URL listing for Google (231 B)
+```bash
+cd ~/Projects/calcmonte
+mkdir -p deploy
+cp index.html og-image.png robots.txt sitemap.xml deploy/
+# Upload deploy/ to Cloudflare → Workers & Pages → calcmonte
+rm -rf deploy
+git add . && git commit -m "description" && git push
 ```
 
-### Cloudflare Account
-- Account: Osepper@gmail.com
-- Dashboard: https://dash.cloudflare.com
-- Worker: Workers & Pages → `calcmonte`
-- Domain settings: Domains → `calcmonte.com`
-- Preview URL: `calcmonte.osepper.workers.dev`
-
-### How to Redeploy
-1. Edit `index.html` locally (at `~/Projects/calcmonte/index.html`)
-2. `mkdir -p deploy && cp index.html og-image.png robots.txt sitemap.xml deploy/`
-3. Go to Cloudflare → Workers & Pages → `calcmonte` → upload the `deploy` folder
-4. `rm -rf deploy && git add . && git commit -m "description" && git push`
-5. Live within seconds, zero downtime
-
-### Git Workflow
-- **Main repo**: `~/Projects/calcmonte` on branch `main`
-- **Remote**: `github.com/osepper/calcmonte` (PRIVATE)
-- **V1 workflow used**: Git worktree with isolated `v1-fixes-lab` branch → PR → merge → delete branch. Good pattern for future multi-fix patches.
-- **Tags**: `v1-live-ready` marks the current production state
-
-### Local Project Files
-```
-~/Projects/calcmonte/
-├── index.html          ← The entire application
-├── og-image.png        ← Social sharing preview (1200×630)
-├── robots.txt          ← Search engine directives
-├── sitemap.xml         ← URL listing for Google
-├── HANDOFF.md          ← This document
-├── README.md           ← GitHub repo readme
-├── LICENSE             ← MIT license
-└── .gitignore
-```
-
----
-
-## Architecture
-
-### Internal Organization (index.html)
-The file is structured in this order:
-1. **`<head>`** — SEO meta tags, Open Graph, Twitter Cards, structured data (JSON-LD), favicon (inline SVG)
-2. **`<style>`** — All CSS (~300 lines), including responsive breakpoints at 900px and 600px
-3. **`<body>` HTML** — Landing page → Top nav → Loan page → Asset page → Methodology page → Footer → Modal
-4. **`<script>`** — All JavaScript (~640 lines), organized as:
-   - Shared utilities (formatting, chart helpers, debounce, page switching)
-   - `L` namespace (Loan module, IIFE returning public API)
-   - `A` namespace (Asset module, IIFE returning public API)
-   - Boot sequence (KaTeX lazy-loader, URL state encoder/decoder, localStorage, initialization)
-5. **GoatCounter** — Analytics script tag just before `</body>`
-
-### Namespaces
-- **`L`** — Loan Analytics module. Public API: `init, update, st, openModal, renderTable, toggleAsset, setAssetType, saveScenario, removeScenario, exportCSV, switchTab, rebuildTabs, loadPreset, saveState, loadSaved`
-- **`A`** — Asset Simulator module. Public API: `init, run, addEvent, removeEvent, switchTab, exportCSV, loadPreset, saveState, loadSaved`
-
-### External Dependencies (CDN)
-| Library | Version | Size | Purpose | Load Strategy |
-|---------|---------|------|---------|---------------|
-| Chart.js | 4.4.1 | ~200KB | All charts | Synchronous in `<head>` |
-| Google Fonts | — | ~100KB | DM Serif Display + IBM Plex Mono | Async preconnect |
-| KaTeX | 0.16.9 | ~300KB | Math formulas on methodology page | **Lazy-loaded** on first methodology tab click |
-| GoatCounter | — | ~3.5KB | Privacy-friendly analytics | Async before `</body>` |
-
-### Design System
-```
-Brand: CalcMonte
-Domain: calcmonte.com
-
-Colors (CSS variables):
-  --bg: #080c14          (background)
-  --card: #0f1520        (card surfaces)
-  --border: #1a2436      (borders)
-  --text: #e1e7f0        (primary text)
-  --text-muted: #7e92b0  (secondary text)
-  --text-dim: #3f5170    (tertiary/hint text)
-  --cyan: #06d6a0        (primary accent — positive values, CTAs)
-  --blue: #58a6ff        (secondary accent — loan balance)
-  --red: #ff6b6b         (negative values, interest)
-  --amber: #fbbf24       (warnings, asset values)
-  --purple: #c4b5fd      (tertiary accent — total paid, scenarios)
-
-Fonts:
-  --font-display: DM Serif Display  (headings)
-  --font-mono: IBM Plex Mono        (everything else — monospace for numbers)
-```
-
----
-
-## Loan Analytics Module (L)
-
-### Mathematical Model
-Standard fixed-rate fully-amortizing loan with annuity formula:
-```
-PMT = P · r · (1+r)^n / ((1+r)^n - 1)
-```
-Where P = principal, r = periodic rate, n = total periods.
-
-### Features
-- **6 payment frequencies**: Monthly, Bi-Weekly, Weekly, Semi-Monthly, Quarterly, Annual
-- **Extra payments**: Added to principal each period, reduces term
-- **Down payment**: Percentage input; derives total property value as `tpv = principal / (1 - downPct/100)`
-- **Asset simulation toggle**: Appreciating (home) or Depreciating (car) overlay
-  - Asset value: `V(t) = V₀ · (1 ± rate)^(t/12)` — exponential growth/decay (deterministic mode, σ=0)
-  - **Stochastic mode (σ>0, appreciating only)**: GBM Monte Carlo with 200 paths, showing 5th/25th/50th/75th/95th percentile bands. Uses same `S(t+Δt) = S(t)·exp[(μ-σ²/2)Δt + σ√Δt·Z]` model as Asset Simulator.
-  - Underwater detection: deterministic warns at specific month; stochastic shows **P(Underwater)** — percentage of paths where home value drops below loan balance
-  - Volatility slider: 0-30%, hidden for depreciating assets. Hint: Home ~8%, Car ~5%
-- **Scenario comparison**: Save up to 3 configurations, compare side-by-side (balance curves, interest curves, table)
-- **Tabs**: Overview, Breakdown, Schedule, Compare (if scenarios saved), Asset (if enabled)
-- **Export**: CSV of full amortization schedule, browser print-to-PDF
-- **Click-to-snapshot**: Click any chart point → modal with detailed period breakdown
-- **Orientation hint**: "Choose a preset or adjust the parameters below" below preset buttons
-
-### Key Implementation Details
-- Amortization runs in `calcAmort()` — returns full schedule array
-- Asset values computed in `calcAsset()` — monthly exponential
-- Charts use shared `sample()` function to downsample large schedules to ~120 points
-- Debounced input handlers (150ms) on number fields; sliders update instantly
-- All inputs auto-save to localStorage on every update
-
-### Presets
-| Preset | Principal | Rate | Term | Down% | Asset | Vol |
-|--------|-----------|------|------|-------|-------|-----|
-| 30yr Mortgage | $350K | 6.5% | 30yr | 20% | Appreciating 3.5% | 8% |
-| 15yr Mortgage | $350K | 5.75% | 15yr | 20% | Appreciating 3.5% | 8% |
-| 5yr Auto | $35K | 5.9% | 5yr | 10% | Depreciating 15% | — |
-| 3yr Auto | $25K | 4.5% | 3yr | 15% | Depreciating 20% | — |
-| Student Loan | $45K | 5.5% | 10yr | 0% | Off | — |
-| Personal | $15K | 10.5% | 5yr | 0% | Off | — |
-
----
-
-## Asset Simulator Module (A)
-
-### Mathematical Model
-**Deterministic mode (σ=0):** Standard compound interest with configurable compounding frequency.
-```
-Continuous: FV = PV · e^(rt)
-Discrete:   FV = PV · (1 + r/n)^(nt)
-```
-
-**Stochastic mode (σ>0):** Geometric Brownian Motion with Itô correction.
-```
-S(t+Δt) = S(t) · exp[(μ - σ²/2)Δt + σ√Δt · Z]
-```
-Where Z ~ N(0,1) via Box-Muller transform: `Z = √(-2·ln(U₁)) · cos(2π·U₂)`
-
-The `-σ²/2` drift adjustment (Itô correction) ensures the expected value of the stochastic process equals the deterministic growth path.
-
-### Features
-- **Compounding modes**: Continuous, Daily (365), Monthly (12), Quarterly (4), Semi-Annual (2), Annual (1). **V1 clarification**: compounding selector is disabled when volatility > 0 (stochastic mode uses monthly-step GBM regardless). UI hint explains this.
-- **Volatility**: 0% = deterministic, ~15-20% = stock market, ~30%+ = crypto
-- **Monte Carlo**: 50–5,000 configurable paths
-- **Cash flows**: Regular contributions/withdrawals at 4 frequencies + one-time events at specific months
-- **Percentile bands**: 5th, 10th, 25th, 50th (median), 75th, 90th, 95th
-- **Historical reference card**: Static reference in sidebar showing typical annual return and volatility for S&P 500 (~10% / ~18σ), Total Bond Mkt (~5% / ~6σ), NASDAQ (~12% / ~22σ), Bitcoin (~60% / ~65σ), CDs/HYSA (~4% / 0σ)
-- **Tabs**:
-  - Projection: Fan chart (stochastic) or single line (deterministic) + milestones
-  - Breakdown: Value decomposition, cumulative cash flows, cost basis
-  - Distribution: Histogram of final values (color-coded profit/loss), percentile table at multiple horizons, probability analysis
-- **Export**: CSV of median path data
-- **Orientation hint**: "Choose a preset or adjust below, then Run Simulation" below preset buttons
-
-### Key Implementation Details
-- `simPath(inp, stochastic)` — runs one GBM path with monthly steps and cash flow events
-- `growthMultiplier(apy, comp, dt)` — returns exact multiplier for any compounding mode
-- **V1 note**: Internal variable names (`A_apy`, `inp.apy`, slider IDs, localStorage keys, URL state params) still use `apy`. User-facing labels changed to "Expected Annual Return". Full internal rename deferred to V2 to avoid regressions.
-- Percentiles computed by sorting all paths at each month and extracting quantiles
-- Balance floored at 0 (prevents negative portfolio values)
-- Median path for breakdown: finds path closest to median final value
-
-### Presets
-| Preset | Initial | Return | Vol | Horizon | Compounding | Contrib |
-|--------|---------|-----|-----|---------|-------------|---------|
-| CD/HYSA | $10K | 4.5% | 0% | 5yr | Daily | $500/mo |
-| S&P 500 | $10K | 10% | 18% | 20yr | Continuous | $500/mo |
-| Bond Fund | $50K | 5% | 6% | 10yr | Monthly | $200/mo |
-| Crypto | $5K | 15% | 55% | 5yr | Continuous | $100/mo |
-| Retirement | $100K | 7% | 15% | 30yr | Continuous | $1K/mo |
-
----
-
-## UX Flow
-
-### Landing Page
-- Headline: "The Financial Calculator That Shows What Others Won't"
-- Three feature cards (outcomes-focused copy, not technical jargon)
-- SVG chart preview (CSS-only Monte Carlo fan chart visualization)
-- Two CTAs: "Open Loan Calculator" (primary) / "Open Asset Simulator" (secondary)
-- Trust line: "Free forever · No signup · No data collected · 100% client-side"
-- No tool pages visible until user clicks a CTA — landing is the sole entry point
-
-### Navigation
-- **Primary tabs**: Loan Analytics, Asset Simulator (full-size nav buttons)
-- **Secondary tabs**: Methodology, Share (visually demoted with `.secondary` class — 50% opacity, smaller font)
-- Share button encodes current state into URL hash and copies to clipboard
-
----
-
-## State Management
-
-### URL Hash State
-All parameters encode into the URL hash for sharing:
-```
-#p=loan&lp=350000&lr=6.5&lt=30&lu=years&lf=12&le=0&ld=20
-#p=asset&ai=10000&aa=10&ac=continuous&ah=20&ahu=years&av=18&ap=1000&aca=500&acf=12&awa=0&awf=12
-```
-- `encodeURLState()` — writes current config to hash (called on every page switch)
-- `decodeURLState()` — reads hash on page load, returns true if valid state found
-- Share button copies full URL to clipboard
-
-### localStorage Persistence
-- Loan state saved under key `L_state` on every `update()` call
-- Asset state saved under key `A_state` on every `run()` call
-- Load priority: URL hash > localStorage > defaults
-
----
-
-## Responsive Design
-
-### Breakpoints
-- **Desktop (>900px):** Two-column grid — 330px sidebar + flexible content
-- **Tablet (≤900px):** Single column — sidebar on top, content below. `flex-direction:column`. All `max-height` and `overflow` constraints cleared.
-- **Phone (≤600px):** Further compacted — smaller fonts, single-column stat cards, stacked field rows, larger touch targets
-
-### iOS/Mobile-Specific Fixes
-- Range inputs: 36px tall element with transparent background, separate `::webkit-slider-runnable-track` (4px), 20px thumb with `margin-top:-8px`. `touch-action:manipulation` prevents scroll-grab conflicts.
-- Chart containers: Explicit `height` at all breakpoints (300/260/220px) — Chart.js requires height-constrained parent when `maintainAspectRatio:false`.
-- Number inputs: `font-size:16px!important` prevents iOS auto-zoom on focus.
-- Nav: `overflow-x:auto` with hidden scrollbar for horizontal scroll on small screens.
-- Removed all collapsible sidebar patterns — mobile uses natural document scroll with sidebar on top, content below.
-
-### Important: Local File Limitation
-**Opening the HTML file directly on iOS (via Files app or download) opens it in Quick Look, not Safari.** Quick Look has severely limited JavaScript support — sliders, buttons, charts, and tab switching will not work. The file **must be served from a web server** to function on mobile. This is an iOS platform limitation, not a code bug. This is why the app is deployed on Cloudflare.
-
----
-
-## SEO Implementation (LIVE)
-
-### Meta Tags (Optimized)
-- **Title**: "Free Loan Calculator & Monte Carlo Investment Simulator | CalcMonte" — hits three highest-volume keyword clusters
-- **Description**: "Compare loan scenarios side by side, model extra payments, and simulate investment growth with real market volatility. See best-case to worst-case outcomes — not just one number. Free, private, no signup."
-- **Keywords**: mortgage calculator, loan amortization, Monte Carlo simulation, investment simulator, financial calculator, compound interest calculator, loan comparison tool, amortization schedule, extra payment calculator, 15 vs 30 year mortgage, portfolio simulator, retirement calculator, CD calculator, investment volatility, GBM simulation, free financial tools
-- **Open Graph + Twitter Card**: Full social sharing preview with 1200×630 OG image showing Monte Carlo fan chart
-- **Canonical URL**: `https://calcmonte.com/`
-
-### Structured Data (JSON-LD) — All Active
-1. **WebApplication** — Declares the app with feature list, free pricing, any OS
-2. **FAQPage** — 4 Q&A pairs targeting long-tail queries (triggers FAQ rich results in Google — **CONFIRMED ACTIVE**)
-3. **BreadcrumbList** — CalcMonte → Asset Simulator (**CONFIRMED ACTIVE**)
-
-### Google Search Console Status
-- **Property verified**: calcmonte.com (DNS verification via Cloudflare)
-- **Page indexed**: ✅ URL is on Google
-- **Sitemap**: ✅ Processed successfully, 1 page discovered
-- **Rich results**: ✅ FAQ detected, ✅ Breadcrumbs detected
-- **HTTPS**: ✅ Valid
-
-### Crawlable Content
-- Landing page: ~200 words of keyword-rich descriptive text
-- Footer: Tool links, feature keywords, disclaimer (distinct from landing — not duplicative)
-- Methodology page: ~1,500 words of unique technical content (extremely SEO-valuable for long-tail finance/quant queries)
-- `<noscript>` fallback with full feature description
-- `robots.txt` and `sitemap.xml` deployed
-
----
-
-## Analytics
-
-### GoatCounter (LIVE)
-- **Dashboard**: https://calcmonte.goatcounter.com
-- **Script**: `<script data-goatcounter="https://calcmonte.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>`
-- **Tracks**: Page views, unique visitors, referrers, browsers, OS, countries, screen sizes
-- **No cookies**, GDPR-compliant, no consent banner needed
-- **Referrer tracking**: Append `?ref=source` to shared URLs (e.g., `calcmonte.com/?ref=hackernews`)
-
-### Upgrade Path (if needed later)
-- **Plausible**: $9/mo, more features, Google Search Console integration
-- **PostHog**: Free up to 1M events/month, includes product analytics, session replay
-
----
-
-## Monetization Strategy
-
-### Affiliate Integration (Infrastructure Ready)
-The footer contains a hidden `#affiliate-row` div (`display:none`) that can be activated when affiliate partnerships are established. The design pattern:
-- **Contextual placement in results area** (not sidebar, not between charts)
-- Style as a muted card consistent with the design language
-- Example: "Current 30-year average: 6.8% — Compare offers ›"
-- Footer "Partners" row for logos
-
-To activate: Set `#affiliate-row` to `display:flex`, populate with styled anchor tags matching the design system (use `--border` for borders, `--text-dim` for text, `--cyan` for hover accents).
-
-### Revenue Channels (Priority Order)
-1. **Affiliate links** — Mortgage lenders ($50-200/lead via Commission Junction/ShareASale), high-yield savings (contextual in asset simulator), brokerage referrals
-2. **Sponsored partnerships** — "Powered by [Lender]" after traffic established
-3. **Freemium** — Basic free, advanced features (Monte Carlo, scenario comparison, PDF reports) behind $5-10/mo paywall
-4. **Lead generation** — Capture intent via forms, sell leads at $20-75+ each (requires financial advertising compliance)
-
-### Distribution Plan (Ready to Execute)
-Social sharing posts have been drafted for all platforms with `?ref=` tracking URLs:
-
-1. **Hacker News** (Show HN) — Technical angle, "single HTML file" architecture → `?ref=hackernews`
-2. **Reddit r/personalfinance** — Practical angle, "best-to-worst-case outcomes" → `?ref=reddit`
-3. **Reddit r/dataisbeautiful** — Fan chart screenshot as image post → `?ref=dataisbeautiful`
-4. **Twitter/X** — 3-tweet thread with screenshots → `?ref=twitter`
-5. **LinkedIn** — Professional angle → `?ref=linkedin`
-6. **Product Hunt** — Tuesday/Wednesday launch
-
-**Recommended posting order**: HN first (Tue-Thu morning EST), Reddit same day, Twitter with screenshots, LinkedIn a day later.
-
----
-
-## OG Image
-
-### Current Image
-- **File**: `og-image.png` (1200×630, 41KB)
-- **Content**: CalcMonte branding on left (title, tagline, three feature bullets, URL), real Monte Carlo fan chart on right (S&P 500 simulation, 200 paths, percentile bands from 5th to 95th, median line showing $10K → $23K over 10 years)
-- **Generated via**: Python script using Pillow (`create_og.py`) with actual GBM simulation data (μ=10%, σ=18%)
-- **Verified**: `https://calcmonte.com/og-image.png` loads correctly, OG meta tags confirmed via `curl`
-
-### Social Platform Cache Notes
-Social platforms aggressively cache OG previews. If you update the image:
-- **Facebook**: Use developers.facebook.com/tools/debug → "Scrape Again"
-- **LinkedIn**: Use linkedin.com/post-inspector → "Refresh"
-- **Twitter**: Cache clears automatically within ~24 hours
-- **Slack/iMessage**: Append `?v=2` to force refetch
-
----
-
-## Performance Optimizations
-
-### Current
-- **KaTeX lazy-loaded**: CSS + JS (~300KB) only downloaded when user clicks Methodology tab
-- **Debounced inputs**: Loan number fields use 150ms debounce; sliders fire immediately for responsive feel
-- **Single-file architecture**: One HTTP request for the entire app (no waterfall)
-- **No cookies**: No consent banner, no tracking overhead
-- **Chart.js only CDN dependency on initial load**: ~200KB, cached after first visit
-
-### Future Optimizations
-- **Web Worker for Monte Carlo**: Move simulation to a worker thread to prevent UI freeze on 5,000+ paths
-- **Chart update vs. destroy**: Currently destroys and recreates charts on every update. Chart.js supports in-place data updates with animation, which would be smoother
-
----
-
-## Known Issues & Technical Debt
-
-### Bugs
-- None known as of V1 deployment.
-- **Transient chart disappearance** was observed once during V1 deployment (charts went blank after slider interaction). Did not reproduce after cache clear. try-catch in `update()` added in v4 should catch and recover from such errors. Monitor.
-
-### Known Technical Debt
-- **Loan time axis uses rounded months**: For non-monthly payment frequencies (weekly, bi-weekly, semi-monthly), period numbers are converted to months via `Math.round()`. This rounded label propagates to charts, milestones, summaries, asset overlays, and modals. Disclosed in UI and methodology in V1. Full architectural fix deferred to V2.
-- **Internal variable names still use `apy`**: User-facing text changed to "Expected Annual Return" in V1, but `A_apy`, `inp.apy`, slider IDs, localStorage keys, and URL params still say `apy`. Full rename deferred to V2 with regression testing.
-- **Cash flow timing approximation**: Non-monthly recurring flows (bi-weekly, etc.) are mapped onto monthly simulation steps. Disclosed in UI and methodology in V1.
-
-### Potential Improvements (Post-Launch)
-- **Sensitivity analysis panel**: Show delta impact of parameter changes (e.g., "each extra $100/mo saves X months")
-- **Light theme toggle**: Some users prefer light mode; also better for screenshots/printing
-- **Animated number transitions**: CountUp-style effect when stat cards update
-- **PWA manifest**: Add `manifest.json` for "Add to Home Screen" with proper icons
-- **A/B test landing page**: Test different headlines, CTA copy, visual previews
-- **Historical benchmark comparison**: Rolling-window historical S&P 500 percentile bands overlaid on Monte Carlo fan chart (discussed and deferred — adds academic rigor but minimal practical value for target users)
-- **Mobile app (iOS/Android)**: PWA is the recommended first step (30 minutes). Capacitor wrapper for App Store distribution is ~1-2 days.
-
-### Recommended V2 Sequence (from V1 handoff)
-1. **Modularize**: Split single file into `index.html`, `styles.css`, `loan.js`, `asset.js`, `shared.js` — no behavior change
-2. **Add validation fixtures/tests**: Amortization totals, deterministic growth, zero-vol consistency, saved-state roundtrip
-3. **Rename internal `apy` variables**: Full rename with regression testing now that tests exist
-4. **Refactor loan time axis**: Replace rounded-month labels with exact period tracking
-5. **Decision-summary cards**: High-value user-facing upgrade for both loan and asset flows
-6. **Assumption presets/guidance**: Conservative / base / aggressive + better help around return/volatility inputs
-7. **First monetizable feature**: Refinance break-even or rent vs buy calculator
-
-### Feature Decisions & Rationale
-| Feature | Decision | Rationale |
-|---------|----------|-----------|
-| Historical benchmark overlay | Deferred | More academic than practical; rolling-window approach is statistically sound but adds complexity without helping users make decisions |
-| Live price ticker | Rejected | Doesn't fit planning-tool identity; creates API dependency; every fintech dashboard already has this |
-| Reference card for volatility | Implemented | Solves actual user friction ("what number do I put for volatility?") with zero infrastructure cost |
-| Collapsible mobile sidebar | Removed | Caused iOS touch failures; replaced with simple stacked layout |
-| KaTeX eager loading | Replaced with lazy | Saved ~300KB on initial page load for users who never visit methodology page |
-| Stochastic home prices | Implemented (v4) | Opt-in σ slider for appreciating assets; 200 GBM paths; P(Underwater) is a killer differentiator vs every other mortgage calculator |
-| Nav readability fix | Implemented (v4) | Users couldn't see inactive tabs; bumped color from text-dim to text-muted, added subtle border, raised secondary opacity |
-| Built-in contact form | Rejected | Requires backend, breaks single-file architecture; feedback@calcmonte.com with Cloudflare email routing achieves same goal |
-| APY terminology | Replaced (V1) | "APY" was misleading when compounding selector and GBM coexist; changed to "Expected Annual Return" — user-facing only, internal vars deferred |
-| Stochastic mode clarity | Implemented (V1) | Compounding dropdown now disabled when vol > 0, with explanatory hint. Prevents users thinking compounding choice matters in GBM mode |
-| Disclosure-based fixes | Implemented (V1) | Cash flow timing, loan rounded-month display, and methodology gaps addressed via honest disclosure rather than risky architectural refactors |
-| Summary language softening | Implemented (V1) | "Crossover at year X" → "approximately year X", "saves X months" → "approximately X months". Reduces overclaim risk for rounded values |
-
----
+## Git
+
+- Repo: ~/Projects/calcmonte, branch main
+- Remote: github.com/osepper/calcmonte (PRIVATE)
+- Cloudflare account: osepper@gmail.com
+- Tag: v1-live-ready (V1 credibility patch checkpoint)
+
+## Feature Summary
+
+### Loan Calculator
+- Amortization with 6 payment frequencies, extra payments, down payment tracking
+- Scenario comparison (save up to 3, side-by-side table + charts)
+- Stochastic home price simulation (GBM, 200 paths, fan chart, Underwater Risk %)
+- Home appreciation presets: Pessimistic (1%/12σ), US Average (3.5%/8σ), Optimistic (6%/10σ)
+- Rent vs Buy comparison: paired Monte Carlo (buy equity fan vs rent portfolio fan), Buy Wins %, Crossover Year, monthly cost chart, verdict summary
+- Full housing costs: itemized Property Tax, Insurance, Maintenance (%/yr) + PMI, HOA ($/mo). True Monthly stat card.
+- Refinance calculator: new tab, break-even analysis, cumulative savings chart, comparison table
+- Decision summary cards on Overview, Breakdown, and Asset tabs (try-catch wrapped)
+- 6 loan presets (30yr/15yr mortgage, 5yr/3yr auto, student, personal)
+
+### Investment Simulator
+- Deterministic compounding (6 modes) or stochastic GBM with Itô correction
+- Configurable paths (50–1000), contributions/withdrawals, one-time events
+- Fan chart (5th–95th percentile), histogram, percentile table, probability analysis
+- Clickable reference card: S&P 500 (10%/18σ), Bond (5%/6σ), NASDAQ (12%/22σ), Bitcoin (60%/65σ), CD (4.5%/0σ)
+- Goal-seeking mode: bisection search to find required monthly contribution for target amount at given confidence level
+- V1 fix: compounding selector disabled when vol > 0 (stochastic uses monthly-step GBM)
+- 6 investment presets
+
+### V1 Credibility Patch (Mar 5, 2026)
+- APY → "Expected Annual Return" (user-facing only, internal vars still use apy)
+- Stochastic/deterministic mode clarified with UI hints
+- Cash flow timing approximation disclosed
+- Loan rounded-month display caveat added
+- Summary language softened ("approximately")
+- Methodology page strengthened
+
+## Technical Debt
+
+- **Internal `apy` variable names**: User-facing changed, internal deferred to modularization
+- **Loan time axis rounded months**: Non-monthly frequencies use Math.round(); disclosed, architectural fix deferred
+- **File size ~177KB**: Modularization recommended before adding more features (target: 4 JS files)
+- **No automated tests**: Add validation fixtures during modularization
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| v1 (backup) | Feb 28, 2026 | Full working app: amortization, Monte Carlo, presets, methodology with KaTeX, URL sharing, localStorage, mobile responsive |
-| v2 | Mar 1, 2026 | Mobile fixes: removed broken collapsible sidebar, fixed range slider touch targets (36px element/4px track/20px thumb), explicit chart container heights, cleared nested scroll containers, iOS-specific input fixes |
-| v3 | Mar 1, 2026 | Launch polish: landing copy rewritten (outcomes over methods), SVG chart preview added, KaTeX lazy-loaded, debounce on inputs, footer restructured (affiliate-ready, non-duplicative), nav hierarchy (methodology/share demoted), orientation hints, historical reference card in asset simulator, brand renamed to CalcMonte, domain references updated, GoatCounter analytics added, SEO meta optimized, OG image created and deployed |
-| v4 | Mar 4, 2026 | Nav readability: inactive buttons brightened (#3f5170→#7e92b0), subtle border on all tabs, secondary nav opacity 0.5→0.8. Stochastic home price simulation: GBM Monte Carlo (200 paths) on loan asset overlay with σ slider, fan chart percentile bands, Underwater Risk stat. Footer: added Feedback column. Chart.js fill syntax fix, try-catch in update(), null safety. Relabeled P(Underwater)→Underwater Risk, P(Profit)→Profit Chance. |
-| V1 (current, live) | Mar 5, 2026 | **Credibility/trust patch.** APY→"Expected Annual Return" in all user-facing text. Stochastic vs deterministic mode clarified: compounding dropdown disabled when vol>0 with explanatory hint. Cash flow timing approximation disclosed in UI and methodology. Loan rounded-month display caveat added. Summary language softened ("approximately"). Methodology strengthened for monthly granularity, cash flow timing, and deterministic/stochastic distinction. Marketing copy softened. Feedback links updated to feedback@calcmonte.com (Cloudflare email routing). GitHub links removed from site. Git tag: `v1-live-ready`. |
+| Version | Date | Key Changes |
+|---------|------|-------------|
+| v1-v3 | Feb 28–Mar 1 | Core app, mobile fixes, launch polish, SEO, GoatCounter |
+| v4 | Mar 4 | Stochastic home prices, nav readability, footer feedback |
+| V1 patch | Mar 5 | Credibility: APY→Expected Annual Return, disclosures, methodology |
+| V2 | Mar 21 | Rent vs Buy, full housing costs, decision cards, clickable presets, refinance calculator, goal-seeking mode |
 
-### Reverting
-Git tag `v1-live-ready` marks the current production state. To revert to any prior state: `git log --oneline` to find the commit, then `git checkout <hash> -- index.html` and redeploy.
+## V2 Roadmap (Remaining Priorities)
 
----
+| Priority | Feature | Status |
+|----------|---------|--------|
+| 1 | Rent vs Buy | ✅ Done |
+| 2 | Full Housing Costs | ✅ Done |
+| 3 | Decision Summary Cards | ✅ Done |
+| 4 | Clickable Assumption Presets | ✅ Done |
+| 5 | Refinance Calculator | ✅ Done |
+| 6 | Goal-Seeking Mode | ✅ Done |
+| 7 | Modularize Codebase | Next — split into 4 JS files |
+| 8 | Retirement Drawdown Mode | After modularization |
+| 9 | Real vs Nominal Toggle | After modularization |
+| 10 | Monetization Placements | After sustained traffic |
 
-## Quick Reference: How to Modify
+See CALCMONTE_V2_ROADMAP.md for full details on each priority.
 
-### Change a preset
-Search for `LOAN_PRESETS` or `ASSET_PRESETS` in the JS section. Each is a plain object with field names matching the input IDs.
+## Key File Locations
 
-### Add a new chart
-1. Add `<canvas id="X_chartName" height="NNN"></canvas>` inside a `<div class="chart-container">`
-2. In the module's `renderTab()` function, create a new `Chart(ctx, config)` — follow existing chart patterns
-3. Store the chart instance in `ch.name` to destroy on re-render
-
-### Add an affiliate banner
-Show the hidden `#affiliate-row` by setting `display:flex`, then populate with styled anchor tags matching the design system (use `--border` for borders, `--text-dim` for text, `--cyan` for hover accents).
-
-### Change domain references
-Search and replace `calcmonte.com` — there are exactly 8 occurrences (canonical URL, OG tags, Twitter cards, and all three JSON-LD blocks).
-
-### Change analytics
-The GoatCounter script is just before `</body>`. Replace with any other analytics provider (Plausible, PostHog, Google Analytics) by swapping the script tag.
-
-### Add a new page
-1. Add `<div class="page" id="page-name">...</div>` in the HTML
-2. Add nav button: `<button class="nav-btn" data-page="name" onclick="switchPage('name')">...</button>`
-3. `switchPage()` handles the rest automatically (hides landing, toggles active states)
-
-### Update and redeploy
-1. Edit `~/Desktop/LoanAnalytics/deploy/index.html`
-2. Cloudflare → Workers & Pages → `calcmonte` → new deployment → upload `deploy` folder
-3. Live in seconds
+| File | Purpose |
+|------|---------|
+| index.html | The entire application |
+| og-image.png | Social sharing preview (1200×630) |
+| robots.txt, sitemap.xml | SEO |
+| HANDOFF.md | This document |
+| CALCMONTE_V2_ROADMAP.md | Detailed V2 roadmap |
+| README.md | GitHub readme |
+| LICENSE | MIT |

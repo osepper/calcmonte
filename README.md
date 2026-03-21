@@ -1,80 +1,50 @@
 # CalcMonte
 
-**The Financial Calculator That Shows What Others Won't**
+A financial calculator combining loan amortization analytics with Monte Carlo investment simulation.
 
-[calcmonte.com](https://calcmonte.com) — Free, no signup, 100% client-side.
-
-## What It Does
-
-Most financial calculators give you one number. CalcMonte shows you the full range of what could happen.
-
-**Loan Calculator** — Compare up to 3 loan scenarios side by side. See how extra payments, different terms, and rates affect your total cost. Supports 6 payment frequencies with asset appreciation/depreciation overlay and optional Monte Carlo simulation on home prices.
-
-**Investment Simulator** — Monte Carlo simulation using Geometric Brownian Motion. See percentile bands from 5th to 95th instead of a single projected line. Understand the realistic spread of outcomes before making decisions.
+**Live:** [calcmonte.com](https://calcmonte.com)
 
 ## Features
 
-- **Stochastic home price modeling** — See the probability of going underwater on your mortgage, not just a single appreciation curve
-- **Side-by-side loan comparison** — Save up to 3 scenarios and compare them
-- **Monte Carlo investment simulation** — GBM with Itô correction, percentile bands, probability analysis
-- **6 payment frequencies** — Monthly, bi-weekly, weekly, semi-monthly, quarterly, annual
-- **Privacy-first** — Everything runs client-side, no data sent anywhere, no cookies
+### Loan Calculator
+- Amortization with 6 payment frequencies
+- Extra payment modeling with interest savings
+- Side-by-side scenario comparison (up to 3)
+- Stochastic home price simulation (GBM, 200 paths, underwater risk)
+- Rent vs Buy comparison with paired Monte Carlo
+- Full housing costs (property tax, insurance, maintenance, PMI, HOA)
+- Refinance calculator with break-even analysis
+- Decision summary cards on every tab
 
-## Architecture
+### Investment Simulator
+- Monte Carlo simulation with GBM and Itô correction
+- Percentile bands (5th–95th) fan charts
+- Clickable assumption presets (S&P 500, Bonds, NASDAQ, Bitcoin, CDs)
+- Goal-seeking mode: find required monthly contribution for any target
+- One-time scheduled events (lump sum add/withdraw)
+- Final value distribution histogram and probability analysis
 
-Single self-contained HTML file (~137KB). No framework, no build step, no backend.
+### Design
+- Single self-contained HTML file (~177KB)
+- No framework, no build step, no backend
+- Dark theme, responsive layout
+- Chart.js for visualization, KaTeX for math rendering
+- Full methodology page documenting all formulas
+- Shareable URL state, localStorage persistence
+- Privacy-friendly (GoatCounter analytics, no cookies, no tracking)
 
-- **Charts**: Chart.js (CDN)
-- **Math rendering**: KaTeX (lazy-loaded CDN)
-- **Fonts**: DM Serif Display + IBM Plex Mono (Google Fonts)
-- **Analytics**: GoatCounter (privacy-friendly, no cookies)
-- **Hosting**: Cloudflare Workers (free tier)
+## Tech Stack
 
-## Run Locally
-
-Just open `index.html` in a browser. Everything runs client-side.
-
-For a local server (needed for some mobile testing):
-
-```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
-```
-
-## Deploy
-
-Upload the contents of this repo to Cloudflare Workers & Pages:
-
-1. Go to [dash.cloudflare.com](https://dash.cloudflare.com) → Workers & Pages → `calcmonte`
-2. Create new deployment → upload project folder
-3. Live in seconds
-
-## Files
-
-```
-index.html      ← The entire application
-og-image.png    ← Social sharing preview (1200×630)
-robots.txt      ← Search engine directives
-sitemap.xml     ← URL listing for Google
-HANDOFF.md      ← Comprehensive technical documentation
-```
-
-## Math
-
-The investment simulator uses GBM with Itô correction:
-
-```
-S(t+Δt) = S(t) · exp[(μ - σ²/2)Δt + σ√Δt · Z]
-```
-
-Where Z ~ N(0,1) via Box-Muller transform. The Methodology tab on the site documents all formulas.
+- HTML/CSS/JS (single file, no build)
+- Chart.js 4.4.1 (CDN)
+- KaTeX 0.16.9 (lazy-loaded CDN)
+- Google Fonts (IBM Plex Mono, DM Serif Display)
+- Cloudflare Workers (hosting, free tier)
+- GoatCounter (analytics)
 
 ## Feedback
 
-Questions, suggestions, or bug reports are welcome:
-
-- **Email**: osepper@gmail.com
-- **Issues**: [github.com/osepper/calcmonte/issues](https://github.com/osepper/calcmonte/issues)
+feedback@calcmonte.com
 
 ## License
 
