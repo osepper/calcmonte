@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ═══ PRIMARY META ═══ -->
-<title>Free Loan Calculator & Monte Carlo Investment Simulator | CalcMonte</title>
-<meta name="description" content="Compare loan scenarios side by side, model extra payments, and simulate investment growth with real market volatility. See best-case to worst-case outcomes — not just one number. Free, private, no signup.">
+<title>Free Mortgage Calculator, Amortization Schedule & Investment Simulator | CalcMonte</title>
+<meta name="description" content="Free mortgage calculator with amortization schedule, extra payment analysis, and side-by-side loan comparison. Includes rent vs buy analysis, refinance break-even, compound interest calculator, and Monte Carlo investment simulator with probability ranges. No signup required.">
 <meta name="keywords" content="mortgage calculator, loan amortization, Monte Carlo simulation, investment simulator, financial calculator, compound interest calculator, loan comparison tool, amortization schedule, extra payment calculator, 15 vs 30 year mortgage, portfolio simulator, retirement calculator, CD calculator, investment volatility, GBM simulation, free financial tools">
 <meta name="author" content="CalcMonte">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -15,8 +15,8 @@
 
 <!-- ═══ OPEN GRAPH (Facebook, LinkedIn, iMessage, Slack) ═══ -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="The Financial Calculator That Shows What Others Won't">
-<meta property="og:description" content="Compare loan scenarios side by side. Simulate investments with real market volatility. See the full range of outcomes. Free, no signup, 100% private.">
+<meta property="og:title" content="Free Mortgage Calculator, Rent vs Buy, & Investment Simulator | CalcMonte">
+<meta property="og:description" content="Mortgage calculator with amortization schedule, rent vs buy analysis, refinance break-even, compound interest calculator, and Monte Carlo investment simulator. Free, no signup.">
 <meta property="og:url" content="https://calcmonte.com/">
 <meta property="og:site_name" content="CalcMonte">
 <meta property="og:locale" content="en_US">
@@ -27,8 +27,8 @@
 
 <!-- ═══ TWITTER CARD ═══ -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free Loan Calculator & Monte Carlo Investment Simulator">
-<meta name="twitter:description" content="Compare loans side by side. Simulate investments with real volatility. See every possible outcome. Free, no signup, runs in your browser.">
+<meta name="twitter:title" content="Free Mortgage Calculator, Rent vs Buy, & Investment Simulator">
+<meta name="twitter:description" content="Amortization schedule, loan comparison, refinance calculator, compound interest, Monte Carlo simulation. Free, no signup, runs in your browser.">
 <meta name="twitter:image" content="https://calcmonte.com/og-image.png">
 <meta name="twitter:image:alt" content="Financial calculator with Monte Carlo simulation fan chart">
 
@@ -88,34 +88,66 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How does the Monte Carlo mortgage simulation work?",
+      "name": "How do I calculate my monthly mortgage payment?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The simulator models your investment using Geometric Brownian Motion (GBM), the same mathematical framework used by quantitative finance professionals. It runs hundreds or thousands of random paths based on your specified annual return and volatility, then shows percentile outcomes (5th through 95th) so you can see best-case, worst-case, and most-likely scenarios for your portfolio."
+        "text": "Enter your loan amount, interest rate, and loan term (15 or 30 years). CalcMonte instantly shows your monthly payment, total interest, and a full amortization schedule with charts. You can also add extra payments to see how much interest you save and how many months you shorten the loan."
       }
     },
     {
       "@type": "Question",
-      "name": "What's the difference between this and a regular mortgage calculator?",
+      "name": "Can I compare different mortgage options side by side?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most calculators show a single amortization schedule. This tool adds scenario comparison (save up to 3 loan configurations side-by-side), asset simulation (model whether your home appreciates or your car depreciates against the loan balance), Monte Carlo projections for investments with real volatility modeling, plain-English narrative summaries, and interactive chart snapshots."
+        "text": "Yes. Save up to 3 loan scenarios with different rates, terms, or extra payments, then view them in a side-by-side comparison table showing monthly payment, total interest, total cost, and payoff timeline for each option."
       }
     },
     {
       "@type": "Question",
-      "name": "Is this financial calculator free?",
+      "name": "What is the probability of going underwater on my mortgage?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, completely free with no signup required. The calculator runs entirely in your browser — no data is sent to any server. You can export amortization schedules as CSV files and print reports to PDF."
+        "text": "CalcMonte runs Monte Carlo simulations on your home's value using real-world volatility. Instead of assuming your home appreciates at a fixed rate, it simulates hundreds of price paths and calculates the percentage of scenarios where the home value drops below the remaining loan balance. This underwater risk percentage helps you understand the true downside of your mortgage."
       }
     },
     {
       "@type": "Question",
-      "name": "What volatility should I use for stock market simulation?",
+      "name": "Is it better to rent or buy a home?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Historical annual volatility for the S&P 500 is approximately 15-20%. For bonds and stable assets, use 3-8%. For individual stocks, 25-40% is common. For cryptocurrency, 50-80% reflects historical behavior. For a CD or savings account, use 0% (deterministic, no volatility)."
+        "text": "CalcMonte's Rent vs Buy calculator runs paired Monte Carlo simulations comparing buying (with mortgage, taxes, insurance, and maintenance) against renting and investing the difference. It shows you what percentage of simulations favor buying vs renting, the median net worth for each path, and when buying overtakes renting. Both sides include real-world volatility."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the compound interest and investment calculator work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enter your initial investment, expected annual return, and time horizon. For a simple compound interest projection (like a CD or savings account), set volatility to 0%. For stocks or other volatile investments, add volatility to see Monte Carlo simulation results showing the 5th to 95th percentile range of outcomes instead of a single number."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much should I save per month to reach my investment goal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use CalcMonte's Goal-Seeking Mode in the Investment Simulator. Enter your target amount (e.g. $1,000,000), time horizon, and desired confidence level (e.g. 75%). The calculator uses Monte Carlo simulation to find the exact monthly contribution needed to reach your goal with that probability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I refinance my mortgage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CalcMonte's Refinance Calculator compares your current loan against a new rate and term. It shows your monthly savings, break-even month (when cumulative savings exceed closing costs), and total interest saved. A chart shows how the savings accumulate over time so you can decide if refinancing is worthwhile."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this financial calculator really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, completely free with no signup required. CalcMonte runs entirely in your browser — no data is sent to any server. There are no ads, no tracking cookies, and no account needed. You can export amortization schedules as CSV and share configurations via URL."
       }
     }
   ]
@@ -422,32 +454,33 @@ select:disabled,input:disabled{opacity:0.6;cursor:not-allowed}
 <!-- This section provides crawlable text for search engines since the interactive tool itself is JS-rendered -->
 <section class="landing" id="landing">
   <div class="landing-inner">
-    <h2>The Financial Calculator That<br>Shows What <span class="hl">Others Won't</span></h2>
+    <h2>Mortgage Calculator,<br>Investment Simulator, <span class="hl">and More</span></h2>
     <p class="landing-sub">
-      See the full range of outcomes — not just one number. Compare loan scenarios side by side. 
-      Model real market volatility on your investments. Free, private, runs entirely in your browser.
+      Calculate your monthly mortgage payment and view a full amortization schedule. Compare loan scenarios side by side. 
+      Check if refinancing makes sense. Model compound interest on savings or investments. 
+      Go deeper with Monte Carlo simulation to see the full range of possible outcomes.
     </p>
 
     <div class="landing-features">
       <div class="landing-feat">
         <div class="landing-feat-icon" style="background:var(--cyan-dim)">📊</div>
         <div>
-          <h4 style="color:var(--cyan)">Loan Analytics</h4>
-          <p>See how extra payments, different terms, and frequencies change your total cost. Save and compare up to 3 scenarios side by side.</p>
+          <h4 style="color:var(--cyan)">Mortgage & Loan Calculator</h4>
+          <p>Monthly payment, amortization schedule, extra payment savings, side-by-side comparison of up to 3 loan scenarios. Works for mortgages, auto loans, student loans, and more.</p>
+        </div>
+      </div>
+      <div class="landing-feat">
+        <div class="landing-feat-icon" style="background:var(--amber-dim)">🏠</div>
+        <div>
+          <h4 style="color:var(--amber)">Rent vs Buy & Refinance</h4>
+          <p>Compare renting and investing the difference vs buying with a mortgage. Includes property tax, insurance, and maintenance. Plus a refinance break-even calculator.</p>
         </div>
       </div>
       <div class="landing-feat">
         <div class="landing-feat-icon" style="background:var(--purple-dim)">📈</div>
         <div>
-          <h4 style="color:var(--purple)">Investment Projections</h4>
-          <p>See the best-case, worst-case, and most-likely outcomes for any investment — from CDs to crypto — using real volatility modeling.</p>
-        </div>
-      </div>
-      <div class="landing-feat">
-        <div class="landing-feat-icon" style="background:var(--amber-dim)">💰</div>
-        <div>
-          <h4 style="color:var(--amber)">Cash Flow Modeling</h4>
-          <p>Add contributions, withdrawals, and one-time events. See how they interact with growth and volatility over any time horizon.</p>
+          <h4 style="color:var(--purple)">Investment & Savings Simulator</h4>
+          <p>Compound interest calculator for CDs and savings accounts. Monte Carlo simulation for stocks and crypto. Goal-seeking mode: find how much to save monthly to reach your target.</p>
         </div>
       </div>
     </div>
@@ -478,6 +511,18 @@ select:disabled,input:disabled{opacity:0.6;cursor:not-allowed}
     </div>
 
     <p class="landing-trust">Free forever · No signup · No data collected · 100% client-side</p>
+
+    <div style="max-width:680px;margin:28px auto 0;text-align:left;font-size:12px;color:var(--text-dim);line-height:1.9">
+      <h3 style="font-family:var(--font-display);font-size:16px;color:var(--text-muted);font-weight:400;margin-bottom:12px;text-align:center">What You Can Do With CalcMonte</h3>
+      <p><strong style="color:var(--text-muted)">Mortgage Calculator & Amortization Schedule</strong> — Enter your loan amount, rate, and term to see your monthly payment and a full amortization schedule. View how much of each payment goes to principal vs interest. Add extra payments to see how much interest you save and how many months you cut off the loan. Compare 15-year vs 30-year mortgages, or any other scenarios side by side.</p>
+      <p style="margin-top:10px"><strong style="color:var(--text-muted)">Rent vs Buy Calculator</strong> — Not sure whether to rent or buy? CalcMonte compares the true cost of homeownership (mortgage, property tax, insurance, maintenance, PMI, HOA) against renting and investing the difference. Uses Monte Carlo simulation to show the probability of buying winning vs renting over any time horizon.</p>
+      <p style="margin-top:10px"><strong style="color:var(--text-muted)">Mortgage Refinance Calculator</strong> — See if refinancing makes sense. Enter your new rate and closing costs to find the break-even month, monthly savings, and total interest saved over the life of the loan.</p>
+      <p style="margin-top:10px"><strong style="color:var(--text-muted)">Home Price Volatility & Underwater Risk</strong> — Most mortgage calculators assume your home goes up in value every year. CalcMonte lets you add price volatility and see the probability of your home dropping below the loan balance — the underwater risk that other tools don't show.</p>
+      <p style="margin-top:10px"><strong style="color:var(--text-muted)">Compound Interest & Savings Calculator</strong> — Calculate compound interest for CDs, savings accounts, or any fixed-rate investment. Set volatility to 0% for a simple deterministic projection, or add volatility to see the range of possible outcomes using Monte Carlo simulation.</p>
+      <p style="margin-top:10px"><strong style="color:var(--text-muted)">Investment Simulator with Monte Carlo</strong> — Simulate S&P 500, NASDAQ, bond funds, or any custom asset with realistic volatility. See percentile bands from 5th to 95th showing best-case to worst-case outcomes. Add monthly contributions and one-time events.</p>
+      <p style="margin-top:10px"><strong style="color:var(--text-muted)">Goal-Seeking Mode</strong> — How much do you need to save per month to reach $1,000,000? CalcMonte finds the answer by running Monte Carlo simulations at any confidence level you choose.</p>
+      <p style="margin-top:10px"><strong style="color:var(--text-muted)">Full Housing Cost Analysis</strong> — Go beyond just principal and interest. Add property tax, homeowner's insurance, maintenance costs, PMI, and HOA fees to see your true monthly housing cost.</p>
+    </div>
   </div>
 </section>
 
@@ -507,7 +552,7 @@ select:disabled,input:disabled{opacity:0.6;cursor:not-allowed}
 <!-- LOAN PAGE (same as before, compact) -->
 <!-- ════════════════════════════════════════════ -->
 <div class="page" id="page-loan">
-<div class="header"><div><h1>Loan Analytics</h1><div class="header-sub">Borrowing · Amortization · Asset Simulation</div></div><div style="display:flex;gap:10px;align-items:center"><div style="display:flex;gap:8px"><button class="export-btn" onclick="L.exportCSV()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>CSV</button><button class="export-btn" onclick="window.print()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print</button></div><span id="L_freqLabel" style="color:var(--text-dim);font-size:10px"></span></div></div>
+<div class="header"><div><h1>Loan Analytics</h1><div class="header-sub">Mortgage · Amortization · Refinance · Rent vs Buy</div></div><div style="display:flex;gap:10px;align-items:center"><div style="display:flex;gap:8px"><button class="export-btn" onclick="L.exportCSV()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>CSV</button><button class="export-btn" onclick="window.print()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print</button></div><span id="L_freqLabel" style="color:var(--text-dim);font-size:10px"></span></div></div>
 <div class="main-grid">
   <div class="sidebar" id="L_sidebar">
     <h2>Loan Parameters</h2>
